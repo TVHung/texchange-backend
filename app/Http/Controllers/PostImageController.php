@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\PostImageCollection;
+use App\Http\Resources\PostImageResource;
+use App\Services\PostImageService;
+use App\Models\PostImage;
+use Illuminate\Support\Facades\Auth;
 
 class PostImageController extends Controller
 {
+    protected $postImageService;
+    public function __construct(PostImageService $postImageService){
+        $this->postImageService = $postImageService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,8 @@ class PostImageController extends Controller
      */
     public function index()
     {
-        //
+        $post_images = $this->postImageService->getAll();
+        return (new PostImageCollection($post_images))->response();
     }
 
     /**
@@ -34,7 +44,12 @@ class PostImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post_image = new PostImage();
+        $post_image->post_id = $request->input('post_id');
+        $post_image->is_banner = $request->input('is_banner');
+        $post_image->image_url = $request->input('image_url');
+        $post_image->save();
+        return (new PostImageResource($post_image))->response();
     }
 
     /**
@@ -45,7 +60,8 @@ class PostImageController extends Controller
      */
     public function show($id)
     {
-        //
+        $post_image = $this->postImageService->get($id);
+        return (new PostImageResource($post_image))->response();
     }
 
     /**
@@ -68,7 +84,9 @@ class PostImageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $post_image = $this->postImageService->update($id, $input);
+        return (new PostImageResource($post_image))->response();
     }
 
     /**
@@ -79,6 +97,6 @@ class PostImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post_image = $this->postImageService->delete($id);
     }
 }

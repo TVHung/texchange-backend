@@ -18,6 +18,10 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             CategorySeeder::class,
             BrandSeeder::class,
+            StorageSeeder::class,
+            StatusSeeder::class,
+            AddressSeeder::class,
+            PostSeeder::class,
         ]);
     }
 }

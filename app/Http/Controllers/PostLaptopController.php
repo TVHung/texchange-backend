@@ -44,9 +44,14 @@ class PostLaptopController extends Controller
      */
     public function store(Request $request)
     {
-        $user_id = Auth::user()->id;
         $post_laptop = new PostLaptop();
-        
+        $post_laptop->post_id = $request->input('post_id');
+        $post_laptop->color = $request->input('color');
+        $post_laptop->cpu = $request->input('cpu');
+        $post_laptop->gpu = $request->input('gpu');
+        $post_laptop->storage_type = $request->input('storage_type');
+        $post_laptop->brand_id = $request->input('brand_id');
+        $post_laptop->display_size = $request->input('display_size');
         $post_laptop->save();
         return (new PostLaptopResource($post_laptop))->response();
     }

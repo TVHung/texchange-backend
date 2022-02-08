@@ -44,9 +44,11 @@ class PostPcController extends Controller
      */
     public function store(Request $request)
     {
-        $user_id = Auth::user()->id;
         $post_pc = new PostPc();
-        
+        $post_pc->post_id = $request->input('post_id');
+        $post_pc->cpu = $request->input('cpu');
+        $post_pc->gpu = $request->input('gpu');
+        $post_pc->storage_type = $request->input('storage_type');
         $post_pc->save();
         return (new PostPcResource($post_pc))->response();
     }
