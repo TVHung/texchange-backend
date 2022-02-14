@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Services\PostService;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -43,25 +44,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'bail|required|string|max:255',
-            // 'image_link' => 'bail|string',
-            // 'category_id' => 'bail|required|numeric',
-            // 'price' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
-            // 'description' => 'bail|required|string',
-            // 'stock' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
-            // 'discount' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors());
-        }
-
         $user_id = Auth::user()->id;
-
         $post = new Post();
+        $post->user_id = $user_id;
+        $post->is_trade = $request->input('is_trade');
+        $post->post_trade_id = $request->input('post_trade_id');
+        $post->title = $request->input('title');
+        $post->category_id = $request->input('category_id');
         $post->name = $request->input('name');
-
+        $post->description = $request->input('description');
+        $post->ram = $request->input('ram');
+        $post->storage_id = $request->input('storage_id');
+        $post->status_id = $request->input('status_id');
+        $post->price = $request->input('price');
+        $post->address_id = $request->input('address_id');
+        $post->public_status = $request->input('public_status');
+        $post->guarantee = $request->input('guarantee');
         $post->save();
         return (new PostResource($post))->response();
     }
@@ -98,14 +96,6 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'bail|required|string|max:255',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors());
-        }
-
         $input = $request->all();
         $post = $this->postService->update($id, $input);
         return (new PostResource($post))->response();

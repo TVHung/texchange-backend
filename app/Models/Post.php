@@ -10,7 +10,6 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
         'user_id',
         'is_trade',
         'post_trade_id',
@@ -27,22 +26,37 @@ class Post extends Model
         'guarantee'
     ];
 
+    public function postMobiles()
+    {
+        return $this->hasMany(PostMobile::class);
+    }
+
+    public function postLaptops()
+    {
+        return $this->hasMany(PostLaptop::class);
+    }
+
+    public function postPcs()
+    {
+        return $this->hasMany(PostPc::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function wish_lists()
+    public function wishLists()
     {
         return $this->belongsToMany(WishList::class);
     }
 
-    public function post_images()
+    public function postImages()
     {
         return $this->hasMany(PostImage::class);
     }
 
-    public function post_video()
+    public function postVideo()
     {
         return $this->hasOne(PostVideo::class);
     }

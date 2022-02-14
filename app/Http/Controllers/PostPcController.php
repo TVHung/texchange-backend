@@ -3,20 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
-use App\Services\UserService;
-use Validator;
+use App\Http\Resources\PostPcCollection;
+use App\Http\Resources\PostPcResource;
+use App\Services\PostPcService;
+use App\Models\PostPc;
+use Illuminate\Support\Facades\Auth;
 
-
-class UserController extends Controller
+class PostPcController extends Controller
 {
-    protected $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
+    protected $postPcService;
+    public function __construct(PostPcService $postPcService){
+        $this->postPcService = $postPcService;
     }
     /**
      * Display a listing of the resource.
@@ -25,8 +22,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->userService->getAll();
-        return UserResource::collection($users);
+        $post_pcs = $this->postPcService->getAll();
+        return (new PostPcCollection($post_pcs))->response();
     }
 
     /**
@@ -47,7 +44,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post_pc = new PostPc();
+        $post_pc->post_id = $request->input('post_id');
+        $post_pc->cpu = $request->input('cpu');
+        $post_pc->gpu = $request->input('gpu');
+        $post_pc->storage_type = $request->input('storage_type');
+        $post_pc->save();
+        return (new PostPcResource($post_pc))->response();
     }
 
     /**
@@ -58,8 +61,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = $this->userService->get($id);
-        return (new UserResource($user))->response();
+        $post_pc = $this->postPcService->get($id);
+        return (new PostPcResource($post_pc))->response();
     }
 
     /**
@@ -82,18 +85,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|string|email',
-        ]);
-
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-
         $input = $request->all();
-        $user = $this->userService->update($id, $input);
-        return response()->json($user->original->first());
+        $post_pc = $this->postPcService->update($id, $input);
+        return (new PostPcResource($post_pc))->response();
     }
 
     /**
@@ -102,8 +96,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function destroy($id)
     {
-        $user = $this->userService->delete($id);
+        $post_pc = $this->postPcService->delete($id);
     }
 }

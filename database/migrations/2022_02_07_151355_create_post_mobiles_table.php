@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostMobileTable extends Migration
+class CreatePostMobilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePostMobileTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_mobile', function (Blueprint $table) {
+        Schema::create('post_mobiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts')->onUpdate('cascade')->onDelete('cascade');
@@ -31,6 +31,6 @@ class CreatePostMobileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_mobile');
+        Schema::dropIfExists('post_mobiles');
     }
 }

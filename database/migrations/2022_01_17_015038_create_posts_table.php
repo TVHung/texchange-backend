@@ -19,8 +19,8 @@ class CreatePostsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->binary('is_trade');
-            $table->integer('post_trade_id');
+            $table->smallInteger('is_trade');
+            $table->bigInteger('post_trade_id');
             $table->string('title');
             $table->string('name');
             $table->string('description');
@@ -28,10 +28,10 @@ class CreatePostsTable extends Migration
             $table->integer('storage_id');
             $table->foreign('storage_id')->references('id')->on('storages');
             $table->integer('status_id');
-            $table->foreign('status_id')->references('id')->on('status');
+            $table->foreign('status_id')->references('id')->on('statuses');
             $table->float('price');
             $table->integer('address_id');
-            $table->foreign('address_id')->references('id')->on('address');
+            $table->foreign('address_id')->references('id')->on('addresses');
             $table->smallInteger('public_status');
             $table->integer('guarantee');
             $table->timestamps();

@@ -3,20 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
-use App\Services\UserService;
-use Validator;
+use App\Http\Resources\PostImageCollection;
+use App\Http\Resources\PostImageResource;
+use App\Services\PostImageService;
+use App\Models\PostImage;
+use Illuminate\Support\Facades\Auth;
 
-
-class UserController extends Controller
+class PostImageController extends Controller
 {
-    protected $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
+    protected $postImageService;
+    public function __construct(PostImageService $postImageService){
+        $this->postImageService = $postImageService;
     }
     /**
      * Display a listing of the resource.
@@ -25,8 +22,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->userService->getAll();
-        return UserResource::collection($users);
+        $post_images = $this->postImageService->getAll();
+        return (new PostImageCollection($post_images))->response();
     }
 
     /**
@@ -47,7 +44,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post_image = new PostImage();
+        $post_image->post_id = $request->input('post_id');
+        $post_image->is_banner = $request->input('is_banner');
+        $post_image->image_url = $request->input('image_url');
+        $post_image->save();
+        return (new PostImageResource($post_image))->response();
     }
 
     /**
@@ -58,8 +60,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = $this->userService->get($id);
-        return (new UserResource($user))->response();
+        $post_image = $this->postImageService->get($id);
+        return (new PostImageResource($post_image))->response();
     }
 
     /**
@@ -82,18 +84,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|string|email',
-        ]);
-
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-
         $input = $request->all();
-        $user = $this->userService->update($id, $input);
-        return response()->json($user->original->first());
+        $post_image = $this->postImageService->update($id, $input);
+        return (new PostImageResource($post_image))->response();
     }
 
     /**
@@ -102,8 +95,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function destroy($id)
     {
-        $user = $this->userService->delete($id);
+        dd($id);
+        $post_image = $this->postImageService->delete($id);
     }
 }
