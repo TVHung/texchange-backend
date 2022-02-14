@@ -27,6 +27,7 @@ class PostImageService
 
     public function delete($id)
     {
+        dd($id);
         $post_image = PostImage::destroy($id);
         return response()->json($id);
     }

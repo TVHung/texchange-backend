@@ -97,6 +97,7 @@ class PostImageController extends Controller
      */
     public function destroy($id)
     {
+        dd($id);
         $post_image = $this->postImageService->delete($id);
     }
 }

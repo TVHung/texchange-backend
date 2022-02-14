@@ -19,6 +19,7 @@ class PostMobileResource extends JsonResource
             'post_id' => $this->post_id,
             'color' => $this->color,
             'brand_id' => $this->brand_id,
+            'brand' => $this->brand->name,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Http\Resources\User as UserResource;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Services\UserService;
 use Validator;
 
@@ -57,7 +58,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = $this->userService->get($id);
+        return (new UserResource($user))->response();
     }
 
     /**

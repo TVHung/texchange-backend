@@ -9,6 +9,7 @@ use App\Http\Controllers\PostMobileController;
 use App\Http\Controllers\PostLaptopController;
 use App\Http\Controllers\PostPcController;
 use App\Http\Controllers\PostImageController;
+use App\Http\Controllers\ProfileController;
 
 Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
     Route::post('/login', [AuthController::class, 'login']);
@@ -19,13 +20,14 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
     Route::post('/change-pass', [AuthController::class, 'changePassWord']);       
 });
 
-// Route::prefix('posts')->group(function () {
-//     Route::get('/', [PostController::class, 'index']);
-//     Route::post('/', [PostController::class, 'store']);
-//     Route::get('/{id}', [ProductController::class, 'show']);
-//     Route::post('/{id}/edit', [ProductController::class, 'update']);
-//     Route::post('/{id}/delete', [ProductController::class, 'destroy']);
-// });
+// Verb          Path                        Action  Route Name
+// GET           /users                      index   users.index
+// POST          /users                      store   users.store
+// GET           /users/{user}               show    users.show
+// PUT|PATCH     /users/{user}               update  users.update
+// DELETE        /users/{user}               destroy users.destroy
+Route::apiResource('users', UserController::class);
+Route::apiResource('profiles', ProfileController::class);
 Route::apiResource('posts', PostController::class); //api crud post
 Route::apiResource('post-mobile', PostMobileController::class); //api crud post mobile
 Route::apiResource('post-laptop', PostLaptopController::class); //api crud post laptop

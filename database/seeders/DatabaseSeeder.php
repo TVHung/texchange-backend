@@ -16,12 +16,17 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
             UserTableSeeder::class,
-            CategorySeeder::class,
+            ProfileSeeder::class,
             BrandSeeder::class,
-            StorageSeeder::class,
             StatusSeeder::class,
             AddressSeeder::class,
+            CategorySeeder::class,
+            StorageSeeder::class,
             PostSeeder::class,
+            PostImageSeeder::class,
+            PostMobileSeeder::class,
+            PostLaptopSeeder::class,
+            PostPcSeeder::class,
         ]);
     }
 }
