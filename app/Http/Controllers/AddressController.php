@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\AddressCollection;
+use App\Http\Resources\AddressResource;
+use App\Services\AddressService;
+use App\Models\Address;
+use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
 {
+    protected $addressService;
+    public function __construct(AddressService $addressService){
+        $this->addressService = $addressService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,8 @@ class AddressController extends Controller
      */
     public function index()
     {
-        //
+        $addresss = $this->addressService->getAll();
+        return (new AddressCollection($addresss))->response();
     }
 
     /**
@@ -34,7 +44,12 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $address = new Address();
+        $address->city = $request->input('city');
+        $address->district = $request->input('district');
+        $address->ward = $request->input('ward');
+        $address->save();
+        return (new AddressResource($address))->response();
     }
 
     /**
@@ -45,7 +60,8 @@ class AddressController extends Controller
      */
     public function show($id)
     {
-        //
+        $address = $this->addressService->get($id);
+        return (new AddressResource($address))->response();
     }
 
     /**
@@ -68,7 +84,9 @@ class AddressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $address = $this->addressService->update($id, $input);
+        return (new AddressResource($address))->response();
     }
 
     /**
@@ -79,6 +97,6 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $address = $this->addressService->delete($id);
     }
 }
