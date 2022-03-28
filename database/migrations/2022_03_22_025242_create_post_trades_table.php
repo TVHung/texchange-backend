@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStoragesTable extends Migration
+class CreatePostTradesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,16 @@ class CreateStoragesTable extends Migration
      */
     public function up()
     {
-        Schema::create('storages', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('post_trades', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('post_id');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->integer('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->integer('capacity');
+            $table->string('title');
+            $table->string('name');
+            $table->string('description');
+            $table->integer('guarantee');
             $table->timestamps();
         });
     }
@@ -29,6 +34,6 @@ class CreateStoragesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('storages');
+        Schema::dropIfExists('post_trades');
     }
 }

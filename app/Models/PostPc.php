@@ -20,5 +20,15 @@ class PostPc extends Model
     {
         return $this->belongsTo(Post::class);
     }
+    public static function filterPost($request) {
+        $posts = Post::query();
 
+        $pipeline = app(Pipeline::class)
+            ->send($posts)
+            ->through([
+                \App\QueryFilters\Sort::class,
+            ])
+            ->thenReturn();
+        return $pipeline->get();
+    }
 }

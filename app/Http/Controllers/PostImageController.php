@@ -44,6 +44,9 @@ class PostImageController extends Controller
      */
     public function store(Request $request)
     {
+        // $response = cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
+        // dd($response);
+        // return back()->with('success', 'File uploaded successfully');
         $post_image = new PostImage();
         $post_image->post_id = $request->input('post_id');
         $post_image->is_banner = $request->input('is_banner');

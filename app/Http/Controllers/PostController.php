@@ -7,7 +7,11 @@ use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Services\PostService;
 use App\Models\Post;
+use App\Models\PostMobile;
+use App\Models\PostLaptop;
+use App\Models\PostPc;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -22,7 +26,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = $this->postService->getAll();
+        $posts = $this->postService->getAll()
+                        ->where('is_trade', '=', 0)
+                        ->where('public_status', '=', 1);;
         return (new PostCollection($posts))->response();
     }
 
@@ -44,6 +50,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'bail|required|string',
+            'status' => 'bail|required|string',
+            'guarantee' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
+            'address' => 'bail|required|string',
+            'description' => 'bail|required|string',
+            'price' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
+            'title' => 'bail|required|string',
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+        DB::beginTransaction();
         $user_id = Auth::user()->id;
         $post = new Post();
         $post->user_id = $user_id;
@@ -54,13 +73,47 @@ class PostController extends Controller
         $post->name = $request->input('name');
         $post->description = $request->input('description');
         $post->ram = $request->input('ram');
-        $post->storage_id = $request->input('storage_id');
-        $post->status_id = $request->input('status_id');
+        $post->storage = $request->input('storage');
+        $post->video_url = $request->input('video_url');
+        $post->status = $request->input('status');
         $post->price = $request->input('price');
-        $post->address_id = $request->input('address_id');
+        $post->address = $request->input('address');
         $post->public_status = $request->input('public_status');
         $post->guarantee = $request->input('guarantee');
         $post->save();
+        
+        $cate = $request->input('category_id');
+        $post_id = $post->id;
+        if($cate == 1){
+            $post_mobile = new PostMobile();
+            $post_mobile->post_id = $post_id;
+            $post_mobile->color = $request->input('color');
+            $post_mobile->brand_id = $request->input('brand_id');
+            $post_mobile->save();
+            DB::commit();
+        }else if($cate == 2){
+            $post_laptop = new PostLaptop();
+            $post_laptop->post_id = $post_id;
+            $post_laptop->color = $request->input('color');
+            $post_laptop->cpu = $request->input('cpu');
+            $post_laptop->gpu = $request->input('gpu');
+            $post_laptop->storage_type = $request->input('storage_type');
+            $post_laptop->brand_id = $request->input('brand_id');
+            $post_laptop->display_size = $request->input('display_size');
+            $post_laptop->save();
+            DB::commit();
+        }else if($cate == 3){
+            $post_pc = new PostPc();
+            $post_pc->post_id = $post_id;
+            $post_pc->cpu = $request->input('cpu');
+            $post_pc->gpu = $request->input('gpu');
+            $post_pc->storage_type = $request->input('storage_type');
+            $post_pc->save();
+            DB::commit();
+        }else{
+            //rollback
+            DB::rollback();
+        }
         return (new PostResource($post))->response();
     }
 
@@ -110,5 +163,11 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = $this->postService->delete($id);
+    }
+
+    public function filter(Request $request)
+    {
+       $posts = Post::filterPost($request);
+       return (new PostCollection($posts))->response();
     }
 }
