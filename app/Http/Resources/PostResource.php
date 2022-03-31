@@ -31,10 +31,12 @@ class PostResource extends JsonResource
             'address'=> $this->address,
             'public_status'=> $this->public_status,
             'guarantee' => $this->guarantee,
+            'sold' => $this->sold,
             'images' => $this->postImages,
             'postMobiles' => $this->postMobiles,
             'postLaptops' => $this->postLaptops,
             'postPcs' => $this->postPcs,
+            'postTrade' => $this->postTrade,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

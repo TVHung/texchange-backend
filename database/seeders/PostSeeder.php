@@ -20,8 +20,8 @@ class PostSeeder extends Seeder
             [
                 'id' => 101,
                 'user_id'=> 101,
-                'is_trade'=> 0,
-                'post_trade_id'=> 0,
+                'is_trade'=> 1,
+                'post_trade_id'=> 101,
                 'title'=> 'day la san pham 1',
                 'category_id'=> 1,
                 'name'=> 'Iphone 13',
@@ -34,6 +34,7 @@ class PostSeeder extends Seeder
                 'video_url'=> "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
                 'public_status'=> 1,
                 'guarantee'=> 2,
+                'sold' => 0,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -54,6 +55,7 @@ class PostSeeder extends Seeder
                 'video_url'=> "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
                 'public_status'=> 1,
                 'guarantee'=> 2,
+                'sold' => 0,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -74,6 +76,7 @@ class PostSeeder extends Seeder
                 'video_url'=> "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
                 'public_status'=> 1,
                 'guarantee'=> 2,
+                'sold' => 0,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -94,6 +97,7 @@ class PostSeeder extends Seeder
                 'video_url'=> "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
                 'public_status'=> 1,
                 'guarantee'=> 2,
+                'sold' => 0,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -114,6 +118,7 @@ class PostSeeder extends Seeder
                 'video_url'=> "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
                 'public_status'=> 1,
                 'guarantee'=> 2,
+                'sold' => 0,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -134,6 +139,7 @@ class PostSeeder extends Seeder
                 'video_url'=> "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
                 'public_status'=> 1,
                 'guarantee'=> 2,
+                'sold' => 0,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -154,6 +160,7 @@ class PostSeeder extends Seeder
                 'video_url'=> "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
                 'public_status'=> 1,
                 'guarantee'=> 2,
+                'sold' => 0,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -174,6 +181,7 @@ class PostSeeder extends Seeder
                 'video_url'=> "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
                 'public_status'=> 1,
                 'guarantee'=> 2,
+                'sold' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -194,6 +202,7 @@ class PostSeeder extends Seeder
                 'video_url'=> "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
                 'public_status'=> 1,
                 'guarantee'=> 2,
+                'sold' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ]

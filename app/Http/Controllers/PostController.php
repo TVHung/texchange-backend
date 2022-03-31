@@ -12,12 +12,15 @@ use App\Models\PostLaptop;
 use App\Models\PostPc;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Repositories\PostRepository;
 
 class PostController extends Controller
 {
     protected $postService;
-    public function __construct(PostService $postService){
+    protected $postRepo;
+    public function __construct(PostService $postService, PostRepository $postRepo){
         $this->postService = $postService;
+        $this->postRepo = $postRepo;
     }
     /**
      * Display a listing of the resource.
@@ -26,9 +29,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = $this->postService->getAll()
-                        ->where('is_trade', '=', 0)
-                        ->where('public_status', '=', 1);;
+        $posts = $this->postService->getAll();
         return (new PostCollection($posts))->response();
     }
 
@@ -66,7 +67,7 @@ class PostController extends Controller
         $user_id = Auth::user()->id;
         $post = new Post();
         $post->user_id = $user_id;
-        $post->is_trade = $request->input('is_trade');
+        $post->is_trade = $request->input('is_trade') ?? null;
         $post->post_trade_id = $request->input('post_trade_id');
         $post->title = $request->input('title');
         $post->category_id = $request->input('category_id');
@@ -125,7 +126,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = $this->postService->get($id);
+        $post = $this->postRepo->getById($id);
         return (new PostResource($post))->response();
     }
 

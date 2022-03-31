@@ -8,12 +8,16 @@ use App\Http\Resources\PostImageResource;
 use App\Services\PostImageService;
 use App\Models\PostImage;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\PostImageRepository;
+use App\Http\Requests\Post\PostImageRequest;
 
 class PostImageController extends Controller
 {
     protected $postImageService;
-    public function __construct(PostImageService $postImageService){
+    protected $postImageRepo;
+    public function __construct(PostImageService $postImageService, PostImageRepository $postImageRepo){
         $this->postImageService = $postImageService;
+        $this->postImageRepo = $postImageRepo;
     }
     /**
      * Display a listing of the resource.
@@ -42,17 +46,12 @@ class PostImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostImageRequest $request)
     {
-        // $response = cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
-        // dd($response);
         // return back()->with('success', 'File uploaded successfully');
-        $post_image = new PostImage();
-        $post_image->post_id = $request->input('post_id');
-        $post_image->is_banner = $request->input('is_banner');
-        $post_image->image_url = $request->input('image_url');
-        $post_image->save();
-        return (new PostImageResource($post_image))->response();
+        $result = $this->postImageService->create($request);
+        return response()->json($result);
+        // return (new PostImageResource($post_image))->response();
     }
 
     /**
@@ -63,7 +62,7 @@ class PostImageController extends Controller
      */
     public function show($id)
     {
-        $post_image = $this->postImageService->get($id);
+        $post_image = $this->postImageRepo->getById($id);
         return (new PostImageResource($post_image))->response();
     }
 

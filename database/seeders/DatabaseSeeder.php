@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             PostMobileSeeder::class,
             PostLaptopSeeder::class,
             PostPcSeeder::class,
+            PostTradeSeeder::class,
         ]);
     }
 }

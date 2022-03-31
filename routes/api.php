@@ -13,12 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FileUploadController;
 
 Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']); 
-    Route::post('/change-pass', [AuthController::class, 'changePassWord']);       
+    require_once('user_api.php');    
 });
 
 Route::apiResource('users', UserController::class);
@@ -42,3 +37,4 @@ Route::prefix('admin')->group(function () {
 // GET           /users/{user}               show    users.show
 // PUT|PATCH     /users/{user}               update  users.update
 // DELETE        /users/{user}               destroy users.destroy
+

@@ -24,7 +24,8 @@ class Post extends Model
         'price',
         'address',
         'public_status',
-        'guarantee'
+        'guarantee',
+        'sold',
     ];
 
     public function postMobiles()
@@ -41,7 +42,10 @@ class Post extends Model
     {
         return $this->hasMany(PostPc::class);
     }
-
+    public function postTrade()
+    {
+        return $this->hasOne(PostTrade::class);
+    }
     public function user()
     {
         return $this->belongsTo(User::class);
