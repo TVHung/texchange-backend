@@ -19,10 +19,10 @@ class CreateProfilesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->string('sex');
-            $table->string('avatar_url');
+            $table->string('avatar_url')->nullable();
             $table->string('phone');
             $table->string('address');
-            $table->string('facebook_url');
+            $table->string('facebook_url')->nullable();
             $table->timestamps();
         });
     }

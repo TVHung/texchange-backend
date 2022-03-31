@@ -13,11 +13,6 @@ class Category extends Model
         'name',
     ];
 
-    public function storages()
-    {
-        return $this->hasMany(Storage::class);
-    }
-
     public function posts()
     {
         return $this->hasMany(Post::class);

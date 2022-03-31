@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Pipeline\Pipeline;
 class Post extends Model
 {
     use HasFactory;
@@ -18,12 +18,14 @@ class Post extends Model
         'name',
         'description',
         'ram',
-        'storage_id',
-        'status_id',
+        'storage',
+        'video_url',
+        'status',
         'price',
-        'address_id',
+        'address',
         'public_status',
-        'guarantee'
+        'guarantee',
+        'sold',
     ];
 
     public function postMobiles()
@@ -40,7 +42,10 @@ class Post extends Model
     {
         return $this->hasMany(PostPc::class);
     }
-
+    public function postTrade()
+    {
+        return $this->hasOne(PostTrade::class);
+    }
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -56,29 +61,29 @@ class Post extends Model
         return $this->hasMany(PostImage::class);
     }
 
-    public function postVideo()
-    {
-        return $this->hasOne(PostVideo::class);
-    }
-
-    public function status()
-    {
-        return $this->belongsTo(Status::class);
-    }
-
-    public function address()
-    {
-        return $this->belongsTo(Address::class);
-    }
-
-    public function storage()
-    {
-        return $this->belongsTo(Address::class);
-    }
-
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
+    
+    public static function filterPost($request) {
+        $posts = Post::query();
 
+        $pipeline = app(Pipeline::class)
+            ->send($posts)
+            ->through([
+                \App\QueryFilters\Sort::class,
+                \App\QueryFilters\Name::class,
+                \App\QueryFilters\Category::class,
+                \App\QueryFilters\Status::class,
+                \App\QueryFilters\Video::class,
+                \App\QueryFilters\Storage::class,
+                \App\QueryFilters\Ram::class,
+                \App\QueryFilters\Price::class,
+                \App\QueryFilters\Guarantee::class,
+                \App\QueryFilters\Display::class
+            ])
+            ->thenReturn();
+        return $pipeline->get();
+    }
 }
