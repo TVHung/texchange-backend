@@ -51,9 +51,9 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function wishLists()
+    public function postWishLists()
     {
-        return $this->belongsToMany(WishList::class);
+        return $this->hasMany(PostWishList::class);
     }
 
     public function postImages()

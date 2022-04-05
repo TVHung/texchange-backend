@@ -34,6 +34,6 @@ class PostRepository extends Repository
 
     public function isExists($id)
     {
-        return $this->getInstance()::where('user_id', $id)->exists();
+        return $this->getInstance()::where('id', $id)->exists();
     }
 }
