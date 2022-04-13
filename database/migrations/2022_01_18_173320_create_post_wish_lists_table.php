@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostWishListTable extends Migration
+class CreatePostWishListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreatePostWishListTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_wish_list', function (Blueprint $table) {
+        Schema::create('post_wish_lists', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('wish_list_id');
+            $table->integer('user_id');
             $table->integer('post_id');
-            $table->foreign('wish_list_id')->references('id')->on('wish_lists')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('posts')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreatePostWishListTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_wish_list');
+        Schema::dropIfExists('post_wish_lists');
     }
 }

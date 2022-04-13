@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             PostLaptopSeeder::class,
             PostPcSeeder::class,
             PostTradeSeeder::class,
+            PostWishListSeeder::class,
         ]);
     }
 }

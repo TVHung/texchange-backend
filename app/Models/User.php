@@ -65,9 +65,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Profile::class);
     }
 
-    public function wishList()
+    public function postWishLists()
     {
-        return $this->hasOne(WishList::class);
+        return $this->hasMany(PostWishList::class);
     }
 
     public function posts()
