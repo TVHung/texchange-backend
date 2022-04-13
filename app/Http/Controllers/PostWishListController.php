@@ -21,6 +21,8 @@ class PostWishListController extends Controller
 {
     protected $postWishListService;
     protected $postWishListRepo;
+    protected $postService;
+    protected $postRepo;
     public function __construct(PostWishListService $postWishListService, PostWishListRepository $postWishListRepo, PostService $postService, PostRepository $postRepo){
         $this->postWishListService = $postWishListService;
         $this->postWishListRepo = $postWishListRepo;
@@ -104,9 +106,14 @@ class PostWishListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($post_id) //id la post id
     {
-        $post_id = $this->postWishListService->delete($id);
-        return response()->json($post_id);
+        if (Auth::check()){
+            $user_id = Auth::user()->id;
+            $id = $this->postWishListService->delete($post_id, $user_id);
+            return response()->json($id);
+        }else{
+            return response()->json("Bạn chưa đăng nhập");
+        }
     }
 }

@@ -31,9 +31,10 @@ class PostWishListService
         return response()->json($post);
     }
 
-    public function delete($id)
+    public function delete($post_id, $user_id)
     {
-        $post = PostWishList::destroy($id);
-        return $id;
+        $post = PostWishList::where(['post_id' => $post_id, 'user_id' => $user_id])->pluck('id')->toArray();
+        $post_delete = PostWishList::destroy($post[0]);
+        return $post;
     }
 }
