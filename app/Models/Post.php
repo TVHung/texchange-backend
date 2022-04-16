@@ -26,22 +26,14 @@ class Post extends Model
         'public_status',
         'guarantee',
         'sold',
+        'color',
+        'cpu',
+        'gpu',
+        'storage_type',
+        'brand_id',
+        'display_size',
     ];
 
-    public function postMobiles()
-    {
-        return $this->hasMany(PostMobile::class);
-    }
-
-    public function postLaptops()
-    {
-        return $this->hasMany(PostLaptop::class);
-    }
-
-    public function postPcs()
-    {
-        return $this->hasMany(PostPc::class);
-    }
     public function postTrade()
     {
         return $this->hasOne(PostTrade::class);

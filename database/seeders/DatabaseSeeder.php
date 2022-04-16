@@ -21,9 +21,6 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             PostSeeder::class,
             PostImageSeeder::class,
-            PostMobileSeeder::class,
-            PostLaptopSeeder::class,
-            PostPcSeeder::class,
             PostTradeSeeder::class,
             PostWishListSeeder::class,
         ]);

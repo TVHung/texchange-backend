@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->integer('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->smallInteger('is_trade');
-            $table->bigInteger('post_trade_id');
+            $table->bigInteger('post_trade_id')->nullable();
             $table->string('title');
             $table->string('name');
             $table->string('description');
@@ -33,6 +33,12 @@ class CreatePostsTable extends Migration
             $table->smallInteger('public_status');
             $table->smallInteger('sold');
             $table->integer('guarantee');
+            $table->string('cpu')->nullable();
+            $table->string('gpu')->nullable();
+            $table->string('storage_type')->nullable();
+            $table->integer('brand_id')->nullable();
+            $table->string('color')->nullable();
+            $table->float('display_size')->nullable();
             $table->timestamps();
         });
     }
