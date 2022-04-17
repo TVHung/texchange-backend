@@ -16,18 +16,20 @@ use App\Models\PostWishList;
 use App\Models\Post;
 use App\Services\PostService;
 use App\Repositories\PostRepository;
-
+use App\Services\BaseService;
 class PostWishListController extends Controller
 {
     protected $postWishListService;
     protected $postWishListRepo;
     protected $postService;
     protected $postRepo;
-    public function __construct(PostWishListService $postWishListService, PostWishListRepository $postWishListRepo, PostService $postService, PostRepository $postRepo){
+    protected $baseService;
+    public function __construct(PostWishListService $postWishListService, PostWishListRepository $postWishListRepo, PostService $postService, PostRepository $postRepo, BaseService $baseService){
         $this->postWishListService = $postWishListService;
         $this->postWishListRepo = $postWishListRepo;
         $this->postService = $postService;
         $this->postRepo = $postRepo;
+        $this->baseService = $baseService;
     }
     /**
      * Display a listing of the resource.
@@ -39,9 +41,9 @@ class PostWishListController extends Controller
         if (Auth::check()){
             $user_id = Auth::user()->id;
             $wishlist = $this->postWishListService->getAllWishList($user_id);
-            return (new PostCollection($wishlist))->response();
+            return $this->baseService->sendResponse(config('apps.message.success'), new PostCollection($wishlist));
         }else{
-            return null;
+            return $this->baseService->sendError(config('apps.message.login_require'));
         }
     }
 
@@ -69,9 +71,10 @@ class PostWishListController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
-        //kiem tra su ton tai 
+        //kiem tra su ton tai neu ton tai thi khong tao
         $exist = $this->postWishListRepo->isExistPost(Auth::user()->id, $request->input('post_id'));
-        if($exist) return response()->json("Post is exist");
+        if($exist) 
+            return $this->baseService->sendResponse(config('apps.message.success'));
         else
             try{
                 DB::beginTransaction();
@@ -80,12 +83,11 @@ class PostWishListController extends Controller
                 $postWishList->user_id = $user_id;
                 $postWishList->post_id = $request->input('post_id');
                 $postWishList->save();
-                // $postWishList = $this->postWishListRepo->store($request);
                 DB::commit();
-                return (new PostWishListResource($postWishList))->response();
+                return $this->baseService->sendResponse(config('apps.message.success'), $postWishList);
             } catch (\Exception $e) {
                 DB::rollback();
-                return $e;
+                return $this->baseService->sendError(config('apps.message.not_complete'), [], config('apps.general.error_code'));
             }
     }
 
@@ -111,9 +113,9 @@ class PostWishListController extends Controller
         if (Auth::check()){
             $user_id = Auth::user()->id;
             $id = $this->postWishListService->delete($post_id, $user_id);
-            return response()->json($id);
+            return $this->baseService->sendResponse(config('apps.message.success'));
         }else{
-            return response()->json("Bạn chưa đăng nhập");
+            return $this->baseService->sendError(config('apps.message.login_require'));
         }
     }
 }

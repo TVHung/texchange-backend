@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'error' => "Thành công", 
-    'success' => "Thất bại",
+    'error' => "Thất bại", 
+    'success' => "Thành công",
     'exist' => "Đã tồn tại", 
     'feild_require' => "Trường này là bắt buộc",
     'ERR_EXCEPTION' => "Xảy ra lỗi",
@@ -15,6 +15,6 @@ return [
     'update_post_error' => "Cập nhật bài viết mới không thành công",
     'delete_post_success' => "Xóa bài viết mới thành công",
     'delete_post_error' => "Xóa bài viết mới không thành công",
-    'not_complete' => "Không thể thực hiện tác vụ"
-
+    'not_complete' => "Không thể thực hiện tác vụ",
+    'login_require' => "Bạn chưa đăng nhập"
 ];
