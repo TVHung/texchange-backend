@@ -4,7 +4,7 @@ namespace App\Services;
 use App\Models\PostWishList;
 use App\Models\Post;
 
-class PostWishListService
+class PostWishListService extends BaseService
 {
     public function get($id)
     {

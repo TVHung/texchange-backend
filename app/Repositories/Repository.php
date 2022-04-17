@@ -82,6 +82,7 @@ class Repository
 
     public function getByCol($col, $value, $relations = [], $sort = [])
     {
+        return $this->model::where($col, $value)->first();
     }
 
     public function updateById($id, array $data)
@@ -91,10 +92,46 @@ class Repository
 
     public function getByCols($filters, $relations = [], $sort = [])
     {
+        if (count($relations) > 0) {
+            if (is_array($sort) && !empty($sort['by']) && !empty($sort['type'])) {
+                return $this->model::where($filters)->orderBy($sort['by'], $sort['type'])->with($relations)->first();
+            }
+            return $this->model::where($filters)->with($relations)->first();
+        }
+        if (is_array($sort) && !empty($sort['by']) && !empty($sort['type'])) {
+            return $this->model::where($filters)->orderBy($sort['by'], $sort['type'])->first();
+        }
+        return $this->model::where($filters)->first();
     }
 
     public function updateByField(string $filed, $fieldValue, array $data): bool
     {
+        try {
+            $result = $this->getInstance()->where($filed, $fieldValue)->update($this->checkDataWithField($data));
+            if (!$result) {
+                return false;
+            }
+            return true;
+        } catch (\Throwable $th) {
+        }
+        return false;
+    }
+
+    private function checkDataWithField(array $data)
+    {
+        return array_filter($data, function ($item) {
+            return in_array($item, $this->fields, true);
+        }, ARRAY_FILTER_USE_KEY);
+    }
+
+    public function deleteByField($column, $valueColumn): bool
+    {
+        try {
+            return $this->getInstance()->where($column, $valueColumn)->delete();
+        } catch (\Throwable $th) {
+            set_log_error('deleteByField', $th->getMessage());
+        }
+        return false;
     }
 
     public function findByField($column, $valueColumn, $relations = [])
