@@ -29,8 +29,38 @@ class PostController extends Controller
     
     public function index()
     {
-        $posts = $this->postService->getAll();
-        return (new PostCollection($posts))->response();
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            $posts = $this->postService->getAll($user_id);
+            return (new PostCollection($posts))->response();
+        }else{
+            $posts = $this->postService->getAllWithoutLogin();
+            return (new PostCollection($posts))->response();
+        }
+    }
+
+    public function getRecentlyPosts()
+    {
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            $posts = $this->postService->getRecentlyPosts($user_id);
+            return (new PostCollection($posts))->response();
+        }else{
+            $posts = $this->postService->getRecentlyPosts();
+            return (new PostCollection($posts))->response();
+        }
+    }
+
+    public function getRecommendPosts()
+    {
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            $posts = $this->postService->getRecentlyPosts($user_id);
+            return (new PostCollection($posts))->response();
+        }else{
+            $posts = $this->postService->getRecentlyPosts();
+            return (new PostCollection($posts))->response();
+        }
     }
 
     public function create()
@@ -56,6 +86,8 @@ class PostController extends Controller
             $user_id = Auth::user()->id;
             $newPost = $this->postService->create($request, $user_id);
             return $newPost;
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
         }         
     }
 
@@ -65,9 +97,15 @@ class PostController extends Controller
         return $post;
     }
 
-    public function edit($id)
+    public function getMyPosts()
     {
-        //
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+            $myPosts = $this->postService->getMyPosts($user_id);
+            return (new PostCollection($myPosts))->response();
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        }    
     }
 
     public function update(Request $request, $id)

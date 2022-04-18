@@ -6,6 +6,7 @@ use App\Repositories\PostRepository;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
+use Illuminate\Support\Facades\Auth;
 
 class PostService extends BaseService
 {
@@ -28,12 +29,62 @@ class PostService extends BaseService
         }
     }
 
-    public function getAll()
+    //get all without login
+    public function getAllWithoutLogin()
     {
         return Post::all()
             ->where('is_trade', '=', 0)
             ->where('public_status', '=', 1)
             ->where('sold', '=', 0);
+    }
+    //get all when logined
+    public function getAll($user_id)
+    {
+        //get all post id of wish list have user_id is current user id
+        $postIds = DB::table('post_wish_lists')->select('post_id')->where('user_id', '=', $user_id)->get()->toArray();
+        $arr_postId = [];
+        foreach ($postIds as $postId) {
+            array_push($arr_postId,  $postId->post_id);
+        }
+        return Post::all()
+            ->where('user_id', '!=', $user_id)
+            ->where('is_trade', '=', 0)
+            ->where('public_status', '=', 1)
+            ->where('sold', '=', 0)
+            ->whereNotIn('id', $arr_postId);
+    }
+
+    public function getMyPosts($user_id)
+    {
+        return Post::all()->where('user_id', '=', $user_id);
+    }
+
+    //get post recently
+    public function getRecentlyPosts($user_id = null)
+    {
+        if($user_id){
+            //get all post id of wish list have user_id is current user id
+            $postIds = DB::table('post_wish_lists')->select('post_id')->where('user_id', '=', $user_id)->get()->toArray();
+            $arr_postId = [];
+            foreach ($postIds as $postId) {
+                array_push($arr_postId,  $postId->post_id);
+            }
+            return Post::where('user_id', '!=', $user_id)
+            ->where('is_trade', '=', 0)
+            ->where('public_status', '=', 1)
+            ->where('sold', '=', 0)
+            ->whereNotIn('id', $arr_postId)
+            ->orderBy('created_at', 'desc')
+            ->take(6)
+            ->get();
+        }else{
+            return Post::where('is_trade', '=', 0)
+            ->where('public_status', '=', 1)
+            ->where('sold', '=', 0)
+            ->orderBy('created_at', 'desc')
+            ->take(6)
+            ->get();
+        }
     }
 
     public function find($id)
@@ -71,7 +122,7 @@ class PostService extends BaseService
             ];
             $newPost = $this->postRepo->store($postData);
             DB::commit();
-            return $this->sendResponse(config('apps.message.create_post_success'), $newPost);
+            return $this->sendResponse(config('apps.message.create_post_success'), new PostResource($newPost));
         } catch (\Exception $e) {
             DB::rollBack();
             return $this->sendError(config('apps.message.create_post_error'), [], config('apps.general.error_code'));
