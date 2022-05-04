@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Str;
 
-class Card implements Pipe
+class CreatedAt implements Pipe
 {
     public function handle($request, Closure $next)
     {
@@ -16,13 +16,7 @@ class Card implements Pipe
             return $next($request);
         }
         $builder = $next($request);
-        if((int)request($filterParam) == config('constants.has_card')){
-            // dd("co card");
-            return $builder->whereNotNull('gpu');
-        }
-        else {
-            // dd("khong co card");
-            return $builder->whereNull('gpu');
-        }
+        // dd(request($filterParam));
+        return $builder->orderBy('created_at', request($filterParam));
     }
 }

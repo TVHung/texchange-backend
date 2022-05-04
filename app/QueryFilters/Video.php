@@ -16,10 +16,14 @@ class Video implements Pipe
             return $next($request);
         }
         $builder = $next($request);
-        // dd(request($filterParam));
-        if(request($filterParam) == "0")
-            return $builder->where('LENGTH(video_url) = 0');
-        else 
-            return $builder->where('LENGTH(video_url) > 0');
+        // dd((int)request($filterParam));
+        if((int)request($filterParam) == config('constants.has_video')){
+            // dd("khong co video");
+            return $builder->whereNotNull('video_url');
+        }
+        else {
+            // dd("co video");
+            return $builder->whereNull('video_url');
+        }
     }
 }

@@ -63,6 +63,18 @@ class PostController extends Controller
         }
     }
 
+    public function getCategoryPosts($id)
+    {
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            $posts = $this->postService->getPostCategory($user_id, $id);
+            return (new PostCollection($posts))->response();
+        }else{
+            $posts = $this->postService->getPostCategory($id);
+            return (new PostCollection($posts))->response();
+        }
+    }
+
     public function create()
     {
         //
@@ -95,6 +107,18 @@ class PostController extends Controller
     {
         $post = $this->postService->get($id);
         return $post;
+    }
+
+    public function getPostEdit($id)
+    {
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+            $post = $this->postService->getWithEdit($id, $user_id);
+            return $post;
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        }        
+        
     }
 
     public function getMyPosts()

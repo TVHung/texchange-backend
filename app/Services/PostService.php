@@ -29,6 +29,22 @@ class PostService extends BaseService
         }
     }
 
+    public function getWithEdit($post_id, $user_id)
+    {
+        try {
+            if (!$this->postRepo->isExists($post_id)) {
+                return $this->sendError(config('apps.message.not_exist'));
+            }
+            $data = $this->postRepo->getById($post_id);
+            if($data->user_id == $user_id)
+                return $this->sendResponse(config('apps.message.get_post_success'), new PostResource($data));
+            else
+                return $this->sendError(config('apps.message.not_complete'));
+        } catch (\Exception $e) {
+            return $this->sendError(config('apps.message.not_complete'));
+        }
+    }
+
     //get all without login
     public function getAllWithoutLogin()
     {
@@ -82,6 +98,42 @@ class PostService extends BaseService
             ->where('public_status', '=', 1)
             ->where('sold', '=', 0)
             ->orderBy('created_at', 'desc')
+            ->take(6)
+            ->get();
+        }
+    }
+
+    //get post recently
+    public function getPostCategory($user_id = null, $category_id)
+    {
+        if(!in_array($category_id, config('constants.category'))){
+            return [];
+        }
+        $posts = $this->getAllWithCondition($user_id, null);
+        return $posts->where('category_id', '=', $category_id);
+    }
+
+    //lay danh sach voi truong hop da login va chua login
+    public function getAllWithCondition($user_id)
+    {
+        if($user_id){
+            //get all post id of wish list have user_id is current user id
+            $postIds = DB::table('post_wish_lists')->select('post_id')->where('user_id', '=', $user_id)->get()->toArray();
+            $arr_postId = [];
+            foreach ($postIds as $postId) {
+                array_push($arr_postId,  $postId->post_id);
+            }
+            return Post::where('user_id', '!=', $user_id)
+            ->where('is_trade', '=', 0)
+            ->where('public_status', '=', 1)
+            ->where('sold', '=', 0)
+            ->whereNotIn('id', $arr_postId)
+            ->take(6)
+            ->get();
+        }else{
+            return Post::where('is_trade', '=', 0)
+            ->where('public_status', '=', 1)
+            ->where('sold', '=', 0)
             ->take(6)
             ->get();
         }

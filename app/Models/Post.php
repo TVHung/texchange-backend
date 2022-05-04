@@ -67,13 +67,17 @@ class Post extends Model
                 \App\QueryFilters\Sort::class,
                 \App\QueryFilters\Name::class,
                 \App\QueryFilters\Category::class,
+                \App\QueryFilters\Card::class,
                 \App\QueryFilters\Status::class,
                 \App\QueryFilters\Video::class,
                 \App\QueryFilters\Storage::class,
+                \App\QueryFilters\StorageType::class,
                 \App\QueryFilters\Ram::class,
                 \App\QueryFilters\Price::class,
                 \App\QueryFilters\Guarantee::class,
-                \App\QueryFilters\Display::class
+                \App\QueryFilters\Display::class,
+                \App\QueryFilters\Brand::class,
+                \App\QueryFilters\CreatedAt::class
             ])
             ->thenReturn();
         return $pipeline->get();

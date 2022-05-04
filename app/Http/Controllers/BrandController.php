@@ -3,9 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Services\BrandService;
+use App\Repositories\BrandRepository;
+use App\Http\Resources\BrandCollection;
+use App\Http\Resources\BrandResource;
+use Illuminate\Support\Facades\Auth;
+use App\Services\BaseService;
 class BrandController extends Controller
 {
+
+    protected $brandService;
+    protected $brandRepo;
+    protected $baseService;
+    public function __construct(BrandService $brandService, BrandRepository $brandRepo, BaseService $baseService){
+        $this->brandService = $brandService;
+        $this->brandRepo = $brandRepo;
+        $this->baseService = $baseService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +29,12 @@ class BrandController extends Controller
     public function index()
     {
         //
+    }
+
+    public function getByCategory($category_id)
+    {
+        $brands = $this->brandService->getBrandCategory($category_id);
+        return $brands;
     }
 
     /**
@@ -79,6 +100,6 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->brandService->delete($id);
     }
 }
