@@ -9,6 +9,7 @@ use App\Http\Controllers\PostImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\PostWishListController;
+use App\Http\Controllers\GoogleController;
 
 Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
     require_once('user_api.php');    
@@ -23,6 +24,10 @@ Route::post('/search', [PostController::class, 'filter']);
 Route::prefix('admin')->group(function () {
     Route::get('/users', [UserController::class, 'index']);
 });
+// Google Sign In
+Route::post('/get-google-sign-in-url', [GoogleController::class, 'getGoogleSignInUrl']);
+Route::get('/callback', [GoogleController::class, 'loginCallback']);
+
 require_once('profile_api.php');  
 require_once('post_api.php');  
 require_once('brand_api.php');  
@@ -33,4 +38,3 @@ require_once('brand_api.php');
 // GET           /users/{user}               show    users.show
 // PUT|PATCH     /users/{user}               update  users.update
 // DELETE        /users/{user}               destroy users.destroy
-

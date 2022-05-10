@@ -25,7 +25,7 @@ class PostRequest extends FormRequest
     {
         return [
             'name' => 'bail|required|string',
-            'status' => 'bail|required|string',
+            'status' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'guarantee' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'address' => 'bail|required|string',
             'description' => 'bail|required|string',

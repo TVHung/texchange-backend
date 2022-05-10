@@ -11,7 +11,6 @@ class Post extends Model
 
     protected $fillable = [
         'user_id',
-        'is_trade',
         'post_trade_id',
         'title',
         'category_id',

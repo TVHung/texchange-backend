@@ -20,7 +20,7 @@ class Status implements Pipe
         // dd($value);
         return $builder->where(function($query) use($value){
                         foreach($value as $id){
-                            $query->orWhere('status', '=', $id);
+                            $query->orWhere('status', '=', (int)$id);
                         }        
                     });
     }

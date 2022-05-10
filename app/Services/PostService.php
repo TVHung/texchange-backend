@@ -49,7 +49,6 @@ class PostService extends BaseService
     public function getAllWithoutLogin()
     {
         return Post::all()
-            ->where('is_trade', '=', 0)
             ->where('public_status', '=', 1)
             ->where('sold', '=', 0);
     }
@@ -64,7 +63,6 @@ class PostService extends BaseService
         }
         return Post::all()
             ->where('user_id', '!=', $user_id)
-            ->where('is_trade', '=', 0)
             ->where('public_status', '=', 1)
             ->where('sold', '=', 0)
             ->whereNotIn('id', $arr_postId);
@@ -86,7 +84,6 @@ class PostService extends BaseService
                 array_push($arr_postId,  $postId->post_id);
             }
             return Post::where('user_id', '!=', $user_id)
-            ->where('is_trade', '=', 0)
             ->where('public_status', '=', 1)
             ->where('sold', '=', 0)
             ->whereNotIn('id', $arr_postId)
@@ -94,8 +91,7 @@ class PostService extends BaseService
             ->take(6)
             ->get();
         }else{
-            return Post::where('is_trade', '=', 0)
-            ->where('public_status', '=', 1)
+            return Post::where('public_status', '=', 1)
             ->where('sold', '=', 0)
             ->orderBy('created_at', 'desc')
             ->take(6)
@@ -124,15 +120,13 @@ class PostService extends BaseService
                 array_push($arr_postId,  $postId->post_id);
             }
             return Post::where('user_id', '!=', $user_id)
-            ->where('is_trade', '=', 0)
             ->where('public_status', '=', 1)
             ->where('sold', '=', 0)
             ->whereNotIn('id', $arr_postId)
             ->take(6)
             ->get();
         }else{
-            return Post::where('is_trade', '=', 0)
-            ->where('public_status', '=', 1)
+            return Post::where('public_status', '=', 1)
             ->where('sold', '=', 0)
             ->take(6)
             ->get();
@@ -150,7 +144,6 @@ class PostService extends BaseService
             DB::beginTransaction();
             $postData = [
                 'user_id' => $user_id,
-                'is_trade' => $request->input('is_trade') ?? null,
                 'post_trade_id' => $request->input('post_trade_id'),
                 'title' => $request->input('title'),
                 'category_id' => $request->input('category_id'),
@@ -172,6 +165,21 @@ class PostService extends BaseService
                 'brand_id' => $request->input('brand_id'),
                 'display_size' => $request->input('display_size'),
             ];
+            switch ($request->input('category_id')) {
+                case 1:
+                    $postData['cpu'] = null;
+                    $postData['gpu'] = null;
+                    $postData['storage_type'] = null;
+                    $postData['display_size'] = null;
+                    break;
+                case 3:
+                    $postData['brand_id'] = null;
+                    $postData['display_size'] = null;
+                    $postData['color'] = null;
+                    break;
+                default:
+                    break;
+            }
             $newPost = $this->postRepo->store($postData);
             DB::commit();
             return $this->sendResponse(config('apps.message.create_post_success'), new PostResource($newPost));
@@ -184,7 +192,7 @@ class PostService extends BaseService
     public function update($user_id, $post_id, $request){
         try {
             DB::beginTransaction();
-            $postData = $request->only(['is_trade', 'post_trade_id', 'title', 'category_id', 'name',
+            $postData = $request->only(['post_trade_id', 'title', 'category_id', 'name',
                 'description', 'ram', 'storage', 'video_url', 'status', 'price', 'address',
                 'public_status', 'guarantee', 'sold', 'color', 'cpu', 'gpu', 'storage_type', 
                 'brand_id', 'display_size'
