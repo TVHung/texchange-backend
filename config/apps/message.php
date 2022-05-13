@@ -16,5 +16,8 @@ return [
     'delete_post_success' => "Xóa bài viết mới thành công",
     'delete_post_error' => "Xóa bài viết mới không thành công",
     'not_complete' => "Không thể thực hiện tác vụ",
-    'login_require' => "Bạn chưa đăng nhập"
+    'login_require' => "Bạn chưa đăng nhập",
+    'block_success' => "Khóa bài viết thành công",
+    'block_error' => "Khóa bài viết không thành công",
+    'not_role_admin' => "Bạn không có quyền thực hiện hành động này",
 ];

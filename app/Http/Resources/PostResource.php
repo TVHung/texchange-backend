@@ -40,6 +40,7 @@ class PostResource extends JsonResource
             'storage_type_value' => config('constants.storage_type')[$this->storage_type] ?? null,
             'brand_id' => $this->brand_id,
             'display_size' => $this->display_size,
+            'is_block' => $this->is_block,
             'images' => $this->postImages,
             'postTrade' => $this->postTrade,
             'created_at' => $this->created_at,

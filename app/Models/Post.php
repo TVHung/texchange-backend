@@ -31,6 +31,7 @@ class Post extends Model
         'storage_type',
         'brand_id',
         'display_size',
+        'is_block',
     ];
 
     public function postTrade()

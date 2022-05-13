@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Profile;
 use Validator;
 
 
@@ -61,6 +62,15 @@ class AuthController extends Controller
                     $validator->validated(),
                     ['password' => bcrypt($request->password)]
                 ));
+        //create profile
+        $profile = new Profile();
+        $profile->user_id = $user->id;
+        $profile->name = $request->input('name');
+        $profile->sex = -1;
+        $profile->phone = "";
+        $profile->address = "";
+        $profile->avatar_url = "https://res.cloudinary.com/trhung/image/upload/v1650219626/rvo0ufooowdf3ur0ltpf.jpg";
+        $profile->save();
 
         return response()->json([
             'message' => 'User successfully registered',

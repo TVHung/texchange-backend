@@ -39,6 +39,7 @@ class CreatePostsTable extends Migration
             $table->foreign('brand_id')->references('id')->on('brands');
             $table->string('color', 30)->nullable();
             $table->float('display_size')->nullable();
+            $table->smallInteger('is_block');
             $table->timestamps();
         });
     }

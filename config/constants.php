@@ -9,5 +9,8 @@ return [
     'has_video' => 1,
     'non_video' => 2,
     'has_card' => 1,
+    'is_admin' => 1,
     'non_card' => 2,
+    'is_block' => 1,
+    'is_not_block' => 0,
 ];

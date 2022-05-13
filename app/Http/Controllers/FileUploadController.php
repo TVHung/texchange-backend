@@ -3,12 +3,41 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\Auth;
+use App\Services\BaseService;
 
 class FileUploadController extends Controller
 {
+    protected $baseService;
+    public function __construct(BaseService $baseService){
+        $this->baseService = $baseService;
+    }
+
     public function storeUploads (Request $request){
-        // $response = cloudinary()->upload($request->input('file')->getRealPath())->getSecurePath();
-        dd($request->input('file'));
-        return $request->input('file')->getRealPath();
+        if(Auth::check()){
+            // $images = $request->file('file');
+            // $upload_url = [];
+            // foreach ($images as $image) {
+            //     $uploadedFileUrl = Cloudinary::upload($image->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
+            //     array_push($upload_url, $uploadedFileUrl);
+            // }
+            // return $upload_url;
+            // dd("a");
+            $uploadedFileUrl = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
+            return $uploadedFileUrl;
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        }   
+       
+    }
+
+    public function storeUploadVideos (Request $request){
+        if(Auth::check()){
+            $uploadedFileUrl = Cloudinary::uploadVideo($request->file('file')->getRealPath(), ['folder' => 'post_videos'])->getSecurePath();
+            return $uploadedFileUrl;
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        }   
     }
 }

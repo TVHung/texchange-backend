@@ -16,6 +16,13 @@ class PostService extends BaseService
         $this->postRepo = $postRepo;
     }
 
+    public function getAllBase () {
+        return Post::all()
+            ->where('public_status', '=', 1)
+            ->where('sold', '=', 0)
+            ->where('is_block', '=', 0);
+    }
+
     public function get($post_id)
     {
         try {
@@ -48,9 +55,7 @@ class PostService extends BaseService
     //get all without login
     public function getAllWithoutLogin()
     {
-        return Post::all()
-            ->where('public_status', '=', 1)
-            ->where('sold', '=', 0);
+        return $this->getAllBase();
     }
     //get all when logined
     public function getAll($user_id)
@@ -138,6 +143,24 @@ class PostService extends BaseService
         return Post::find($id);
     }
 
+    public function setBlock($request)
+    {
+        if(Auth::user()->is_admin !== config('constants.is_admin')){
+            $post_id = $request->input('post_id');
+            $is_block = $request->input('is_block');
+            $post = $this->find($post_id);
+            if($post){
+                $post->is_block = $is_block;
+                $post->save();
+                return $this->sendResponse(config('apps.message.block_success'), []);
+            }else{
+                return $this->sendError(config('apps.message.block_error'), [], config('apps.general.error_code'));
+            }
+        }else{
+            return $this->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        }
+    }
+
     public function create($request, $user_id)
     {
         try {
@@ -164,6 +187,7 @@ class PostService extends BaseService
                 'storage_type' => $request->input('storage_type'),
                 'brand_id' => $request->input('brand_id'),
                 'display_size' => $request->input('display_size'),
+                'is_block' => config('constants.is_not_block'),
             ];
             switch ($request->input('category_id')) {
                 case 1:

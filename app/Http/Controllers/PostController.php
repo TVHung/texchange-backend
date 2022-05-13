@@ -75,6 +75,12 @@ class PostController extends Controller
         }
     }
 
+    public function setBlockPost(Request $request)
+    {
+        $result = $this->postService->setBlock($request);
+        return $result; 
+    }
+
     public function create()
     {
         //
@@ -105,7 +111,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = $this->postService->get($id);
+        $post = $this->postService->get($id);   
         return $post;
     }
 
