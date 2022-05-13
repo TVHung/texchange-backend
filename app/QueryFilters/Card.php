@@ -16,6 +16,13 @@ class Card implements Pipe
             return $next($request);
         }
         $builder = $next($request);
-        return $builder->where('category_id', '=', request($filterParam));
+        if((int)request($filterParam) == config('constants.has_card')){
+            // dd("co card");
+            return $builder->whereNotNull('gpu');
+        }
+        else {
+            // dd("khong co card");
+            return $builder->whereNull('gpu');
+        }
     }
 }

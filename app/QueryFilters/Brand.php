@@ -16,6 +16,6 @@ class Brand implements Pipe
             return $next($request);
         }
         $builder = $next($request);
-        return $builder->where('category_id', '=', request($filterParam));
+        return $builder->where('brand_id', '=', request($filterParam));
     }
 }

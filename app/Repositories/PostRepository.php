@@ -23,17 +23,8 @@ class PostRepository extends Repository
         return $data;
     }
 
-    public function create($userInfo)
-    {
-        try {
-            
-        } catch (\Exception $e) {
-           
-        }
-    }
-
     public function isExists($id)
     {
-        return $this->getInstance()::where('id', $id)->exists();
+        return Post::where('id', $id)->exists();
     }
 }

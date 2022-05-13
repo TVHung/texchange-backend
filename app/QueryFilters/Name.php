@@ -17,7 +17,7 @@ class Name implements Pipe
         }
         $builder = $next($request);
         if(request($filterParam)!= "")
-            return $builder->where('name', 'ilike', '%' . request($filterParam) . '%');
+            return $builder->where('name', 'ilike', '%' . request($filterParam) . '%'); 
         else return false;
     }
 }

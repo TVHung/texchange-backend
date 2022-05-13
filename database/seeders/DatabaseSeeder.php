@@ -17,15 +17,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserTableSeeder::class,
             ProfileSeeder::class,
-            CategorySeeder::class,
             BrandSeeder::class,
+            CategorySeeder::class,
             PostSeeder::class,
             PostImageSeeder::class,
-            PostMobileSeeder::class,
-            PostLaptopSeeder::class,
-            PostPcSeeder::class,
             PostTradeSeeder::class,
-            PostWishListSeeder::class,
         ]);
     }
 }

@@ -15,10 +15,11 @@ class Storage implements Pipe
         if ( ! request()->has($filterParam)){
             return $next($request);
         }
-        if(count(config('constants.storage')) <= (int)request($filterParam) || (int)request($filterParam) < 0)
-            return false;
+        // if(count(config('constants.storage')) <= (int)request($filterParam) || (int)request($filterParam) < 0)
+        //     return false;
         $builder = $next($request);
-        $value = explode("_", array_values(config('constants.storage'))[(int)request($filterParam)]);
+        // $value = explode("_", array_values(config('constants.storage'))[(int)request($filterParam)]);
+        $value = explode("_", request($filterParam));
         // dd((int)$value[0], (int)$value[1]);
         return $builder->whereBetween('storage', [(int)$value[0], (int)$value[1]]);
     }

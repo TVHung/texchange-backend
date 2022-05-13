@@ -8,38 +8,27 @@ use App\Repositories\ProfileRepository;
 use App\Http\Resources\ProfileCollection;
 use App\Http\Resources\ProfileResource;
 use Illuminate\Support\Facades\Auth;
+use App\Services\BaseService;
 class ProfileController extends Controller
 {
     protected $profileService;
     protected $profileRepo;
-    public function __construct(ProfileService $profileService, ProfileRepository $profileRepo){
+    protected $baseService;
+    public function __construct(ProfileService $profileService, ProfileRepository $profileRepo, BaseService $baseService){
         $this->profileService = $profileService;
         $this->profileRepo = $profileRepo;
+        $this->baseService = $baseService;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
+    //get profile current user
     public function getProfile()
     {
         if (Auth::check()){
             $user_id = Auth::user()->id;
             $profile = $this->profileService->getProfileUser($user_id);
-            return (new ProfileResource($profile))->response();
+            return $profile;
         }else{
-            
+            return $this->baseService->sendError(config('apps.message.login_require'));
         }
     }
 
@@ -47,78 +36,20 @@ class ProfileController extends Controller
         if(Auth::check()){
             $user_id = Auth::user()->id;
             $updateProfile = $this->profileService->updateUserProfile($user_id, $request);
+            return $updateProfile;
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'));
         }
-        return $updateProfile;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         if (Auth::check()){
             $user_id = Auth::user()->id;
             $profile = $this->profileService->create($request, $user_id);
+            return $profile;
         }else{
-            
+            return $this->baseService->sendError(config('apps.message.login_require'));
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $profile = $this->profileService->delete($id);
     }
 }

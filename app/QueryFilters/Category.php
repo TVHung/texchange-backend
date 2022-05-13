@@ -16,6 +16,12 @@ class Category implements Pipe
             return $next($request);
         }
         $builder = $next($request);
-        return $builder->where('category_id', '=', request($filterParam));
+        $value = explode(".", request($filterParam));
+        // dd($value);
+        return $builder->where(function($query) use($value){
+                        foreach($value as $id){
+                            $query->orWhere('category_id', '=', $id);
+                        }        
+                    });
     }
 }

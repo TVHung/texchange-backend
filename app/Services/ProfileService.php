@@ -5,7 +5,8 @@ use App\Models\Profile;
 use App\Repositories\ProfileRepository;
 use Illuminate\Support\Facades\DB;
 use App\Services\BaseService;
-
+use App\Http\Resources\ProfileCollection;
+use App\Http\Resources\ProfileResource;
 class ProfileService extends BaseService
 {
     private $profileRepo;
@@ -21,7 +22,15 @@ class ProfileService extends BaseService
 
     public function getProfileUser($user_id)
     {
-        return Profile::where('user_id', $user_id)->first();
+        try {
+            if (!$this->profileRepo->isExists($user_id)) {
+                return $this->sendError(config('apps.message.not_exist'));
+            }
+            $data = $this->profileRepo->getByCol('user_id', $user_id);
+            return $this->sendResponse(config('apps.message.success'), new ProfileResource($data));
+        } catch (\Exception $e) {
+            return $this->sendError(config('apps.message.not_complete'));
+        }
     }
 
     public function getAllWishList($user_id)
@@ -37,7 +46,7 @@ class ProfileService extends BaseService
     public function create ($request, $user_id){
         try {
             DB::beginTransaction();
-            if($this->profileRepo->isExists($user_id)){
+            if(!$this->profileRepo->isExists($user_id)){
                 $profileData = [
                     'user_id' => $user_id,
                     'name' => $request->input('name'),
@@ -49,7 +58,7 @@ class ProfileService extends BaseService
                 ];
                 $newProfile = $this->profileRepo->store($profileData);
                 DB::commit();
-                return $this->sendResponse(config('apps.message.error'), $newProfile);
+                return $this->sendResponse(config('apps.message.success'), $newProfile);
             }else{
                 return $this->sendError(config('apps.message.exist'));
             }
@@ -81,12 +90,12 @@ class ProfileService extends BaseService
                 'address' => $request->input('address'),
                 'facebook_url' => $request->input('facebook_url')
             ];
-            $post = tap(Profile::where('user_id', $user_id))->update($updateData);
+            $profile = tap(Profile::where('user_id', $user_id))->update($updateData);
             DB::commit();
-            return response()->json($post);
+            return $this->sendResponse(config('apps.message.success'), $profile);
         } catch (\Exception $exception) {
             DB::rollBack();
-            return null;
+            return $this->sendError(config('apps.message.error'));
         }
     }
 }

@@ -26,7 +26,7 @@ class BaseService
     {
         return [
             'status' => config('apps.general.error'),
-            'message' => [trans('message.ERR_EXCEPTION') ],
+            'message' => config('apps.message.ERR_EXCEPTION'),
             'error_code' => config('apps.general.error_code'),
             'message_id' => ['ERR_EXCEPTION']
         ];
@@ -37,7 +37,7 @@ class BaseService
         return [
             'status'        => config('apps.general.success'),
             'data'          => null,
-            'message'       => [trans('message.SUCCESS')],
+            'message'       => config('apps.message.success'),
         ];
     }
 }

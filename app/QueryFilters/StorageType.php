@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Str;
 
-class Storage implements Pipe
+class StorageType implements Pipe
 {
     public function handle($request, Closure $next)
     {
@@ -15,11 +15,14 @@ class Storage implements Pipe
         if ( ! request()->has($filterParam)){
             return $next($request);
         }
-        if(count(config('constants.storage_type')) <= (int)request($filterParam) || (int)request($filterParam) < 0)
-            return false;
-        $value = explode("_", array_values(config('constants.storage_type'))[(int)request($filterParam)]);
-        // dd((int)$value[0], (int)$value[1]);
+        // dd(request($filterParam));
         $builder = $next($request);
-        return $builder->where('status', 'like', '%' . request($filterParam) . '%');
+        $value = explode(".", request($filterParam));
+        // dd($value);
+        return $builder->where(function($query) use($value){
+                        foreach($value as $id){
+                            $query->orWhere('storage_type', '=', (int)$id);
+                        }        
+                    });
     }
 }
