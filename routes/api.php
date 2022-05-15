@@ -31,6 +31,7 @@ Route::get('/callback', [GoogleController::class, 'loginCallback']);
 require_once('profile_api.php');  
 require_once('post_api.php');  
 require_once('brand_api.php');  
+require_once('post_trade_api.php');  
 
 // Verb          Path                        Action  Route Name
 // GET           /users                      index   users.index

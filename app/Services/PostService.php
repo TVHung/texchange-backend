@@ -7,13 +7,16 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Auth;
+use App\Services\PostTradeService;
 
 class PostService extends BaseService
 {
     private $postRepo;
-    public function __construct(PostRepository $postRepo)
+    protected $postTradeService;
+    public function __construct(PostRepository $postRepo, PostTradeService $postTradeService)
     {
         $this->postRepo = $postRepo;
+        $this->postTradeService = $postTradeService;
     }
 
     public function getAllBase () {
@@ -213,21 +216,28 @@ class PostService extends BaseService
         }
     }
 
+    // if($request->input('post_trade_id') != null || $request->input('post_trade_id') != 0)
+    //                 $newPostTrade = $this->postTradeService->create($request);
     public function update($user_id, $post_id, $request){
-        try {
-            DB::beginTransaction();
-            $postData = $request->only(['post_trade_id', 'title', 'category_id', 'name',
-                'description', 'ram', 'storage', 'video_url', 'status', 'price', 'address',
-                'public_status', 'guarantee', 'sold', 'color', 'cpu', 'gpu', 'storage_type', 
-                'brand_id', 'display_size'
-            ]);
-            $postData['user_id'] = $user_id;
-            $updatePost = $this->postRepo->updateByField('id', $post_id, $postData);
-            DB::commit();
-            return $this->sendResponse(config('apps.message.update_post_success'), $updatePost);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return $this->sendError(config('apps.message.update_post_error'), [], config('apps.general.error_code'));
+        $post = $this->find($post_id);
+        if ($post->user_id == $user_id){
+            try {
+                DB::beginTransaction();
+            $postData = $request->only(['post_trade_id', 'title', 'name',
+                    'description', 'ram', 'storage', 'video_url', 'status', 'price', 'address',
+                    'public_status', 'guarantee', 'sold', 'color', 'cpu', 'gpu', 'storage_type', 
+                    'brand_id', 'display_size'
+                ]);
+                $postData['user_id'] = $user_id;
+                $updatePost = $this->postRepo->updateByField('id', $post_id, $postData);
+                DB::commit();
+             return $this->sendResponse(config('apps.message.update_post_success'), $updatePost);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return $this->sendError(config('apps.message.update_post_error'), [], config('apps.general.error_code'));
+            }
+        }else{
+            return $this->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
         }
     }
 
