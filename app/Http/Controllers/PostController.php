@@ -89,6 +89,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'category_id' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'name' => 'bail|required|string',
             'status' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'guarantee' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',

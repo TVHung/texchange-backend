@@ -32,7 +32,8 @@ class PostTradeController extends Controller
      */
     public function index()
     {
-        return $this->postTradeService->getAll(); 
+        $postTrades = $this->postTradeService->getAll(); 
+        return (new PostTradeCollection($postTrades))->response();
     }
 
     /**

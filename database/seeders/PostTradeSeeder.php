@@ -31,7 +31,7 @@ class PostTradeSeeder extends Seeder
             ],
             [
                 'id' => 102,
-                'post_id'=> 104,
+                'post_id'=> 102,
                 'category_id'=> 2,
                 'title'=> "Đổi sang máy tính cũ",
                 'name'=> "Máy tính macbook 16 2019",

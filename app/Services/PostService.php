@@ -7,13 +7,17 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\PostTradeRepository;
+use Illuminate\Support\Facades\Validator;
 
 class PostService extends BaseService
 {
     private $postRepo;
-    public function __construct(PostRepository $postRepo)
+    private $postTradeRepo;
+    public function __construct(PostRepository $postRepo, PostTradeRepository $postTradeRepo)
     {
         $this->postRepo = $postRepo;
+        $this->postTradeRepo = $postTradeRepo;
     }
 
     public function getAllBase () {
@@ -163,11 +167,12 @@ class PostService extends BaseService
 
     public function create($request, $user_id)
     {
+        dd($request->input('video_url'));
         try {
             DB::beginTransaction();
             $postData = [
                 'user_id' => $user_id,
-                'post_trade_id' => $request->input('post_trade_id'),
+                'is_trade' => $request->input('is_trade'),
                 'title' => $request->input('title'),
                 'category_id' => $request->input('category_id'),
                 'name' => $request->input('name'),
@@ -205,6 +210,26 @@ class PostService extends BaseService
                     break;
             }
             $newPost = $this->postRepo->store($postData);
+            if($request->input('is_trade') == 1){
+                $validator = Validator::make($request->all(), [
+                    'category_idTrade' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
+                    'nameTrade' => 'bail|required|string',
+                    'descriptionTrade' => 'bail|required|string',
+                    'titleTrade' => 'bail|required|string',
+                ]);
+                if ($validator->fails()) {
+                    return response()->json($validator->errors());
+                }
+                $postTradeData = [
+                    'post_id' => $newPost->id,
+                    'category_id' => $request->input('category_idTrade'),
+                    'name' => $request->input('nameTrade'),
+                    'title' => $request->input('titleTrade'),
+                    'description' => $request->input('descriptionTrade'),
+                    "guarantee" => $request->input('guaranteeTrade')
+                ];
+                $newPostTrade = $this->postTradeRepo->store($postTradeData);
+            }
             DB::commit();
             return $this->sendResponse(config('apps.message.create_post_success'), new PostResource($newPost));
         } catch (\Exception $e) {

@@ -18,6 +18,7 @@ class PostTradeResource extends JsonResource
             'id' => $this->id,
             'post_id' => $this->post_id,
             'category_id' => $this->category_id,
+            'category'=> $this->category->name,
             'title' => $this->title,
             'name' => $this->name,
             'description' => $this->description,
