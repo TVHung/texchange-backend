@@ -8,16 +8,20 @@ use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\PostTradeRepository;
+use App\Repositories\PostImageRepository;
 use Illuminate\Support\Facades\Validator;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class PostService extends BaseService
 {
     private $postRepo;
     private $postTradeRepo;
-    public function __construct(PostRepository $postRepo, PostTradeRepository $postTradeRepo)
+    private $postImageRepo;
+    public function __construct(PostRepository $postRepo, PostTradeRepository $postTradeRepo, PostImageRepository $postImageRepo)
     {
         $this->postRepo = $postRepo;
         $this->postTradeRepo = $postTradeRepo;
+        $this->postImageRepo = $postImageRepo;
     }
 
     public function getAllBase () {
@@ -241,13 +245,58 @@ class PostService extends BaseService
     public function update($user_id, $post_id, $request){
         try {
             DB::beginTransaction();
-            $postData = $request->only(['post_trade_id', 'title', 'category_id', 'name',
+            $postData = $request->only(['is_trade', 'title', 'name',
                 'description', 'ram', 'storage', 'video_url', 'status', 'price', 'address',
                 'public_status', 'guarantee', 'sold', 'color', 'cpu', 'gpu', 'storage_type', 
                 'brand_id', 'display_size'
             ]);
             $postData['user_id'] = $user_id;
+
+            //kiem tra khi edit co xoa anh hay khong
+            if($request->input('is_delete_image') != null || $request->input('is_delete_image') != ""){
+                $imageIds = explode(",", $request->input('is_delete_image'));
+                $deleteImages = $this->postImageRepo->deleteWithListId($imageIds, $post_id);
+            }
+            //kiem tra khi edit có xoa video hay khong
+            if($request->input('is_delete_video') == config('apps.general.is_delete_video'))
+                $postData['video_url'] = null;
+            
+            //kiem tra neu co video thi tao moi
+            if($request->input('fileVideo') != null || $request->input('fileVideo') != ""){
+                $uploadedFileUrl = Cloudinary::uploadVideo($request->input('fileVideo')->getRealPath(), ['folder' => 'post_videos'])->getSecurePath();
+                $postData['video_url'] = $uploadedFileUrl;
+            }
+
             $updatePost = $this->postRepo->updateByField('id', $post_id, $postData);
+
+            $post_trade_id = DB::table('post_trades')->where('post_id', $post_id)->pluck('id')->first();
+            if($request->input('is_trade') == 1){ //if have post trade and update
+                $validator = Validator::make($request->all(), [
+                    'category_idTrade' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
+                    'nameTrade' => 'bail|required|string',
+                    'descriptionTrade' => 'bail|required|string',
+                    'titleTrade' => 'bail|required|string',
+                ]);
+                if ($validator->fails()) {
+                    return response()->json($validator->errors());
+                }
+                $postTradeData = [
+                    'category_id' => $request->input('category_idTrade'),
+                    'name' => $request->input('nameTrade'),
+                    'title' => $request->input('titleTrade'),
+                    'description' => $request->input('descriptionTrade'),
+                    "guarantee" => $request->input('guaranteeTrade')
+                ];
+                if($post_trade_id)
+                    $updatePostTrade = $this->postTradeRepo->updateByField('id', $post_trade_id, $postData);  //update
+                else {
+                    $postTradeData['post_id'] = (int) $post_id;
+                    $newPostTrade = $this->postTradeRepo->store($postTradeData);
+                }
+                // dd($postTradeData);
+            }else{ //have post trade and delete
+                $deletePostTrade = $this->postTradeRepo->deleteByField('id', $post_trade_id);
+            }
             DB::commit();
             return $this->sendResponse(config('apps.message.update_post_success'), $updatePost);
         } catch (\Exception $e) {

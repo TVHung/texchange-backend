@@ -7,4 +7,6 @@ return [
     'auth_error_code' => 601, // config('apps.general.auth_error_code')
     'status_success_code' => 1, // config('apps.general.status_success_code')
     'status_error_code' => -1, // config('apps.general.status_error_code')
+    'is_trade' => 1,
+    'is_delete_video' => 1
 ];

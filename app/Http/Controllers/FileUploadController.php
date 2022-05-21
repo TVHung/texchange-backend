@@ -37,7 +37,7 @@ class FileUploadController extends Controller
     }
 
     public function storeUploadVideos (Request $request){
-        dd($request->file('file'));
+        // dd($request->file('file'));
         if(Auth::check()){
             try {
                 $uploadedFileUrl = Cloudinary::uploadVideo($request->file('file')->getRealPath(), ['folder' => 'post_videos'])->getSecurePath();

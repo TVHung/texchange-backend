@@ -141,6 +141,7 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
+        // dd($request->input('fileVideo'));
         $validator = Validator::make($request->all(), [
             'name' => 'bail|required|string',
             'status' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
@@ -157,7 +158,9 @@ class PostController extends Controller
             $user_id = Auth::user()->id;
             $updatePost = $this->postService->update($user_id, $id, $request);
             return $updatePost;
-        }       
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        }         
         return $this->baseService->sendError(config('apps.message.update_post_error'), [], config('apps.general.error_code'));
     }
 
