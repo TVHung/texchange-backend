@@ -66,7 +66,7 @@ class AuthController extends Controller
         $profile = new Profile();
         $profile->user_id = $user->id;
         $profile->name = $request->input('name');
-        $profile->sex = -1;
+        $profile->sex = null;
         $profile->phone = "";
         $profile->address = "";
         $profile->avatar_url = "https://res.cloudinary.com/trhung/image/upload/v1650219626/rvo0ufooowdf3ur0ltpf.jpg";
@@ -119,7 +119,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => auth()->factory()->getTTL() * 60 * 24,
             'user' => auth()->user()
         ]);
     }

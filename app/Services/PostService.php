@@ -81,7 +81,7 @@ class PostService extends BaseService
             ->whereNotIn('id', $arr_postId);
     }
 
-    public function getMyPosts($user_id)
+    public function getUserPosts($user_id)
     {
         return Post::all()->where('user_id', '=', $user_id);
     }
@@ -171,7 +171,7 @@ class PostService extends BaseService
 
     public function create($request, $user_id)
     {
-        dd($request->input('video_url'));
+        // dd($request->input('video_url'));
         try {
             DB::beginTransaction();
             $postData = [
@@ -183,7 +183,7 @@ class PostService extends BaseService
                 'description' => $request->input('description'),
                 'ram' => $request->input('ram'),
                 'storage' => $request->input('storage'),
-                'video_url' => $request->input('video_url'),
+                'video_url' => null,
                 'status' => $request->input('status'),
                 'price' => $request->input('price'),
                 'address' => $request->input('address'),
@@ -213,13 +213,50 @@ class PostService extends BaseService
                 default:
                     break;
             }
+            // kiem tra neu co video thi tao moi
+            $imgages =  $request->file('fileImage');
+            
+            foreach ($imgages as $key => $value) {
+                var_dump($key, $value);
+            }
+            // dd("co image");
+            if($request->file('fileVideo') != null || $request->file('fileVideo') != ""){
+                $uploadedFileUrl = Cloudinary::uploadVideo($request->file('fileVideo')->getRealPath(), ['folder' => 'post_videos'])->getSecurePath();
+                $postData['video_url'] = $uploadedFileUrl;
+            }
+            
             $newPost = $this->postRepo->store($postData);
+            
+            // if($request->file('fileImage') != null || $request->file('fileImage') != ""){
+            //     $uploadedFileImageUrl = Cloudinary::upload($request->file('fileImage')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
+            //     $imageData = [
+            //         'post_id' => $newPost->id,
+            //         'is_banner' => 1,
+            //         'image_url' => $uploadedFileImageUrl,
+            //     ];
+            //     $newPostImage = $this->postImageRepo->store($imageData);
+            // }
             if($request->input('is_trade') == 1){
                 $validator = Validator::make($request->all(), [
                     'category_idTrade' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
                     'nameTrade' => 'bail|required|string',
                     'descriptionTrade' => 'bail|required|string',
                     'titleTrade' => 'bail|required|string',
+                    'guaranteeTrade' => 'bail|regex:/^\d+(\.\d{1,2})?$/',
+                ],
+                [
+                    //require
+                    'category_idTrade.required'=> config('apps.validation.feild_require'), 
+                    'nameTrade.required'=> config('apps.validation.feild_require'), 
+                    'titleTrade.required'=> config('apps.validation.feild_require'), 
+                    'descriptionTrade.required'=> config('apps.validation.feild_require'), 
+                    //string
+                    'nameTrade.string'=> config('apps.validation.feild_is_string'), 
+                    'titleTrade.string'=> config('apps.validation.feild_is_string'), 
+                    'descriptionTrade.string'=> config('apps.validation.feild_is_string'), 
+                    //number
+                    'category_idTrade.regex'=> config('apps.validation.feild_is_number'),
+                    'guaranteeTrade.regex'=> config('apps.validation.feild_is_number'),
                 ]);
                 if ($validator->fails()) {
                     return response()->json($validator->errors());
@@ -252,6 +289,22 @@ class PostService extends BaseService
             ]);
             $postData['user_id'] = $user_id;
 
+            $category_id_post = $this->postRepo->getById($post_id)->category_id;
+            switch ($category_id_post) {
+                case 1:
+                    $postData['cpu'] = null;
+                    $postData['gpu'] = null;
+                    $postData['storage_type'] = null;
+                    $postData['display_size'] = null;
+                    break;
+                case 3:
+                    $postData['brand_id'] = null;
+                    $postData['display_size'] = null;
+                    $postData['color'] = null;
+                    break;
+                default:
+                    break;
+            }
             //kiem tra khi edit co xoa anh hay khong
             if($request->input('is_delete_image') != null || $request->input('is_delete_image') != ""){
                 $imageIds = explode(",", $request->input('is_delete_image'));
@@ -261,12 +314,21 @@ class PostService extends BaseService
             if($request->input('is_delete_video') == config('apps.general.is_delete_video'))
                 $postData['video_url'] = null;
             
-            //kiem tra neu co video thi tao moi
+            // kiem tra neu co video thi tao moi
             if($request->input('fileVideo') != null || $request->input('fileVideo') != ""){
                 $uploadedFileUrl = Cloudinary::uploadVideo($request->input('fileVideo')->getRealPath(), ['folder' => 'post_videos'])->getSecurePath();
                 $postData['video_url'] = $uploadedFileUrl;
             }
-
+            //kiem tra neu có image
+            // if($request->file('fileImage') != null || $request->file('fileImage') != ""){
+            //     $uploadedFileImageUrl = Cloudinary::upload($request->file('fileImage')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
+            //     $imageData = [
+            //         'post_id' => $post_id,
+            //         'is_banner' => 1,
+            //         'image_url' => $uploadedFileImageUrl,
+            //     ];
+            //     $newPostImage = $this->postImageRepo->store($imageData);
+            // }
             $updatePost = $this->postRepo->updateByField('id', $post_id, $postData);
 
             $post_trade_id = DB::table('post_trades')->where('post_id', $post_id)->pluck('id')->first();
@@ -276,6 +338,20 @@ class PostService extends BaseService
                     'nameTrade' => 'bail|required|string',
                     'descriptionTrade' => 'bail|required|string',
                     'titleTrade' => 'bail|required|string',
+                ],
+                [
+                    //require
+                    'category_idTrade.required'=> config('apps.validation.feild_require'), 
+                    'nameTrade.required'=> config('apps.validation.feild_require'), 
+                    'titleTrade.required'=> config('apps.validation.feild_require'), 
+                    'descriptionTrade.required'=> config('apps.validation.feild_require'), 
+                    //string
+                    'nameTrade.string'=> config('apps.validation.feild_is_string'), 
+                    'titleTrade.string'=> config('apps.validation.feild_is_string'), 
+                    'descriptionTrade.string'=> config('apps.validation.feild_is_string'), 
+                    //number
+                    'category_idTrade.regex'=> config('apps.validation.feild_is_number'),
+                    'guaranteeTrade.regex'=> config('apps.validation.feild_is_number'),
                 ]);
                 if ($validator->fails()) {
                     return response()->json($validator->errors());

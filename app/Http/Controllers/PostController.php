@@ -88,15 +88,37 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'category_id' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'name' => 'bail|required|string',
             'status' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
-            'guarantee' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
+            'guarantee' => 'bail|regex:/^\d+(\.\d{1,2})?$/',
             'address' => 'bail|required|string',
             'description' => 'bail|required|string',
             'price' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'title' => 'bail|required|string',
+        ],
+        [
+            //require
+            'category_id.required'=> config('apps.validation.feild_require'), 
+            'name.required'=> config('apps.validation.feild_require'), 
+            'status.required'=> config('apps.validation.feild_require'), 
+            'address.required'=> config('apps.validation.feild_require'), 
+            'price.required'=> config('apps.validation.feild_require'), 
+            'title.required'=> config('apps.validation.feild_require'), 
+            'description.required'=> config('apps.validation.feild_require'), 
+            //string
+            'name.string'=> config('apps.validation.feild_is_string'), 
+            'address.string'=> config('apps.validation.feild_is_string'), 
+            'title.string'=> config('apps.validation.feild_is_string'), 
+            'description.string'=> config('apps.validation.feild_is_string'), 
+            //number
+            'post_id.regex'=> config('apps.validation.feild_is_number'),
+            'category_id.regex'=> config('apps.validation.feild_is_number'), 
+            'status.regex'=> config('apps.validation.feild_is_number'), 
+            'guarantee.regex'=> config('apps.validation.feild_is_number'), 
+            'price.regex'=> config('apps.validation.feild_is_number'), 
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors());
@@ -132,13 +154,19 @@ class PostController extends Controller
     {
         if(Auth::check()){
             $user_id = Auth::user()->id;
-            $myPosts = $this->postService->getMyPosts($user_id);
+            $myPosts = $this->postService->getUserPosts($user_id);
             return (new PostCollection($myPosts))->response();
         }else{
             return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
         }    
     }
 
+    public function getUserPosts($id)
+    {
+        $userPosts = $this->postService->getUserPosts($id);
+        return (new PostCollection($userPosts))->response();
+    }
+    
     public function update(Request $request, $id)
     {
         // dd($request->input('fileVideo'));
@@ -150,6 +178,27 @@ class PostController extends Controller
             'description' => 'bail|required|string',
             'price' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'title' => 'bail|required|string',
+        ],
+        [
+            //require
+            'category_id.required'=> config('apps.validation.feild_require'), 
+            'name.required'=> config('apps.validation.feild_require'), 
+            'status.required'=> config('apps.validation.feild_require'), 
+            'address.required'=> config('apps.validation.feild_require'), 
+            'price.required'=> config('apps.validation.feild_require'), 
+            'title.required'=> config('apps.validation.feild_require'), 
+            'description.required'=> config('apps.validation.feild_require'), 
+            //string
+            'name.string'=> config('apps.validation.feild_is_string'), 
+            'address.string'=> config('apps.validation.feild_is_string'), 
+            'title.string'=> config('apps.validation.feild_is_string'), 
+            'description.string'=> config('apps.validation.feild_is_string'), 
+            //number
+            'post_id.regex'=> config('apps.validation.feild_is_number'),
+            'category_id.regex'=> config('apps.validation.feild_is_number'), 
+            'status.regex'=> config('apps.validation.feild_is_number'), 
+            'guarantee.regex'=> config('apps.validation.feild_is_number'), 
+            'price.regex'=> config('apps.validation.feild_is_number'), 
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors());

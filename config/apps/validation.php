@@ -1,0 +1,9 @@
+<?php
+
+return [
+    'feild_require' => "Trường này là bắt buộc",
+    'feild_is_number' => "Trường này phải là 1 số",
+    'feild_is_string' => "Trường này phải là một chuỗi", 
+    'feild_wrong_format' => "Trường này sai định dạng",
+    'feild_wrong_phone' => "Trường này không phải số điện thoại",
+];
