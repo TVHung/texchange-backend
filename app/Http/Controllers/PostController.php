@@ -26,6 +26,15 @@ class PostController extends Controller
         $this->postRepo = $postRepo;
         $this->baseService = $baseService;
     }
+
+    public function all()
+    {
+        if(Auth::user()->is_admin == 1){
+            $posts = $this->postService->getAllAdmin();
+            return (new PostCollection($posts))->response();
+        }
+        return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+    }
     
     public function index()
     {
@@ -47,6 +56,18 @@ class PostController extends Controller
             return (new PostCollection($posts))->response();
         }else{
             $posts = $this->postService->getRecentlyPosts();
+            return (new PostCollection($posts))->response();
+        }
+    }
+
+    public function getPostHasTrade()
+    {
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            $posts = $this->postService->getPostHasTrade($user_id);
+            return (new PostCollection($posts))->response();
+        }else{
+            $posts = $this->postService->getPostHasTrade();
             return (new PostCollection($posts))->response();
         }
     }

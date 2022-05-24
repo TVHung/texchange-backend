@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
 Route::apiResource('posts', PostController::class); //api crud post
+Route::get('/post-manager', [PostController::class, 'all']);       
 Route::get('/posts-recently', [PostController::class, 'getRecentlyPosts']);       
+Route::get('/posts-has-trade', [PostController::class, 'getPostHasTrade']);       
 Route::get('/my-posts', [PostController::class, 'getMyPosts']);       
 Route::get('/user-posts/{id}', [PostController::class, 'getUserPosts']);       
 Route::get('/recommend-posts', [PostController::class, 'getRecommendPosts']);       

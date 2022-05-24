@@ -23,7 +23,6 @@ class FileUploadController extends Controller
             //     array_push($upload_url, $uploadedFileUrl);
             // }
             // return $upload_url;
-            // dd("a");
             try {
                 $uploadedFileUrl = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
                 return $this->baseService->sendResponse(config('apps.message.success'), $uploadedFileUrl);
@@ -37,7 +36,6 @@ class FileUploadController extends Controller
     }
 
     public function storeUploadVideos (Request $request){
-        // dd($request->all());
         if(Auth::check()){
             try {
                 $uploadedFileUrl = Cloudinary::uploadVideo($request->file('file')->getRealPath(), ['folder' => 'post_videos'])->getSecurePath();

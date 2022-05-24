@@ -7,16 +7,18 @@ use App\Models\User;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Services\UserService;
+use App\Services\BaseService;
 use Validator;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     protected $userService;
-
-    public function __construct(UserService $userService)
+    protected $baseService;
+    public function __construct(UserService $userService, BaseService $baseService)
     {
         $this->userService = $userService;
+        $this->baseService = $baseService;
     }
     /**
      * Display a listing of the resource.
@@ -25,8 +27,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->userService->getAll();
-        return UserResource::collection($users);
+        if(Auth::user()->is_admin == 1){
+            $users = $this->userService->getAll();
+            return UserResource::collection($users);
+        }
+        return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
     }
 
     /**

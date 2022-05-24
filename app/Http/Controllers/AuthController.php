@@ -29,10 +29,22 @@ class AuthController extends Controller
     	$validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
-        ]);
+        ],
+        [
+            //require
+            'email.required'=> config('apps.validation.feild_require'), 
+            'password.required'=> config('apps.validation.feild_require'), 
+            //email
+            'email.email'=> config('apps.validation.feild_is_email'), 
+            //string
+            'password.string'=> config('apps.validation.feild_is_string'), 
+            //min
+            'password.min'=> config('apps.validation.feild_min_6'), 
+        ]
+        );
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json($validator->errors());
         }
 
         if (! $token = auth()->attempt($validator->validated())) {

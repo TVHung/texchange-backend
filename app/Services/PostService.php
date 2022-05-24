@@ -24,6 +24,10 @@ class PostService extends BaseService
         $this->postImageRepo = $postImageRepo;
     }
 
+    public function getAllAdmin () {
+        return Post::all();
+    }
+
     public function getAllBase () {
         return Post::all()
             ->where('public_status', '=', 1)
@@ -113,6 +117,33 @@ class PostService extends BaseService
     }
 
     //get post recently
+    public function getPostHasTrade($user_id = null)
+    {
+        if($user_id){
+            $postIds = DB::table('post_wish_lists')->select('post_id')->where('user_id', '=', $user_id)->get()->toArray();
+            $arr_postId = [];
+            foreach ($postIds as $postId) {
+                array_push($arr_postId,  $postId->post_id);
+            }
+            return Post::where('user_id', '!=', $user_id)
+            ->where('public_status', '=', 1)
+            ->where('sold', '=', 0)
+            ->where('is_trade', 1)
+            ->whereNotIn('id', $arr_postId)
+            ->orderBy('created_at', 'desc')
+            ->take(6)
+            ->get();
+        }else{
+            return Post::where('public_status', '=', 1)
+            ->where('sold', '=', 0)
+            ->where('is_trade', 1)
+            ->orderBy('created_at', 'desc')
+            ->take(6)
+            ->get();
+        }
+    }
+
+    //get post category
     public function getPostCategory($user_id = null, $category_id)
     {
         if(!in_array($category_id, config('constants.category'))){
@@ -213,29 +244,22 @@ class PostService extends BaseService
                 default:
                     break;
             }
-            // kiem tra neu co video thi tao moi
-            $imgages =  $request->file('fileImage');
-            
-            foreach ($imgages as $key => $value) {
-                var_dump($key, $value);
-            }
-            // dd("co image");
+            // dd("a");
             if($request->file('fileVideo') != null || $request->file('fileVideo') != ""){
                 $uploadedFileUrl = Cloudinary::uploadVideo($request->file('fileVideo')->getRealPath(), ['folder' => 'post_videos'])->getSecurePath();
                 $postData['video_url'] = $uploadedFileUrl;
             }
-            
             $newPost = $this->postRepo->store($postData);
             
-            // if($request->file('fileImage') != null || $request->file('fileImage') != ""){
-            //     $uploadedFileImageUrl = Cloudinary::upload($request->file('fileImage')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
-            //     $imageData = [
-            //         'post_id' => $newPost->id,
-            //         'is_banner' => 1,
-            //         'image_url' => $uploadedFileImageUrl,
-            //     ];
-            //     $newPostImage = $this->postImageRepo->store($imageData);
-            // }
+            if($request->file('fileImage') != null || $request->file('fileImage') != ""){
+                $uploadedFileImageUrl = Cloudinary::upload($request->file('fileImage')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
+                $imageData = [
+                    'post_id' => $newPost->id,
+                    'is_banner' => 1,
+                    'image_url' => $uploadedFileImageUrl,
+                ];
+                $newPostImage = $this->postImageRepo->store($imageData);
+            }
             if($request->input('is_trade') == 1){
                 $validator = Validator::make($request->all(), [
                     'category_idTrade' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',

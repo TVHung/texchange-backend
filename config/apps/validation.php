@@ -6,4 +6,6 @@ return [
     'feild_is_string' => "Trường này phải là một chuỗi", 
     'feild_wrong_format' => "Trường này sai định dạng",
     'feild_wrong_phone' => "Trường này không phải số điện thoại",
+    'feild_min_6' => "Trường này phải có tối thiểu 6 kí tự",
+    'feild_is_email' => "Trường này phải là email",
 ];
