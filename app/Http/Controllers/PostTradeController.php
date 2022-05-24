@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\PostTradeRepository;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\Post\PostTradeRequest;
 
 class PostTradeController extends Controller
 {
@@ -32,7 +33,8 @@ class PostTradeController extends Controller
      */
     public function index()
     {
-        return $this->postTradeService->getAll(); 
+        $postTrades = $this->postTradeService->getAll(); 
+        return (new PostTradeCollection($postTrades))->response();
     }
 
     /**
@@ -50,6 +52,18 @@ class PostTradeController extends Controller
             'title' => 'bail|required|string',
             'description' => 'bail|required|string',
             'guarantee' => 'bail|regex:/^\d+(\.\d{1,2})?$/',
+        ],
+        [
+            //require
+            'post_id.required'=> config('apps.validation.feild_require'),
+            'category_id.required'=> config('apps.validation.feild_require'), 
+            'name.required'=> config('apps.validation.feild_require'), 
+            'title.required'=> config('apps.validation.feild_require'), 
+            'description.required'=> config('apps.validation.feild_require'), 
+            //number
+            'post_id.regex'=> config('apps.validation.feild_is_number'),
+            'category_id.regex'=> config('apps.validation.feild_is_number'), 
+            'guarantee.regex'=> config('apps.validation.feild_is_number'), 
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors());

@@ -23,9 +23,12 @@ class FileUploadController extends Controller
             //     array_push($upload_url, $uploadedFileUrl);
             // }
             // return $upload_url;
-            // dd("a");
-            $uploadedFileUrl = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
-            return $uploadedFileUrl;
+            try {
+                $uploadedFileUrl = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
+                return $this->baseService->sendResponse(config('apps.message.success'), $uploadedFileUrl);
+            } catch (\Throwable $th) {
+                return $this->baseService->sendError(config('apps.message.error'), [], config('apps.general.error_code'));
+            }
         }else{
             return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
         }   
@@ -34,8 +37,12 @@ class FileUploadController extends Controller
 
     public function storeUploadVideos (Request $request){
         if(Auth::check()){
-            $uploadedFileUrl = Cloudinary::uploadVideo($request->file('file')->getRealPath(), ['folder' => 'post_videos'])->getSecurePath();
-            return $uploadedFileUrl;
+            try {
+                $uploadedFileUrl = Cloudinary::uploadVideo($request->file('file')->getRealPath(), ['folder' => 'post_videos'])->getSecurePath();
+                return $this->baseService->sendResponse(config('apps.message.success'), $uploadedFileUrl);
+            } catch (\Throwable $th) {
+                return $this->baseService->sendError(config('apps.message.error'), [], config('apps.general.error_code'));
+            }
         }else{
             return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
         }   

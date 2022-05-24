@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->bigInteger('post_trade_id')->nullable();
+            $table->smallInteger('is_trade');
             $table->string('title', 100);
             $table->string('name', 100);
             $table->string('description', 255);

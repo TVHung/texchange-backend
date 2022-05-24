@@ -11,7 +11,7 @@ class Post extends Model
 
     protected $fillable = [
         'user_id',
-        'post_trade_id',
+        'is_trade',
         'title',
         'category_id',
         'name',
@@ -58,6 +58,11 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
     
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
     public static function filterPost($request) {
         $posts = Post::query();
 

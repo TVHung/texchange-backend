@@ -29,10 +29,22 @@ class AuthController extends Controller
     	$validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
-        ]);
+        ],
+        [
+            //require
+            'email.required'=> config('apps.validation.feild_require'), 
+            'password.required'=> config('apps.validation.feild_require'), 
+            //email
+            'email.email'=> config('apps.validation.feild_is_email'), 
+            //string
+            'password.string'=> config('apps.validation.feild_is_string'), 
+            //min
+            'password.min'=> config('apps.validation.feild_min_6'), 
+        ]
+        );
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json($validator->errors());
         }
 
         if (! $token = auth()->attempt($validator->validated())) {
@@ -66,7 +78,7 @@ class AuthController extends Controller
         $profile = new Profile();
         $profile->user_id = $user->id;
         $profile->name = $request->input('name');
-        $profile->sex = -1;
+        $profile->sex = null;
         $profile->phone = "";
         $profile->address = "";
         $profile->avatar_url = "https://res.cloudinary.com/trhung/image/upload/v1650219626/rvo0ufooowdf3ur0ltpf.jpg";
@@ -119,7 +131,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => auth()->factory()->getTTL() * 60 * 24,
             'user' => auth()->user()
         ]);
     }

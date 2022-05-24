@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\PostTradeResource;
 
 class PostResource extends JsonResource
 {
@@ -17,7 +18,7 @@ class PostResource extends JsonResource
         return [
             'id' => $this->id,
             'user_id'=> $this->user_id,
-            'post_trade_id'=> $this->post_trade_id,
+            'is_trade'=> $this->is_trade,
             'title'=> $this->title,
             'category_id'=> $this->category->id,
             'category'=> $this->category->name,
@@ -39,10 +40,11 @@ class PostResource extends JsonResource
             'storage_type' => $this->storage_type,
             'storage_type_value' => config('constants.storage_type')[$this->storage_type] ?? null,
             'brand_id' => $this->brand_id,
+            'brand' => $this->brand,
             'display_size' => $this->display_size,
             'is_block' => $this->is_block,
             'images' => $this->postImages,
-            'postTrade' => $this->postTrade,
+            'postTrade' => new PostTradeResource($this->postTrade),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

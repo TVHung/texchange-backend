@@ -80,6 +80,14 @@ class Repository
         return $this->model::find($id);
     }
 
+    public function getFeildById($id, $feild)
+    {
+        if (!$id) {
+            return false;
+        }
+        return $this->model::find($id)->pluck($feild);
+    }
+
     public function getByCol($col, $value, $relations = [], $sort = [])
     {
         return $this->model::where($col, $value)->first();
@@ -113,6 +121,7 @@ class Repository
             }
             return true;
         } catch (\Throwable $th) {
+            return false;
         }
         return false;
     }
@@ -136,9 +145,30 @@ class Repository
 
     public function findByField($column, $valueColumn, $relations = [])
     {
+        try {
+            return $this->getInstance()->where($column, $valueColumn)->with($relations)->first();
+        } catch (\Throwable $th) {
+            set_log_error('findByField', $th->getMessage());
+        }
+        return null;
     }
   
     public function isDeleted($tableName, $objectIdName, $objectId, $identifyCode)
     {
+    }
+
+    public function deleteWithListId ($listId = [], $parent_id){
+        // dd("delete many", $listId);
+        try {
+            foreach ($listId as $id){ 
+                $post_id = $this->getById($id)->post_id;
+                if($post_id == $parent_id)
+                    $this->getInstance()->where('id', $id)->delete();
+            }
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
+        return false;
     }
 }

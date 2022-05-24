@@ -34,17 +34,17 @@ class PostRequest extends FormRequest
         ];
     }
 
-    // public function messages()
-    // {
-    //     return [
-    //         // required
-    //         'name.required' => config('apps.message.feild_require'),
-    //         'status.required' => config('apps.message.feild_require'),
-    //         'guarantee.required' => config('apps.message.feild_require'),
-    //         'address.required' => config('apps.message.feild_require'),
-    //         'description.required' => config('apps.message.feild_require'),
-    //         'price.required' => config('apps.message.feild_require'),
-    //         'title.required' => config('apps.message.feild_require'),
-    //     ];
-    // }
+    public function messages()
+    {
+        return [
+            // required
+            'name.required' => config('apps.message.feild_require'),
+            'status.required' => config('apps.message.feild_require'),
+            'guarantee.required' => config('apps.message.feild_require'),
+            'address.required' => config('apps.message.feild_require'),
+            'description.required' => config('apps.message.feild_require'),
+            'price.required' => config('apps.message.feild_require'),
+            'title.required' => config('apps.message.feild_require'),
+        ];
+    }
 }

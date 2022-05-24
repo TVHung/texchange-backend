@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Services\BaseService;
 use App\Http\Resources\ProfileCollection;
 use App\Http\Resources\ProfileResource;
+use Illuminate\Support\Facades\Validator;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class ProfileService extends BaseService
 {
     private $profileRepo;
@@ -51,11 +53,15 @@ class ProfileService extends BaseService
                     'user_id' => $user_id,
                     'name' => $request->input('name'),
                     'sex' => $request->input('sex'),
-                    'avatar_url' => $request->input('avatar_url'),
+                    'avatar_url' => null,
                     'phone' => $request->input('phone'),
                     'address' => $request->input('address'),
                     'facebook_url' => $request->input('facebook_url')
                 ];
+                // if($request->file('avatar') != null || $request->file('avatar') != ""){
+                //     $uploadedFileImageUrl = Cloudinary::upload($request->file('avatar')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
+                //     $profileData['avatar_url'] = $uploadedFileImageUrl;
+                // }
                 $newProfile = $this->profileRepo->store($profileData);
                 DB::commit();
                 return $this->sendResponse(config('apps.message.success'), $newProfile);
@@ -79,17 +85,20 @@ class ProfileService extends BaseService
     }
 
     public function updateUserProfile($user_id, $request){
+        // dd($request->file('avatar'));
         try{
             DB::beginTransaction();
             $updateData = [
-                'user_id' => $user_id,
                 'name' => $request->input('name'),
                 'sex' => $request->input('sex'),
-                'avatar_url' => $request->input('avatar_url'),
                 'phone' => $request->input('phone'),
                 'address' => $request->input('address'),
                 'facebook_url' => $request->input('facebook_url')
             ];
+            // if($request->file('avatar') != null || $request->file('avatar') != ""){
+            //     $uploadedFileImageUrl = Cloudinary::upload($request->file('avatar')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
+            //     $profileData['avatar_url'] = $uploadedFileImageUrl;
+            // }
             $profile = tap(Profile::where('user_id', $user_id))->update($updateData);
             DB::commit();
             return $this->sendResponse(config('apps.message.success'), $profile);

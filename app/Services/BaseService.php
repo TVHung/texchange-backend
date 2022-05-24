@@ -9,6 +9,7 @@ class BaseService
         return [
             'status' => config('apps.general.error'),
             'message' => $messages,
+            'data' => $data,
             'error_code' => $errorCode ?? config('apps.general.error_code')
         ];
     }

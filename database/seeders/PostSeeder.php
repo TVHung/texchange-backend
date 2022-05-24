@@ -20,7 +20,7 @@ class PostSeeder extends Seeder
             [
                 'id' => 101,
                 'user_id'=> 101,
-                'post_trade_id'=> 101,
+                'is_trade'=> 0,
                 'title'=> 'day la san pham 1',
                 'category_id'=> 1,
                 'name'=> 'Iphone 13',
@@ -47,7 +47,7 @@ class PostSeeder extends Seeder
             [
                 'id' => 102,
                 'user_id'=> 102,
-                'post_trade_id'=> null,
+                'is_trade'=> 0,
                 'title'=> 'day la san pham 2',
                 'category_id'=> 1,
                 'name'=> 'Iphone 14',
@@ -74,7 +74,7 @@ class PostSeeder extends Seeder
             [
                 'id' => 103,
                 'user_id'=> 103,
-                'post_trade_id'=> null,
+                'is_trade'=> 0,
                 'title'=> 'day la san pham 3',
                 'category_id'=> 1,
                 'name'=> 'Iphone 15',
@@ -101,7 +101,7 @@ class PostSeeder extends Seeder
             [
                 'id' => 104,
                 'user_id'=> 104,
-                'post_trade_id'=> null,
+                'is_trade'=> 0,
                 'title'=> 'day la san pham 4',
                 'category_id'=> 2,
                 'name'=> 'Iphone 13',
@@ -128,7 +128,7 @@ class PostSeeder extends Seeder
             [
                 'id' => 105,
                 'user_id'=> 105,
-                'post_trade_id'=> null,
+                'is_trade'=> 0,
                 'title'=> 'day la san pham 5',
                 'category_id'=> 2,
                 'name'=> 'Iphone 14',
@@ -155,7 +155,7 @@ class PostSeeder extends Seeder
             [
                 'id' => 106,
                 'user_id'=> 106,
-                'post_trade_id'=> null,
+                'is_trade'=> 0,
                 'title'=> 'day la san pham 6',
                 'category_id'=> 2,
                 'name'=> 'Iphone 15',
@@ -182,7 +182,7 @@ class PostSeeder extends Seeder
             [
                 'id' => 107,
                 'user_id'=> 101,
-                'post_trade_id'=> null,
+                'is_trade'=> 0,
                 'title'=> 'day la san pham 7',
                 'category_id'=> 3,
                 'name'=> 'Iphone 13',
@@ -209,7 +209,7 @@ class PostSeeder extends Seeder
             [
                 'id' => 108,
                 'user_id'=> 104,
-                'post_trade_id'=> null,
+                'is_trade'=> 0,
                 'title'=> 'day la san pham 8',
                 'category_id'=> 3,
                 'name'=> 'Iphone 14',
@@ -236,7 +236,7 @@ class PostSeeder extends Seeder
             [
                 'id' => 109,
                 'user_id'=> 106,
-                'post_trade_id'=> null,
+                'is_trade'=> 0,
                 'title'=> 'day la san pham 9',
                 'category_id'=> 3,
                 'name'=> 'Iphone 15',
