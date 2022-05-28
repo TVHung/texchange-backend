@@ -29,11 +29,15 @@ class PostController extends Controller
 
     public function all()
     {
-        if(Auth::user()->is_admin == 1){
-            $posts = $this->postService->getAllAdmin();
-            return (new PostCollection($posts))->response();
-        }
-        return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        if (Auth::check()) {
+            if(Auth::user()->is_admin == 1){
+                $posts = $this->postService->getAllAdmin();
+                return (new PostCollection($posts))->response();
+            }
+            return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        } 
     }
     
     public function index()
@@ -96,10 +100,17 @@ class PostController extends Controller
         }
     }
 
-    public function setBlockPost(Request $request)
+    public function setBlockPost($id)
     {
-        $result = $this->postService->setBlock($request);
-        return $result; 
+        if(Auth::check()){
+            if(Auth::user()->is_admin == config('constants.is_admin')){
+                $result = $this->postService->setBlockPost($id);
+                return $this->baseService->sendResponse(config('apps.message.success'), []);
+            }
+            return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        } 
     }
 
     public function create()

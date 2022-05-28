@@ -12,5 +12,7 @@ Route::group([], function () {
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']); 
     Route::post('/change-pass', [AuthController::class, 'changePassWord']);  
-    Route::get('/profile-user', [ProfileController::class, 'getProfile']);  
+    Route::get('/profile-user', [ProfileController::class, 'getProfile']);
+    Route::post('/set-block-user/{id}', [UserController::class, 'setBlockUser']);
+    Route::post('/set-admin-user/{id}', [UserController::class, 'setAdminUser']);
 });

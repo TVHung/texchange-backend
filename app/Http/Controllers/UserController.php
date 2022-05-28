@@ -27,11 +27,41 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->is_admin == 1){
-            $users = $this->userService->getAll();
-            return UserResource::collection($users);
-        }
-        return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        if(Auth::check()){
+            if(Auth::user()->is_admin == config('constants.is_admin')){
+                $users = $this->userService->getAll();
+                return UserResource::collection($users);
+            }
+            return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+    }   else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        }   
+    }
+
+    public function setBlockUser($id)
+    {
+        if(Auth::check()){
+            if(Auth::user()->is_admin == config('constants.is_admin')){
+                $users = $this->userService->setDataUserWithAdmin($id, 'is_block');
+                return $this->baseService->sendResponse(config('apps.message.success'), []);
+            }
+            return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        }   
+    }
+
+    public function setAdminUser($id)
+    {
+        if(Auth::check()){
+            if(Auth::user()->is_admin == config('constants.is_admin')){
+                $users = $this->userService->setDataUserWithAdmin($id, 'is_admin');
+                return $this->baseService->sendResponse(config('apps.message.success'), []);
+            }
+            return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        }   
     }
 
     /**
