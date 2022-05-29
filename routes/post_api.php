@@ -12,4 +12,4 @@ Route::get('/user-posts/{id}', [PostController::class, 'getUserPosts']);
 Route::get('/recommend-posts', [PostController::class, 'getRecommendPosts']);       
 Route::get('/get-post-edit/{id}', [PostController::class, 'getPostEdit']);       
 Route::get('/get-post-category/{id}', [PostController::class, 'getCategoryPosts']);       
-Route::post('/set-block', [PostController::class, 'setBlockPost']);       
+Route::post('/set-block-post/{id}', [PostController::class, 'setBlockPost']);       

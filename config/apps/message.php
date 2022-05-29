@@ -15,6 +15,20 @@ return [
     'update_post_error' => "Cập nhật bài viết mới không thành công",
     'delete_post_success' => "Xóa bài viết mới thành công",
     'delete_post_error' => "Xóa bài viết mới không thành công",
+
+    'delete_user_success' => "Xóa người dùng thành công",
+    'delete_user_error' => "Xóa người dùng không thành công",
+
+    'add_admin_success' => "Thêm người dùng làm quản trị viên thành công",
+    'add_admin_error' => "Thêm người dùng làm quản trị viên không thành công",
+    'delete_admin_success' => "Xóa người dùng làm quản trị viên thành công",
+    'delete_admin_error' => "Xóa người dùng làm quản trị viên không thành công",
+
+    'block_user_success' => "Khóa người dùng thành công",
+    'block_user_error' => "Khóa người dùng không thành công",
+    'unblock_user_success' => "Mở khóa người dùng thành công",
+    'unblock_user_error' => "Mở khóa người dùng không thành công",
+
     'not_complete' => "Không thể thực hiện tác vụ",
     'login_require' => "Bạn chưa đăng nhập",
     'block_success' => "Khóa bài viết thành công",

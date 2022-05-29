@@ -182,21 +182,18 @@ class PostService extends BaseService
         return Post::find($id);
     }
 
-    public function setBlock($request)
+    public function setBlockPost($post_id)
     {
-        if(Auth::user()->is_admin !== config('constants.is_admin')){
-            $post_id = $request->input('post_id');
-            $is_block = $request->input('is_block');
+        $is_exsist = $this->postRepo->isExists($post_id);
+        if($is_exsist){
             $post = $this->find($post_id);
-            if($post){
-                $post->is_block = $is_block;
-                $post->save();
-                return $this->sendResponse(config('apps.message.block_success'), []);
-            }else{
-                return $this->sendError(config('apps.message.block_error'), [], config('apps.general.error_code'));
-            }
+            $is_block = $post->is_block == 0 ? 1: 0;
+            $post->is_block = $is_block;
+            // dd($is_block);
+            $post->save();
+            return $this->sendResponse(config('apps.message.block_success'), []);
         }else{
-            return $this->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+            return $this->sendError(config('apps.message.not_complete'));
         }
     }
 
@@ -405,9 +402,17 @@ class PostService extends BaseService
         }
     }
 
-    public function delete($id)
+    public function delete($id, $user_id, $is_admin)
     {
-        $post = Post::destroy($id);
-        return response()->json($id);
+        // dd($is_admin == config('constants.is_admin'));
+        if($this->postRepo->isExists($id)){
+            $post = Post::find($id); 
+            if($user_id == $post->user_id || $is_admin == config('constants.is_admin')){
+                $postDelete = Post::destroy($id);
+                return $this->sendResponse(config('apps.message.delete_post_success'), $id);
+            }
+            return $this->sendError(config('apps.message.not_role_admin'));
+        }
+        return $this->sendError(config('apps.message.not_exist'));
     }
 }

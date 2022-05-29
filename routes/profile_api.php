@@ -8,6 +8,7 @@ Route::group([], function () {
     Route::get('/profile-user', [ProfileController::class, 'getProfile']);  
     Route::post('/profile-user', [ProfileController::class, 'createProfile']);  
     Route::put('/profile-user', [ProfileController::class, 'updateProfileUser']);  
+    Route::post('/change-avatar', [ProfileController::class, 'changeAvatar']);       
 });
 
 // Verb          Path                        Action  Route Name

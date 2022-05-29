@@ -29,11 +29,15 @@ class PostController extends Controller
 
     public function all()
     {
-        if(Auth::user()->is_admin == 1){
-            $posts = $this->postService->getAllAdmin();
-            return (new PostCollection($posts))->response();
-        }
-        return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        if (Auth::check()) {
+            if(Auth::user()->is_admin == 1){
+                $posts = $this->postService->getAllAdmin();
+                return (new PostCollection($posts))->response();
+            }
+            return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        } 
     }
     
     public function index()
@@ -96,10 +100,17 @@ class PostController extends Controller
         }
     }
 
-    public function setBlockPost(Request $request)
+    public function setBlockPost($id)
     {
-        $result = $this->postService->setBlock($request);
-        return $result; 
+        if(Auth::check()){
+            if(Auth::user()->is_admin == config('constants.is_admin')){
+                $result = $this->postService->setBlockPost($id);
+                return $result;
+            }
+            return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        } 
     }
 
     public function create()
@@ -236,10 +247,14 @@ class PostController extends Controller
 
     public function destroy($id)
     {
-        $post_id = $this->postService->delete($id);
-        if($post_id)
-            return $this->baseService->sendResponse(config('apps.message.delete_post_success'), $id);
-        return $this->baseService->sendError(config('apps.message.delete_post_error'), [], config('apps.general.error_code'));
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+            $is_admin = Auth::user()->is_admin;
+            $post_id = $this->postService->delete($id, $user_id, $is_admin);
+            return $post_id;
+        }else{
+            return $this->baseService->sendError(config('apps.message.delete_post_error'), [], config('apps.general.error_code'));
+        }
     }
 
     public function filter(Request $request)

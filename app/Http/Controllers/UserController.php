@@ -27,11 +27,47 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->is_admin == 1){
-            $users = $this->userService->getAll();
-            return UserResource::collection($users);
-        }
-        return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        if(Auth::check()){
+            if(Auth::user()->is_admin == config('constants.is_admin')){
+                $users = $this->userService->getAll(Auth::user()->id);
+                return (new UserCollection($users))->response();
+            }
+            return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        }   
+    }
+
+    public function setBlockUser($id)
+    {
+        if(Auth::check()){
+            if(Auth::user()->is_admin == config('constants.is_admin')){
+                if(Auth::user()->id != $id){
+                    $users = $this->userService->setDataUserWithAdmin($id, 'is_block');
+                    return $users;
+                }
+                return $this->baseService->sendError(config('apps.message.not_complete'), [], config('apps.general.error_code'));
+            }
+            return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        }   
+    }
+
+    public function setAdminUser($id)
+    {
+        if(Auth::check()){
+            if(Auth::user()->is_admin == config('constants.is_admin')){
+                if(Auth::user()->id != $id){
+                    $users = $this->userService->setDataUserWithAdmin($id, 'is_admin');
+                    return $users;
+                }
+                return $this->baseService->sendError(config('apps.message.not_complete'), [], config('apps.general.error_code'));
+            }
+            return $this->baseService->sendError(config('apps.message.not_role_admin'), [], config('apps.general.error_code'));
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'), [], config('apps.general.error_code'));
+        }   
     }
 
     /**
@@ -64,7 +100,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->userService->get($id);
-        return (new UserResource($user))->response();
+        if($user)
+            return (new UserResource($user))->response();
+        return $this->baseService->sendError(config('apps.message.not_exist'), [], config('apps.general.error_code'));
     }
 
     /**
@@ -107,8 +145,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function destroy($id)
     {
-        $user = $this->userService->delete($id);
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+            $is_admin = Auth::user()->is_admin;
+            if($id != $user_id){
+                $user_id = $this->userService->delete($id, $user_id, $is_admin);
+                return $user_id;
+            }
+            return $this->baseService->sendError(config('apps.message.delete_user_error'), [], config('apps.general.error_code'));
+        }else{
+            return $this->baseService->sendError(config('apps.message.delete_user_error'), [], config('apps.general.error_code'));
+        }
     }
 }

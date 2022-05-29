@@ -84,6 +84,24 @@ class ProfileService extends BaseService
         return response()->json($post);
     }
 
+    public function updateAvatar($user_id, $avatar){
+        if($avatar){
+            try {
+                DB::beginTransaction();
+                $profile = $this->get($user_id);
+                $profile->avatar_url = $avatar;
+                $profile->save();
+                DB::commit();
+                return $this->sendResponse(config('apps.message.success'), $avatar);
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                return $this->sendError(config('apps.message.error'));
+            }
+        }else{
+            return $this->sendError(config('apps.message.error'));
+        }
+    }
+
     public function updateUserProfile($user_id, $request){
         // dd($request->file('avatar'));
         try{

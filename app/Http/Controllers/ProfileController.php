@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\ProfileService;
+use App\Services\FileUploadService;
 use App\Repositories\ProfileRepository;
 use App\Http\Resources\ProfileCollection;
 use App\Http\Resources\ProfileResource;
@@ -15,10 +16,12 @@ class ProfileController extends Controller
     protected $profileService;
     protected $profileRepo;
     protected $baseService;
-    public function __construct(ProfileService $profileService, ProfileRepository $profileRepo, BaseService $baseService){
+    protected $fileUploadService;
+    public function __construct(ProfileService $profileService, ProfileRepository $profileRepo, BaseService $baseService, FileUploadService $fileUploadService){
         $this->profileService = $profileService;
         $this->profileRepo = $profileRepo;
         $this->baseService = $baseService;
+        $this->fileUploadService = $fileUploadService;
     }
     
     //get profile current user
@@ -28,6 +31,19 @@ class ProfileController extends Controller
             $user_id = Auth::user()->id;
             $profile = $this->profileService->getProfileUser($user_id);
             return $profile;
+        }else{
+            return $this->baseService->sendError(config('apps.message.login_require'));
+        }
+    }
+
+    public function changeAvatar(Request $request)
+    {
+        if (Auth::check()){
+            $user_id = Auth::user()->id;
+            $avatar = $this->fileUploadService->imageUpload($request);
+            sleep(2);
+            $updateAvatar = $this->profileService->updateAvatar($user_id, $avatar);
+            return $updateAvatar;
         }else{
             return $this->baseService->sendError(config('apps.message.login_require'));
         }
