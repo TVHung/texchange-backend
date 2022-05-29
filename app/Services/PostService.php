@@ -402,9 +402,17 @@ class PostService extends BaseService
         }
     }
 
-    public function delete($id)
+    public function delete($id, $user_id, $is_admin)
     {
-        $post = Post::destroy($id);
-        return response()->json($id);
+        // dd($is_admin == config('constants.is_admin'));
+        if($this->postRepo->isExists($id)){
+            $post = Post::find($id); 
+            if($user_id == $post->user_id || $is_admin == config('constants.is_admin')){
+                $postDelete = Post::destroy($id);
+                return $this->sendResponse(config('apps.message.delete_post_success'), $id);
+            }
+            return $this->sendError(config('apps.message.not_role_admin'));
+        }
+        return $this->sendError(config('apps.message.not_exist'));
     }
 }
