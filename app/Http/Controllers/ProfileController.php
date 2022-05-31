@@ -41,7 +41,6 @@ class ProfileController extends Controller
         if (Auth::check()){
             $user_id = Auth::user()->id;
             $avatar = $this->fileUploadService->imageUpload($request);
-            sleep(2);
             $updateAvatar = $this->profileService->updateAvatar($user_id, $avatar);
             return $updateAvatar;
         }else{
@@ -60,11 +59,11 @@ class ProfileController extends Controller
         // dd($request->all());
         if(Auth::check()){
             $validator = Validator::make($request->all(), [
-                'name' => 'bail|required|string',
-                'sex' => 'bail|regex:/^\d+(\.\d{1,2})?$/',
-                'phone' => 'bail|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-                'address' => 'bail|string',
-                'facebook_url' => 'bail|string',
+                'name' => 'required|string',
+                'sex' => 'nullable|regex:/^\d+(\.\d{1,2})?$/',
+                'phone' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+                'address' => 'nullable|string',
+                'facebook_url' => 'nullable|string',
             ],
             [
                 //require

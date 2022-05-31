@@ -13,4 +13,5 @@ return [
     'non_card' => 2,
     'is_block' => 1,
     'is_not_block' => 0,
+    'paginate' => 8,
 ];

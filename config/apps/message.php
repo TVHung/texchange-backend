@@ -34,4 +34,14 @@ return [
     'block_success' => "Khóa bài viết thành công",
     'block_error' => "Khóa bài viết không thành công",
     'not_role_admin' => "Bạn không có quyền thực hiện hành động này",
+
+    'login_success' => "Đăng nhập thành công",
+    'login_error' => "Đăng nhập thất bại",
+
+    'register_success' => "Đăng ký thành công",
+    'register_error' => "Đăng ký thất bại",
+
+    'update_password_success' => "Thay đổi mật khẩu thành công",
+    'update_password_error' => "Thay đổi mật khẩu thất bại",
+    'password_not_match' => "Mật khẩu cũ không chính xác",
 ];

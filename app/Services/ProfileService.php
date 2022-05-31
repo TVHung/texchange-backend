@@ -103,7 +103,6 @@ class ProfileService extends BaseService
     }
 
     public function updateUserProfile($user_id, $request){
-        // dd($request->file('avatar'));
         try{
             DB::beginTransaction();
             $updateData = [
@@ -113,10 +112,6 @@ class ProfileService extends BaseService
                 'address' => $request->input('address'),
                 'facebook_url' => $request->input('facebook_url')
             ];
-            // if($request->file('avatar') != null || $request->file('avatar') != ""){
-            //     $uploadedFileImageUrl = Cloudinary::upload($request->file('avatar')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
-            //     $profileData['avatar_url'] = $uploadedFileImageUrl;
-            // }
             $profile = tap(Profile::where('user_id', $user_id))->update($updateData);
             DB::commit();
             return $this->sendResponse(config('apps.message.success'), $profile);

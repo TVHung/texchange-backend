@@ -25,7 +25,7 @@ class PostService extends BaseService
     }
 
     public function getAllAdmin () {
-        return Post::all();
+        return Post::paginate(config('constants.paginate'));
     }
 
     public function getAllBase () {
