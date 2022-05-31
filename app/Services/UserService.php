@@ -24,7 +24,13 @@ class UserService extends BaseService
 
     public function getAll($id)
     {
-        return User::where('id', '!=', $id)->get();
+        return User::where('id', '!=', $id)->paginate(config('constants.paginate'));
+    }
+
+    public function getCount()
+    {
+        $user_count = User::count();
+        return $user_count - 1;
     }
 
     public function find($id)
