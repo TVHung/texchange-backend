@@ -13,3 +13,4 @@ Route::get('/recommend-posts', [PostController::class, 'getRecommendPosts']);
 Route::get('/get-post-edit/{id}', [PostController::class, 'getPostEdit']);       
 Route::get('/get-post-category/{id}', [PostController::class, 'getCategoryPosts']);       
 Route::post('/set-block-post/{id}', [PostController::class, 'setBlockPost']);       
+Route::post('/search', [PostController::class, 'filter']);
