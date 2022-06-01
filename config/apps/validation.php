@@ -10,4 +10,5 @@ return [
     'feild_is_email' => "Trường này phải là email",
     'confirm_pass_wrong' => "Xác nhận mật khẩu không khớp",
     'exsist_email' => "Email này đã tồn tại",
+    'image_require' => "Bạn phải thêm ít nhất 1 hình ảnh",
 ];

@@ -234,6 +234,150 @@ class PostImageSeeder extends Seeder
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
+            [
+                'id' => 328,
+                'post_id'=> 110,
+                'is_banner'=> 1,
+                'image_url'=> "https://media.vneconomy.vn/w800/images/upload/2021/12/29/iphone-13-pro-max.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 329,
+                'post_id'=> 111,
+                'is_banner'=> 1,
+                'image_url'=> "https://bachlongmobile.com/bnews/wp-content/uploads/2021/09/tren-tay-thuc-te-iphone-13-pro-max-819x1024.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 330,
+                'post_id'=> 112,
+                'is_banner'=> 1,
+                'image_url'=> "https://genk.mediacdn.vn/139269124445442048/2021/4/21/photo-1-16189398046231706741295.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 331,
+                'post_id'=> 113,
+                'is_banner'=> 1,
+                'image_url'=> "https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/10/19/637702682508615222_macbook-pro-16-2021-xam-1.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 332,
+                'post_id'=> 114,
+                'is_banner'=> 1,
+                'image_url'=> "https://static.remove.bg/remove-bg-web/d450d501f6500a09e72d0e306a5d62768359d9fa/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 333,
+                'post_id'=> 115,
+                'is_banner'=> 1,
+                'image_url'=> "http://www.maccenter.vn/Adv_Images/Banner-MacBookPro-2021-1.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 334,
+                'post_id'=> 116,
+                'is_banner'=> 1,
+                'image_url'=> "https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/10/19/637702682508615222_macbook-pro-16-2021-xam-1.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 335,
+                'post_id'=> 117,
+                'is_banner'=> 1,
+                'image_url'=> "https://static.remove.bg/remove-bg-web/d450d501f6500a09e72d0e306a5d62768359d9fa/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 336,
+                'post_id'=> 118,
+                'is_banner'=> 1,
+                'image_url'=> "http://www.maccenter.vn/Adv_Images/Banner-MacBookPro-2021-1.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 337,
+                'post_id'=> 119,
+                'is_banner'=> 1,
+                'image_url'=> "https://media.vneconomy.vn/w800/images/upload/2021/12/29/iphone-13-pro-max.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 338,
+                'post_id'=> 120,
+                'is_banner'=> 1,
+                'image_url'=> "https://bachlongmobile.com/bnews/wp-content/uploads/2021/09/tren-tay-thuc-te-iphone-13-pro-max-819x1024.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 339,
+                'post_id'=> 121,
+                'is_banner'=> 1,
+                'image_url'=> "https://genk.mediacdn.vn/139269124445442048/2021/4/21/photo-1-16189398046231706741295.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 340,
+                'post_id'=> 122,
+                'is_banner'=> 1,
+                'image_url'=> "https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/10/19/637702682508615222_macbook-pro-16-2021-xam-1.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 341,
+                'post_id'=> 123,
+                'is_banner'=> 1,
+                'image_url'=> "https://static.remove.bg/remove-bg-web/d450d501f6500a09e72d0e306a5d62768359d9fa/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 342,
+                'post_id'=> 124,
+                'is_banner'=> 1,
+                'image_url'=> "http://www.maccenter.vn/Adv_Images/Banner-MacBookPro-2021-1.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 343,
+                'post_id'=> 125,
+                'is_banner'=> 1,
+                'image_url'=> "https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/10/19/637702682508615222_macbook-pro-16-2021-xam-1.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 344,
+                'post_id'=> 126,
+                'is_banner'=> 1,
+                'image_url'=> "https://static.remove.bg/remove-bg-web/d450d501f6500a09e72d0e306a5d62768359d9fa/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'id' => 345,
+                'post_id'=> 127,
+                'is_banner'=> 1,
+                'image_url'=> "http://www.maccenter.vn/Adv_Images/Banner-MacBookPro-2021-1.jpg",
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+            ],
         ];
 
         DB::table('post_images')->insert($postImages);

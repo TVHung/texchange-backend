@@ -41,7 +41,7 @@ class PostWishListController extends Controller
         if (Auth::check()){
             $user_id = Auth::user()->id;
             $wishlist = $this->postWishListService->getAllWishList($user_id);
-            return $this->baseService->sendResponse(config('apps.message.success'), new PostCollection($wishlist));
+            return $this->baseService->sendResponse(config('apps.message.success'), $wishlist);
         }else{
             return $this->baseService->sendError(config('apps.message.login_require'));
         }

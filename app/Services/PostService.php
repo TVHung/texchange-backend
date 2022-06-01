@@ -32,7 +32,8 @@ class PostService extends BaseService
         return Post::all()
             ->where('public_status', '=', 1)
             ->where('sold', '=', 0)
-            ->where('is_block', '=', 0);
+            ->where('is_block', '=', 0)
+            ->take(12);
     }
 
     public function get($post_id)
@@ -82,12 +83,13 @@ class PostService extends BaseService
             ->where('user_id', '!=', $user_id)
             ->where('public_status', '=', 1)
             ->where('sold', '=', 0)
-            ->whereNotIn('id', $arr_postId);
+            ->whereNotIn('id', $arr_postId)
+            ->take(12);
     }
 
     public function getUserPosts($user_id)
     {
-        return Post::all()->where('user_id', '=', $user_id);
+        return Post::where('user_id', $user_id)->paginate(config('constants.paginate_my_post'));
     }
 
     //get post recently
@@ -105,13 +107,13 @@ class PostService extends BaseService
             ->where('sold', '=', 0)
             ->whereNotIn('id', $arr_postId)
             ->orderBy('created_at', 'desc')
-            ->take(6)
+            ->take(12)
             ->get();
         }else{
             return Post::where('public_status', '=', 1)
             ->where('sold', '=', 0)
             ->orderBy('created_at', 'desc')
-            ->take(6)
+            ->take(12)
             ->get();
         }
     }
@@ -131,14 +133,14 @@ class PostService extends BaseService
             ->where('is_trade', 1)
             ->whereNotIn('id', $arr_postId)
             ->orderBy('created_at', 'desc')
-            ->take(6)
+            ->take(12)
             ->get();
         }else{
             return Post::where('public_status', '=', 1)
             ->where('sold', '=', 0)
             ->where('is_trade', 1)
             ->orderBy('created_at', 'desc')
-            ->take(6)
+            ->take(12)
             ->get();
         }
     }
@@ -247,16 +249,20 @@ class PostService extends BaseService
                 $postData['video_url'] = $uploadedFileUrl;
             }
             $newPost = $this->postRepo->store($postData);
+
+            // if($request->hasFile('fileImages')){
+            //     dd($request->file('fileImages'));
+            // }
             
-            if($request->file('fileImage') != null || $request->file('fileImage') != ""){
-                $uploadedFileImageUrl = Cloudinary::upload($request->file('fileImage')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
-                $imageData = [
-                    'post_id' => $newPost->id,
-                    'is_banner' => 1,
-                    'image_url' => $uploadedFileImageUrl,
-                ];
-                $newPostImage = $this->postImageRepo->store($imageData);
-            }
+            // if($request->file('fileImages') != null || $request->file('fileImage') != ""){
+            //     $uploadedFileImageUrl = Cloudinary::upload($request->file('fileImage')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
+            //     $imageData = [
+            //         'post_id' => $newPost->id,
+            //         'is_banner' => 1,
+            //         'image_url' => $uploadedFileImageUrl,
+            //     ];
+            //     $newPostImage = $this->postImageRepo->store($imageData);
+            // }
             if($request->input('is_trade') == 1){
                 $validator = Validator::make($request->all(), [
                     'category_idTrade' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',

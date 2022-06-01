@@ -18,7 +18,7 @@ class PostWishListService extends BaseService
         foreach ($arrayObjPostId as $key => $value) {
             array_push($array_postId, $value->post_id);
         }
-        return Post::whereIn('id', $array_postId)->get(); //get post favoriate
+        return Post::whereIn('id', $array_postId)->paginate(config('constants.paginate_wish_list')); //get post favoriate
     }
 
     public function find($id)

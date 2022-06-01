@@ -17,14 +17,14 @@ Route::apiResource('users', UserController::class);
 Route::apiResource('post-image', PostImageController::class); //api crud post image
 Route::apiResource('wish-list', PostWishListController::class); //api crud wish list
 
-Route::post('/search', [PostController::class, 'filter']);
-
 Route::prefix('admin')->group(function () {
     Route::get('/users', [UserController::class, 'index']);
 });
 // Google Sign In
 Route::post('/get-google-sign-in-url', [GoogleController::class, 'getGoogleSignInUrl']);
 Route::get('/callback', [GoogleController::class, 'loginCallback']);
+
+Route::post('/test-form-data', [PostController::class, 'TestForm']);
 
 require_once('profile_api.php');  
 require_once('post_api.php');  
