@@ -70,7 +70,8 @@ class Post extends Model
             ->send($posts)
             ->through([
                 \App\QueryFilters\Sort::class,
-                \App\QueryFilters\Name::class,
+                \App\QueryFilters\Search::class,
+                \App\QueryFilters\Address::class,
                 \App\QueryFilters\Category::class,
                 \App\QueryFilters\Card::class,
                 \App\QueryFilters\Status::class,
