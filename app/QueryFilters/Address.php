@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Str;
 
-class Name implements Pipe
+class Address implements Pipe
 {
     public function handle($request, Closure $next)
     {
@@ -15,7 +15,8 @@ class Name implements Pipe
         if ( ! request()->has($filterParam)){
             return $next($request);
         }
+        // dd($filterParam, request($filterParam));
         $builder = $next($request);
-        return $builder->where('name', 'ilike', '%' . request($filterParam) . '%');
+        return $builder->where('address', 'ilike', '%' . request($filterParam) . '%');
     }
 }

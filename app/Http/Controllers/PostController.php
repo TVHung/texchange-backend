@@ -264,13 +264,4 @@ class PostController extends Controller
        $posts = Post::filterPost($request);
        return (new PostCollection($posts))->response();
     }
-
-    public function TestForm (Request $request){
-        $data = [
-            "name" => $request->input('name'),
-            "address" => $request->input('address'),
-            "file" => $request->file('file'),
-        ];
-        return $data;
-    }
 }

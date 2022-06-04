@@ -243,7 +243,8 @@ class PostService extends BaseService
                 default:
                     break;
             }
-            // dd("a");
+            // dd($request->input('fileVideo'));
+
             if($request->file('fileVideo') != null || $request->file('fileVideo') != ""){
                 $uploadedFileUrl = Cloudinary::uploadVideo($request->file('fileVideo')->getRealPath(), ['folder' => 'post_videos'])->getSecurePath();
                 $postData['video_url'] = $uploadedFileUrl;
@@ -309,7 +310,7 @@ class PostService extends BaseService
     public function update($user_id, $post_id, $request){
         try {
             DB::beginTransaction();
-            $postData = $request->only(['is_trade', 'title', 'name',
+            $postData = $request->only(['is_trade', 'title', 'name', 'video_url',
                 'description', 'ram', 'storage', 'video_url', 'status', 'price', 'address',
                 'public_status', 'guarantee', 'sold', 'color', 'cpu', 'gpu', 'storage_type', 
                 'brand_id', 'display_size'
@@ -341,9 +342,10 @@ class PostService extends BaseService
             if($request->input('is_delete_video') == config('apps.general.is_delete_video'))
                 $postData['video_url'] = null;
             
+            // dd($request->input('fileVideo'));
             // kiem tra neu co video thi tao moi
-            if($request->input('fileVideo') != null || $request->input('fileVideo') != ""){
-                $uploadedFileUrl = Cloudinary::uploadVideo($request->input('fileVideo')->getRealPath(), ['folder' => 'post_videos'])->getSecurePath();
+            if($request->file('fileVideo') != null || $request->file('fileVideo') != ""){
+                $uploadedFileUrl = Cloudinary::uploadVideo($request->file('fileVideo')->getRealPath(), ['folder' => 'post_videos'])->getSecurePath();
                 $postData['video_url'] = $uploadedFileUrl;
             }
             //kiem tra neu có image
