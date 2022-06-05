@@ -16,4 +16,5 @@ return [
     'paginate' => 8,
     'paginate_wish_list' => 12,
     'paginate_my_post' => 4,
+    'paginate_search_post' => 4,
 ];
