@@ -83,9 +83,9 @@ class Post extends Model
                 \App\QueryFilters\Guarantee::class,
                 \App\QueryFilters\Display::class,
                 \App\QueryFilters\Brand::class,
-                \App\QueryFilters\CreatedAt::class
+                \App\QueryFilters\CreateAt::class
             ])
             ->thenReturn();
-        return $pipeline->get();
+        return $pipeline->paginate(config('constants.paginate_search_post'));
     }
 }

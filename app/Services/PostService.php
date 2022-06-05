@@ -87,9 +87,32 @@ class PostService extends BaseService
             ->take(12);
     }
 
-    public function getUserPosts($user_id)
+    public function getUserPosts($user_id, $type = 'all')
     {
-        return Post::where('user_id', $user_id)->paginate(config('constants.paginate_my_post'));
+        switch ($type) {
+            case 'all':
+                $posts = Post::where('user_id', $user_id)->paginate(config('constants.paginate_my_post'));
+                break;
+            case 'sold':
+                $posts = Post::where('user_id', $user_id)
+                            ->where('sold', 1)
+                            ->paginate(config('constants.paginate_my_post'));
+                break;
+            case 'not_sold':
+                $posts = Post::where('user_id', $user_id)
+                            ->where('sold', 0)
+                            ->paginate(config('constants.paginate_my_post'));
+                break;
+            case 'private':
+                $posts = Post::where('user_id', $user_id)
+                            ->where('public_status', 0)
+                            ->paginate(config('constants.paginate_my_post'));
+                break;
+            default:
+                $posts = Post::where('user_id', $user_id)->paginate(config('constants.paginate_my_post'));
+                break;
+        }
+        return $posts;
     }
 
     //get post recently
@@ -315,10 +338,12 @@ class PostService extends BaseService
                 'public_status', 'guarantee', 'sold', 'color', 'cpu', 'gpu', 'storage_type', 
                 'brand_id', 'display_size'
             ]);
+            $postUpdate = $this->postRepo->getById((int)$post_id);
+            if($postUpdate->user_id !== $user_id){
+                return $this->sendError(config('apps.message.not_role_admin'));
+            }
             $postData['user_id'] = $user_id;
-
-            $category_id_post = $this->postRepo->getById($post_id)->category_id;
-            switch ($category_id_post) {
+            switch ($postUpdate->category_id) {
                 case 1:
                     $postData['cpu'] = null;
                     $postData['gpu'] = null;
@@ -333,6 +358,7 @@ class PostService extends BaseService
                 default:
                     break;
             }
+
             //kiem tra khi edit co xoa anh hay khong
             if($request->input('is_delete_image') != null || $request->input('is_delete_image') != ""){
                 $imageIds = explode(",", $request->input('is_delete_image'));
