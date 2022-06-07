@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
-Route::group([], function () {
-    Route::apiResource('profiles', ProfileController::class);
+Route::apiResource('profiles', ProfileController::class);
+Route::group(['middleware' => 'auth'], function() {
     Route::get('/profile-user', [ProfileController::class, 'getProfile']);  
     Route::post('/profile-user', [ProfileController::class, 'createProfile']);  
     Route::put('/profile-user', [ProfileController::class, 'updateProfileUser']);  

@@ -4,26 +4,27 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Support\Facades\Auth;
 
-class Authenticate extends Middleware
+class AdminMiddleware
 {
     /**
-     * Get the path the user should be redirected to when they are not authenticated.
+     * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return string|null
+     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
+        if (Auth::check() && Auth::user()->is_admin == config('constants.is_admin')) {
             return $next($request);
         }
         $response = [
             'status' => config('apps.general.error'),
-            'message' => config('apps.message.login_require'),
+            'message' => config('apps.message.not_role_admin'),
         ];
+
         return response()->json($response, 413);
     }
 }
