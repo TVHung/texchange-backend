@@ -9,6 +9,7 @@ use App\Http\Controllers\PostImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostWishListController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\ResetPasswordController;
 
 Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
     require_once('user_api.php');    
@@ -24,7 +25,9 @@ Route::prefix('admin')->group(function () {
 Route::post('/get-google-sign-in-url', [GoogleController::class, 'getGoogleSignInUrl']);
 Route::get('/callback', [GoogleController::class, 'loginCallback']);
 
-Route::post('/test-form-data', [PostController::class, 'TestForm']);
+//reset password
+Route::post('reset-password', [ResetPasswordController::class, 'sendMail']);
+Route::put('reset-password/{token}', [ResetPasswordController::class, 'reset']);
 
 require_once('profile_api.php');  
 require_once('post_api.php');  
