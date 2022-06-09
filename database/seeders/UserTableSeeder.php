@@ -18,7 +18,7 @@ class UserTableSeeder extends Seeder
 
         $user = [
             ['id' => 101, 'name' => 'hungday', 'email' => 'hungday@gmail.com', 'password' => bcrypt('hungday'), 'is_admin' => 1, 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')],
-            ['id' => 102, 'name' => 'hungne', 'email' => 'hungne@gmail.com', 'password' => bcrypt('hungne'), 'is_admin' => 1, 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')],
+            ['id' => 102, 'name' => 'truonghungvatvo', 'email' => 'truonghungvatvo@gmail.com', 'password' => bcrypt('truonghungvatvo'), 'is_admin' => 1, 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')],
             ['id' => 103, 'name' => 'hungisme', 'email' => 'hungisme@gmail.com', 'password' => bcrypt('hungisme'), 'is_admin' => 0, 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')],
             ['id' => 104, 'name' => 'truongsang', 'email' => 'truongsang@gmail.com', 'password' => bcrypt('truongsang'), 'is_admin' => 0, 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')],
             ['id' => 105, 'name' => 'truonghoan', 'email' => 'truonghoan@gmail.com', 'password' => bcrypt('truonghoan'), 'is_admin' => 0, 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')],

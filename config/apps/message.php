@@ -44,4 +44,10 @@ return [
     'update_password_success' => "Thay đổi mật khẩu thành công",
     'update_password_error' => "Thay đổi mật khẩu thất bại",
     'password_not_match' => "Mật khẩu cũ không chính xác",
+
+    'sent_email_reset_password' => 'Chúng tôi đã gửi đường dẫn đặt lại mật khẩu đến email của bạn!',
+    'token_ivalid' => 'Mã token đặt lại mật khẩu này không hợp lệ',
+    'email_ivalid' => 'Email không tồn tại, bạn vui lòng nhập đúng email tài khoản của mình',
+    'reset_password_success' => 'Reset mật khẩu thành công',
+    'reset_password_error' => 'Reset mật khẩu không thành công',
 ];
