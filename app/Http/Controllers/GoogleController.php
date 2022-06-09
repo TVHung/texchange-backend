@@ -8,7 +8,6 @@ use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use Redirect;
-
 class GoogleController extends Controller
 {
     public function getGoogleSignInUrl()
@@ -44,14 +43,14 @@ class GoogleController extends Controller
                     ]
                 );
             }
-            return response()->json([
-                'status' => __('google sign in successful'),
-                'data' => $user,
-            ], Response::HTTP_CREATED);
-
+            $request = new Request([
+                'email'   => $user->email,
+                'password' =>  $user->google_id,
+            ]);
+            return app('App\Http\Controllers\AuthController')->login($request);
         } catch (\Exception $exception) {
             return response()->json([
-                'status' => __('google sign in failed'),
+                'status' =>  config('apps.general.error'),
                 'error' => $exception,
                 'message' => $exception->getMessage()
             ], Response::HTTP_BAD_REQUEST);
