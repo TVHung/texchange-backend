@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Profile;
 use Redirect;
 class GoogleController extends Controller
 {
@@ -42,6 +43,14 @@ class GoogleController extends Controller
                         'password'=> bcrypt($googleUser->id),
                     ]
                 );
+                $profile = new Profile();
+                $profile->user_id = $user->id;
+                $profile->name = $user->name;
+                $profile->sex = 10;
+                $profile->phone = "";
+                $profile->address = "";
+                $profile->avatar_url = "https://res.cloudinary.com/trhung/image/upload/v1650219626/rvo0ufooowdf3ur0ltpf.jpg";
+                $profile->save();
             }
             $request = new Request([
                 'email'   => $user->email,
