@@ -43,7 +43,15 @@ class PostService extends BaseService
                 return $this->sendError(config('apps.message.not_exist'));
             }
             $data = $this->postRepo->getById($post_id);
-            return $this->sendResponse(config('apps.message.get_post_success'), new PostResource($data));
+            if($data->is_block === config('constants.is_block'))
+                if(Auth::check() && (Auth::user()->is_admin === config('constants.is_admin') || $data->user_id === Auth::user()->id)){
+                    return $this->sendResponse(config('apps.message.get_post_success'), new PostResource($data));
+                }else{
+                    return $this->sendError(config('apps.message.not_exist'));
+                }
+            else{
+                return $this->sendResponse(config('apps.message.get_post_success'), new PostResource($data));
+            }
         } catch (\Exception $e) {
             return $this->sendError(config('apps.message.not_complete'));
         }
@@ -83,6 +91,7 @@ class PostService extends BaseService
             ->where('user_id', '!=', $user_id)
             ->where('public_status', '=', 1)
             ->where('sold', '=', 0)
+            ->where('is_block', '=', 0)
             ->whereNotIn('id', $arr_postId)
             ->take(12);
     }
@@ -91,25 +100,38 @@ class PostService extends BaseService
     {
         switch ($type) {
             case 'all':
-                $posts = Post::where('user_id', $user_id)->paginate(config('constants.paginate_my_post'));
+                $posts = Post::where('user_id', $user_id)
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(config('constants.paginate_my_post'));
                 break;
             case 'sold':
                 $posts = Post::where('user_id', $user_id)
                             ->where('sold', 1)
+                            ->orderBy('created_at', 'desc')
                             ->paginate(config('constants.paginate_my_post'));
                 break;
             case 'not_sold':
                 $posts = Post::where('user_id', $user_id)
                             ->where('sold', 0)
+                            ->orderBy('created_at', 'desc')
                             ->paginate(config('constants.paginate_my_post'));
                 break;
             case 'private':
                 $posts = Post::where('user_id', $user_id)
                             ->where('public_status', 0)
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(config('constants.paginate_my_post'));
+                break;
+            case 'block':
+                $posts = Post::where('user_id', $user_id)
+                            ->orderBy('created_at', 'desc')
+                            ->where('is_block', config('constants.is_block'))
                             ->paginate(config('constants.paginate_my_post'));
                 break;
             default:
-                $posts = Post::where('user_id', $user_id)->paginate(config('constants.paginate_my_post'));
+                $posts = Post::where('user_id', $user_id)
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(config('constants.paginate_my_post'));
                 break;
         }
         return $posts;
@@ -128,6 +150,7 @@ class PostService extends BaseService
             return Post::where('user_id', '!=', $user_id)
             ->where('public_status', '=', 1)
             ->where('sold', '=', 0)
+            ->where('is_block', '=', 0)
             ->whereNotIn('id', $arr_postId)
             ->orderBy('created_at', 'desc')
             ->take(12)
@@ -135,6 +158,7 @@ class PostService extends BaseService
         }else{
             return Post::where('public_status', '=', 1)
             ->where('sold', '=', 0)
+            ->where('is_block', '=', 0)
             ->orderBy('created_at', 'desc')
             ->take(12)
             ->get();
@@ -154,6 +178,7 @@ class PostService extends BaseService
             ->where('public_status', '=', 1)
             ->where('sold', '=', 0)
             ->where('is_trade', 1)
+            ->where('is_block', '=', 0)
             ->whereNotIn('id', $arr_postId)
             ->orderBy('created_at', 'desc')
             ->take(12)
@@ -162,6 +187,7 @@ class PostService extends BaseService
             return Post::where('public_status', '=', 1)
             ->where('sold', '=', 0)
             ->where('is_trade', 1)
+            ->where('is_block', '=', 0)
             ->orderBy('created_at', 'desc')
             ->take(12)
             ->get();
@@ -191,12 +217,14 @@ class PostService extends BaseService
             return Post::where('user_id', '!=', $user_id)
             ->where('public_status', '=', 1)
             ->where('sold', '=', 0)
+            ->where('is_block', '=', 0)
             ->whereNotIn('id', $arr_postId)
             ->take(6)
             ->get();
         }else{
             return Post::where('public_status', '=', 1)
             ->where('sold', '=', 0)
+            ->where('is_block', '=', 0)
             ->take(6)
             ->get();
         }
@@ -339,6 +367,8 @@ class PostService extends BaseService
                 'brand_id', 'display_size'
             ]);
             $postUpdate = $this->postRepo->getById((int)$post_id);
+            if($postUpdate->is_block === config('constants.is_block')) //user cannot edit post is blocked
+                return $this->sendError(config('apps.message.post_is_block_cannot_edit'));
             if($postUpdate->user_id !== $user_id){
                 return $this->sendError(config('apps.message.not_role_admin'));
             }

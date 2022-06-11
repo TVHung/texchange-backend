@@ -143,6 +143,12 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     protected function createNewToken($token){
+        if(auth()->user()->is_block === 1){
+            return response()->json([
+                'status' => -1,
+                'message' => config('apps.message.cannot_login_user_is_block')
+            ]);
+        }
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',

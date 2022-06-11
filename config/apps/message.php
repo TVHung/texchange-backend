@@ -15,6 +15,7 @@ return [
     'update_post_error' => "Cập nhật bài viết mới không thành công",
     'delete_post_success' => "Xóa bài viết mới thành công",
     'delete_post_error' => "Xóa bài viết mới không thành công",
+    'post_is_block_cannot_edit' => "Bài viết đã bị quản trị viên khóa, bạn không thể chỉnh sửa bài viết",
 
     'delete_user_success' => "Xóa người dùng thành công",
     'delete_user_error' => "Xóa người dùng không thành công",
@@ -28,6 +29,7 @@ return [
     'block_user_error' => "Khóa người dùng không thành công",
     'unblock_user_success' => "Mở khóa người dùng thành công",
     'unblock_user_error' => "Mở khóa người dùng không thành công",
+    'cannot_login_user_is_block' => "Tài khoản này đã bị khóa, bạn không thể đăng nhập.",
 
     'not_complete' => "Không thể thực hiện tác vụ",
     'login_require' => "Bạn chưa đăng nhập",
