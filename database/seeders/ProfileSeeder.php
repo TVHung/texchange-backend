@@ -14,6 +14,7 @@ class ProfileSeeder extends Seeder
      */
     public function run()
     {
+        // \App\Models\Profile::factory(1)->create();
         DB::table('profiles')->delete();
 
         $profiles = [

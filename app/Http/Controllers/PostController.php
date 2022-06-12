@@ -202,7 +202,7 @@ class PostController extends Controller
 
     public function getUserPosts($id)
     {
-        $userPosts = $this->postService->getUserPosts($id);
+        $userPosts = $this->postService->getUserProfilePosts($id);
         return (new PostCollection($userPosts))->response();
     }
     
