@@ -96,6 +96,15 @@ class PostService extends BaseService
             ->take(12);
     }
 
+    public function getUserProfilePosts($user_id)
+    {
+        $posts = Post::where('user_id', $user_id)
+                    ->orderBy('created_at', 'desc')
+                    ->where('is_block', config('constants.is_not_block'))
+                    ->paginate(config('constants.paginate_my_post'));
+        return $posts;
+    }
+
     public function getUserPosts($user_id, $type = 'all')
     {
         switch ($type) {
