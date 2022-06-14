@@ -120,7 +120,7 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->input('fileImageLength'));
+        // dd($request->input('category_id'));
         $validator = Validator::make($request->all(), [
             'category_id' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'name' => 'bail|required|string',
@@ -130,7 +130,7 @@ class PostController extends Controller
             'description' => 'bail|required|string',
             'price' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'title' => 'bail|required|string',
-            // 'fileImages' => 'bail|required',
+            'fileImages' => 'bail|required',
         ],
         [
             //require
@@ -141,7 +141,7 @@ class PostController extends Controller
             'price.required'=> config('apps.validation.feild_require'), 
             'title.required'=> config('apps.validation.feild_require'), 
             'description.required'=> config('apps.validation.feild_require'), 
-            // 'fileImages.required'=> config('apps.validation.image_require'), 
+            'fileImages.required'=> config('apps.validation.image_require'), 
             //string
             'name.string'=> config('apps.validation.feild_is_string'), 
             'address.string'=> config('apps.validation.feild_is_string'), 

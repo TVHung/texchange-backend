@@ -102,7 +102,12 @@ class AuthController extends Controller
         $profile->avatar_url = "https://res.cloudinary.com/trhung/image/upload/v1650219626/rvo0ufooowdf3ur0ltpf.jpg";
         $profile->save();
 
-        return $this->baseService->sendResponse(config('apps.message.register_success'), $user);
+        $requestLogin = new Request([
+            'email'   => $request->input('email'),
+            'password' =>  $request->input('password'),
+        ]);
+        return $this->login($requestLogin);
+        // return $this->baseService->sendResponse(config('apps.message.register_success'), $user);
     }
 
 
