@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Repositories;
-use App\Models\PostWishList;
+use App\Models\ProductWishList;
 /**
- * Class PostWishListRepository.
+ * Class ProductWishListRepository.
  */
-class PostWishListRepository extends Repository
+class ProductWishListRepository extends Repository
 {
     public function __construct()
     {
-        parent::__construct(PostWishList::class);  //đinh nghĩa model post
+        parent::__construct(ProductWishList::class);  //đinh nghĩa model product
         $this->fields = $this->getInstance()->getFillable();
     }
 
@@ -20,7 +20,7 @@ class PostWishListRepository extends Repository
 
     public function update($id, $data)
     {
-        $data = PostWishList::where('id', $id)->update($data);
+        $data = ProductWishList::where('id', $id)->update($data);
         return $data;
     }
 
@@ -39,8 +39,8 @@ class PostWishListRepository extends Repository
     }
 
     //check ton tai cua san pham yeu thich
-    public function isExistPost($user_id, $post_id)
+    public function isExistProduct($user_id, $product_id)
     {
-        return $this->getInstance()::where(['user_id'=> $user_id, 'post_id' => $post_id])->exists();
+        return $this->getInstance()::where(['user_id'=> $user_id, 'product_id' => $product_id])->exists();
     }
 }

@@ -18,9 +18,8 @@ class DatabaseSeeder extends Seeder
             ProfileSeeder::class,
             BrandSeeder::class,
             CategorySeeder::class,
-            PostSeeder::class,
-            PostImageSeeder::class,
-            PostTradeSeeder::class,
+            // ProductSeeder::class,
+            // ProductImageSeeder::class,
         ]);
     }
 }

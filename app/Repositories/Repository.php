@@ -161,8 +161,8 @@ class Repository
         // dd("delete many", $listId);
         try {
             foreach ($listId as $id){ 
-                $post_id = $this->getById($id)->post_id;
-                if($post_id == $parent_id)
+                $product_id = $this->getById($id)->product_id;
+                if($product_id == $parent_id)
                     $this->getInstance()->where('id', $id)->delete();
             }
             return true;

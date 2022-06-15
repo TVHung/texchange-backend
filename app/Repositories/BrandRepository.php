@@ -13,7 +13,7 @@ class BrandRepository extends Repository
 {
     public function __construct()
     {
-        parent::__construct(Brand::class);  //đinh nghĩa model post
+        parent::__construct(Brand::class);  //đinh nghĩa model brand
         $this->fields = $this->getInstance()->getFillable();
     }
 

@@ -19,8 +19,13 @@ class Brand extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function posts()
+    public function productMobiles()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(ProductMobile::class);
+    }
+
+    public function productlaptops()
+    {
+        return $this->hasMany(ProductLaptop::class);
     }
 }

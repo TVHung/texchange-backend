@@ -15,6 +15,6 @@ return [
     'is_not_block' => 0,
     'paginate' => 8,
     'paginate_wish_list' => 12,
-    'paginate_my_post' => 4,
-    'paginate_search_post' => 4,
+    'paginate_my_product' => 4,
+    'paginate_search_product' => 4,
 ];
