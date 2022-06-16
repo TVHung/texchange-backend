@@ -50,15 +50,15 @@ class Product extends Model
     }
     
     public function productMobile() {
-        return $this->hasOne(Product::class);
+        return $this->hasOne(ProductMobile::class);
     }
 
     public function productLaptop() {
-        return $this->hasOne(Product::class);
+        return $this->hasOne(ProductLaptop::class);
     }
 
     public function productPc() {
-        return $this->hasOne(Product::class);
+        return $this->hasOne(ProductPc::class);
     }
 
     public static function filterProduct($request) {

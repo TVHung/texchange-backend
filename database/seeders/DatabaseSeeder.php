@@ -18,8 +18,11 @@ class DatabaseSeeder extends Seeder
             ProfileSeeder::class,
             BrandSeeder::class,
             CategorySeeder::class,
-            // ProductSeeder::class,
-            // ProductImageSeeder::class,
+            ProductSeeder::class,
+            ProductMobileSeeder::class,
+            ProductLaptopSeeder::class,
+            ProductPcSeeder::class,
+            ProductImageSeeder::class,
         ]);
     }
 }
