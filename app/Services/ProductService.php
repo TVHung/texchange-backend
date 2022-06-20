@@ -134,6 +134,12 @@ class ProductService extends BaseService
                             ->where('is_block', config('constants.is_block'))
                             ->paginate(config('constants.paginate_my_product'));
                 break;
+            case 'trade':
+                $products = Product::where('user_id', $user_id)
+                            ->orderBy('created_at', 'desc')
+                            ->where('is_trade', config('constants.is_trade'))
+                            ->paginate(config('constants.paginate_my_product'));
+                break;
             default:
                 $products = Product::where('user_id', $user_id)
                             ->orderBy('created_at', 'desc')
@@ -239,6 +245,22 @@ class ProductService extends BaseService
     public function find($id)
     {
         return Product::find($id);
+    }
+
+    public function upView($product_id)
+    {
+        try {
+            DB::beginTransaction();
+            $product = $this->find($product_id);
+            $view = $product->view + 1;
+            $product->view = $view;
+            $product->save();
+            DB::commit();
+            return $this->sendResponse(config('apps.message.success'), []);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return $this->sendError(config('apps.message.error'));
+        }
     }
 
     public function setBlockProduct($product_id)

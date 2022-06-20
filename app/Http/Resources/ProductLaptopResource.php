@@ -22,6 +22,7 @@ class ProductLaptopResource extends JsonResource
             'storage_type' => $this->storage_type,
             'display_size' => $this->display_size,
             'brand_id' => $this->brand_id,
+            'brand' => $this->brand['name'],
             'color' => $this->color,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

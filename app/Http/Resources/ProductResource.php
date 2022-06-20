@@ -36,9 +36,9 @@ class ProductResource extends JsonResource
             'is_block' => $this->is_block,
             'view' => $this->view,
             'images' => $this->productImages,
-            'productMobile' => $this->productMobile,
-            'productLaptop' => $this->productLaptop,
-            'productPc' => $this->productPc,
+            'productMobile' => new ProductMobileResource($this->productMobile),
+            'productLaptop' => new ProductLaptopResource($this->productLaptop),
+            'productPc' => new ProductPcResource($this->productPc),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

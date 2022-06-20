@@ -12,6 +12,7 @@ return [
     'is_admin' => 1,
     'non_card' => 2,
     'is_block' => 1,
+    'is_trade' => 1,
     'is_not_block' => 0,
     'paginate' => 8,
     'paginate_wish_list' => 12,

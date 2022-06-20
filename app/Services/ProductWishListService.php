@@ -24,7 +24,7 @@ class ProductWishListService extends BaseService
         return Product::join('product_images', 'products.id', '=', 'product_images.product_id')
                     ->whereIn('products.id', $array_productId)
                     ->where('product_images.is_banner', '=', 1)
-                    ->paginate(config('constants.paginate_wish_list'), array('products.*', 'product_images.*')); //get product favoriate
+                    ->paginate(config('constants.paginate_wish_list'), array('products.*', 'product_images.image_url')); //get product favoriate
     }
 
     public function find($id)
@@ -39,6 +39,7 @@ class ProductWishListService extends BaseService
 
     public function delete($product_id, $user_id)
     {
+        // dd($product_id, $user_id);
         $product = ProductWishList::where(['product_id' => $product_id, 'user_id' => $user_id])->pluck('id')->toArray();
         $product_delete = ProductWishList::destroy($product[0]);
         return $product;

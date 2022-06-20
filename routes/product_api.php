@@ -18,4 +18,5 @@ Route::get('/products-has-trade', [ProductController::class, 'getProductHasTrade
 Route::get('/user-products/{id}', [ProductController::class, 'getUserProducts']);       
 Route::get('/recommend-products', [ProductController::class, 'getRecommendProducts']);       
 Route::get('/get-product-category/{id}', [ProductController::class, 'getCategoryProducts']);       
+Route::get('/up-view/{id}', [ProductController::class, 'upView']);       
 Route::post('/search', [ProductController::class, 'filter']);

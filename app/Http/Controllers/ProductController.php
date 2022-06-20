@@ -168,7 +168,8 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = $this->productService->get($id);   
+
+        $product = $this->productService->get($id);
         return $product;
     }
 
@@ -262,6 +263,11 @@ class ProductController extends Controller
         }else{
             return $this->baseService->sendError(config('apps.message.delete_product_error'), [], config('apps.general.error_code'));
         }
+    }
+
+    public function upView($id)
+    {
+        return $this->productService->upView($id);
     }
 
     public function filter(Request $request)

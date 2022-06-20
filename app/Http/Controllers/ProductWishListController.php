@@ -112,7 +112,7 @@ class ProductWishListController extends Controller
     {
         if (Auth::check()){
             $user_id = Auth::user()->id;
-            $id = $this->productWishListService->delete($product_id, $user_id);
+            $id = $this->productWishListService->delete((int)$product_id, $user_id);
             return $this->baseService->sendResponse(config('apps.message.success'));
         }else{
             return $this->baseService->sendError(config('apps.message.login_require'));
