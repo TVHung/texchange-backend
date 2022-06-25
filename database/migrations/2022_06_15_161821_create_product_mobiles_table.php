@@ -17,8 +17,8 @@ class CreateProductMobilesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->integer('brand_id')->nullable();
-            $table->foreign('brand_id')->references('id')->on('brands');
+            $table->integer('brand_id');
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->string('color', 30)->nullable();
             $table->timestamps();
         });

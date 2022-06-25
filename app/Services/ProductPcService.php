@@ -17,4 +17,16 @@ class ProductPcService extends BaseService
     {
         $this->productPcRepo = $productPcRepo;
     }
+
+    public function create($data) {
+        return $this->productPcRepo->store($data);
+    }
+
+    public function update($product_child_id, $productData) {
+        return $this->productPcRepo->updateById($product_child_id, $productData);
+    }
+
+    public function getIdByParentId($product_id) {
+        return $this->productPcRepo->findByField('product_id', $product_id);
+    }
 }

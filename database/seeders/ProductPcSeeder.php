@@ -23,7 +23,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 107,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -33,7 +33,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 108,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -43,7 +43,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 109,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -53,7 +53,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 116,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -63,7 +63,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 117,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -73,7 +73,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 118,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -83,7 +83,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 125,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -93,7 +93,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 126,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -103,7 +103,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 127,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -113,7 +113,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 134,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -123,7 +123,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 135,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -133,7 +133,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 136,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -143,7 +143,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 143,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -153,7 +153,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 144,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -163,7 +163,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 145,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -173,7 +173,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 152,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -183,7 +183,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 153,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -193,7 +193,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 154,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -203,7 +203,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 159,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
@@ -213,7 +213,7 @@ class ProductPcSeeder extends Seeder
                 'product_id'=> 160,
                 'cpu'=> "i5",
                 'gpu'=> "amd radeon r7",
-                'storage_type'=> 0,
+                'storage_type'=> 3,
                 'display_size'=> null,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')

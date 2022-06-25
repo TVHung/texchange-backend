@@ -10,19 +10,45 @@ use Illuminate\Support\Facades\Auth;
 use App\Repositories\ProductImageRepository;
 use Illuminate\Support\Facades\Validator;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
-
+use Carbon\Carbon;
+use App\Services\ProductMobileService;
+use App\Services\ProductLaptopService;
+use App\Services\ProductPcService;
 class ProductService extends BaseService
 {
     private $productRepo;
+    private $productMobileService;
+    private $productLaptopService;
+    private $productPcService;
     private $productImageRepo;
-    public function __construct(ProductRepository $productRepo, ProductImageRepository $productImageRepo)
+    public function __construct(ProductRepository $productRepo, ProductMobileService $productMobileService, ProductLaptopService $productLaptopService, ProductPcService $productPcService, ProductImageRepository $productImageRepo)
     {
         $this->productRepo = $productRepo;
+        $this->productMobileService = $productMobileService;
+        $this->productLaptopService = $productLaptopService;
+        $this->productPcService = $productPcService;
         $this->productImageRepo = $productImageRepo;
     }
 
     public function getAllAdmin () {
-        return Product::paginate(config('constants.paginate'));
+        $allParameters = \Request::query();
+        $product = Product::query();
+
+        if (array_key_exists('category_id', $allParameters)) {
+            $product->where('category_id', $allParameters['category_id']);
+        }
+        if (array_key_exists('is_block', $allParameters)) {
+            $product->where('is_block', $allParameters['is_block']);
+        }
+        if (array_key_exists('sold', $allParameters)) {
+            $product->where('sold', $allParameters['sold']);
+        }
+
+        return $product->paginate(config('constants.paginate'));
+        // if(array_key_exists('category', $allParameters))
+        //     return Product::where('category_id', $allParameters['category'])->paginate(config('constants.paginate'));
+        // else
+        //     return Product::paginate(config('constants.paginate'));
     }
 
     public function getAllBase () {
@@ -280,48 +306,27 @@ class ProductService extends BaseService
 
     public function create($request, $user_id)
     {
-        // dd($request->input('video_url'));
         try {
             DB::beginTransaction();
             $productData = [
                 'user_id' => $user_id,
-                'is_trade' => $request->input('is_trade'),
+                'is_trade' => $request->input('is_trade') ?? 0,
                 'title' => $request->input('title'),
                 'category_id' => $request->input('category_id'),
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
-                'ram' => $request->input('ram'),
-                'storage' => $request->input('storage'),
+                'ram' => $request->input('ram') ?? 0,
+                'storage' => $request->input('storage') ?? 0,
                 'video_url' => null,
                 'status' => $request->input('status'),
-                'price' => $request->input('price'),
+                'price' => $request->input('price') ?? 0,
                 'address' => $request->input('address'),
-                'public_status' => $request->input('public_status'),
-                'guarantee' => $request->input('guarantee'),
-                'sold' => $request->input('sold'),
-                'color' => $request->input('color'),
-                'cpu' => $request->input('cpu'),
-                'gpu' => $request->input('gpu'),
-                'storage_type' => $request->input('storage_type'),
-                'brand_id' => $request->input('brand_id'),
-                'display_size' => $request->input('display_size'),
-                'is_block' => config('constants.is_not_block'),
+                'public_status' => $request->input('public_status') ?? 1,
+                'guarantee' => $request->input('guarantee') ?? 0,
+                'sold' => 0,
+                'is_block' => config('constants.is_not_block') ?? 0,
+                'view' => 0
             ];
-            switch ($request->input('category_id')) {
-                case 1:
-                    $productData['cpu'] = null;
-                    $productData['gpu'] = null;
-                    $productData['storage_type'] = null;
-                    $productData['display_size'] = null;
-                    break;
-                case 3:
-                    $productData['brand_id'] = null;
-                    $productData['display_size'] = null;
-                    $productData['color'] = null;
-                    break;
-                default:
-                    break;
-            }
             // dd($request->input('fileVideo'));
 
             if($request->file('fileVideo') != null || $request->file('fileVideo') != ""){
@@ -329,7 +334,38 @@ class ProductService extends BaseService
                 $productData['video_url'] = $uploadedFileUrl;
             }
             $newProduct = $this->productRepo->store($productData);
-
+            // dd($request->input('video_url'));
+            $productChilData = [];
+            $newProductChild = null;
+            switch ($request->input('category_id')) {
+                case 1:
+                    $productChilData['product_id'] = $newProduct->id;
+                    $productChilData['brand_id'] = $request->input('brand_id') ?? null;
+                    $productChilData['color'] = $request->input('color') ?? null;
+                    $newProductChild = $this->productMobileService->create($productChilData);
+                    break;
+                case 2:
+                    $productChilData['product_id'] = $newProduct->id;
+                    $productChilData['brand_id'] = $request->input('brand_id') ?? null;
+                    $productChilData['color'] = $request->input('color') ?? null;
+                    $productChilData['cpu'] = $request->input('cpu') ?? null;
+                    $productChilData['gpu'] = $request->input('gpu') ?? null;
+                    $productChilData['storage_type'] = $request->input('storage_type') ?? null;
+                    $productChilData['display_size'] = $request->input('display_size') ?? null;
+                    $newProductChild = $this->productLaptopService->create($productChilData);
+                    break;
+                case 3:
+                    $productChilData['product_id'] = $newProduct->id;
+                    $productChilData['cpu'] = $request->input('cpu') ?? null;
+                    $productChilData['gpu'] = $request->input('gpu') ?? null;
+                    $productChilData['storage_type'] = $request->input('storage_type') ?? null;
+                    $productChilData['display_size'] = $request->input('display_size') ?? null;
+                    $newProductChild = $this->productPcService->create($productChilData);
+                    break;
+                default:
+                    break;
+            }
+            // dd($newProductChild);
             // if($request->hasFile('fileImages')){
             //     dd($request->file('fileImages'));
             // }
@@ -358,8 +394,7 @@ class ProductService extends BaseService
             DB::beginTransaction();
             $productData = $request->only(['is_trade', 'title', 'name', 'video_url',
                 'description', 'ram', 'storage', 'video_url', 'status', 'price', 'address',
-                'public_status', 'guarantee', 'sold', 'color', 'cpu', 'gpu', 'storage_type', 
-                'brand_id', 'display_size'
+                'public_status', 'guarantee', 'sold'
             ]);
             $productUpdate = $this->productRepo->getById((int)$product_id);
             if($productUpdate->is_block === config('constants.is_block')) //user cannot edit product is blocked
@@ -368,22 +403,7 @@ class ProductService extends BaseService
                 return $this->sendError(config('apps.message.not_role_admin'));
             }
             $productData['user_id'] = $user_id;
-            switch ($productUpdate->category_id) {
-                case 1:
-                    $productData['cpu'] = null;
-                    $productData['gpu'] = null;
-                    $productData['storage_type'] = null;
-                    $productData['display_size'] = null;
-                    break;
-                case 3:
-                    $productData['brand_id'] = null;
-                    $productData['display_size'] = null;
-                    $productData['color'] = null;
-                    break;
-                default:
-                    break;
-            }
-
+            // dd($productUpdate);
             //kiem tra khi edit co xoa anh hay khong
             if($request->input('is_delete_image') != null || $request->input('is_delete_image') != ""){
                 $imageIds = explode(",", $request->input('is_delete_image'));
@@ -409,7 +429,40 @@ class ProductService extends BaseService
             //     ];
             //     $newProductImage = $this->productImageRepo->store($imageData);
             // }
-            $updateProduct = $this->productRepo->updateByField('id', $product_id, $productData);
+            $updateProduct = $this->productRepo->updateById($product_id, $productData);
+            // dd($updateProduct);
+            //update child
+            $productChilData = [];
+            $updateProductChild = null;
+            switch ($productUpdate->category_id) {
+                case 1:
+                    $child = $this->productMobileService->getIdByParentId($product_id);
+                    $productChilData['brand_id'] = $request->input('brand_id');
+                    $productChilData['color'] = $request->input('color');
+                    $updateProductChild = $this->productMobileService->update($child->id, $productChilData);
+                    break;
+                case 2:
+                    $child = $this->productLaptopService->getIdByParentId($product_id);
+                    $productChilData['brand_id'] = $request->input('brand_id');
+                    $productChilData['color'] = $request->input('color');
+                    $productChilData['cpu'] = $request->input('cpu');
+                    $productChilData['gpu'] = $request->input('gpu');
+                    $productChilData['storage_type'] = $request->input('storage_type');
+                    $productChilData['display_size'] = $request->input('display_size');
+                    $updateProductChild = $this->productLaptopService->update($child->id, $productChilData);
+                    break;
+                case 3:
+                    $child = $this->productPcService->getIdByParentId($product_id);
+                    $productChilData['cpu'] = $request->input('cpu');
+                    $productChilData['gpu'] = $request->input('gpu');
+                    $productChilData['storage_type'] = $request->input('storage_type');
+                    $productChilData['display_size'] = $request->input('display_size');
+                    $updateProductChild = $this->productPcService->update($child->id, $productChilData);
+                    break;
+                default:
+                    break;
+            }
+            // dd($child_id->id);
             if($request->input('is_trade') == 1){ //if have product trade and update
               
             }else{
@@ -434,5 +487,41 @@ class ProductService extends BaseService
             return $this->sendError(config('apps.message.not_role_admin'));
         }
         return $this->sendError(config('apps.message.not_exist'));
+    }
+
+    public function getProductDashbpoard($type){
+        try {
+            DB::beginTransaction();
+            $products = null;
+            if($type == "view") //sort for view
+                $products = Product::orderBy('view', 'desc')
+                                    ->take(5)
+                                    ->get();
+            else //sort for new
+                $products = Product::orderBy('created_at', 'desc')
+                                    ->take(5)
+                                    ->get();
+            DB::commit();
+            return $this->sendResponse(config('apps.message.success'), new ProductCollection($products));
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return $this->sendError(config('apps.message.not_complete'));
+        }
+    }
+
+    public function getViewStatic() {
+        try {
+            DB::beginTransaction();
+            $week = DB::table('products')
+                        ->select(DB::raw('DATE(created_at) as date'), DB::raw('sum(view) as views'))
+                        ->groupBy('date')
+                        ->take(7)
+                        ->get();
+            DB::commit();
+            return $this->sendResponse(config('apps.message.success'), $week);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return $this->sendError(config('apps.message.not_complete'));
+        }
     }
 }

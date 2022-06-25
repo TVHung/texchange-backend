@@ -130,7 +130,8 @@ class ProductController extends Controller
             'description' => 'bail|required|string',
             'price' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'title' => 'bail|required|string',
-            'fileImages' => 'bail|required',
+            'brand_id' => $request->input('category_id') != 3 ? 'bail|required|regex:/^\d+(\.\d{1,2})?$/' : '',
+            'fileImages' => $request->input('is_trade') ? 'bail' : 'bail|required',
         ],
         [
             //require
@@ -142,6 +143,7 @@ class ProductController extends Controller
             'title.required'=> config('apps.validation.feild_require'), 
             'description.required'=> config('apps.validation.feild_require'), 
             'fileImages.required'=> config('apps.validation.image_require'), 
+            'brand_id.required'=> config('apps.validation.feild_require'), 
             //string
             'name.string'=> config('apps.validation.feild_is_string'), 
             'address.string'=> config('apps.validation.feild_is_string'), 
@@ -150,7 +152,8 @@ class ProductController extends Controller
             //number
             'product_id.regex'=> config('apps.validation.feild_is_number'),
             'category_id.regex'=> config('apps.validation.feild_is_number'), 
-            'status.regex'=> config('apps.validation.feild_is_number'), 
+            'status.regex'=> config('apps.validation.feild_require'), 
+            'brand_id.regex'=> config('apps.validation.feild_require'), 
             'guarantee.regex'=> config('apps.validation.feild_is_number'), 
             'price.regex'=> config('apps.validation.feild_is_number'), 
         ]);
@@ -218,6 +221,7 @@ class ProductController extends Controller
             'description' => 'bail|required|string',
             'price' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'title' => 'bail|required|string',
+            'brand_id' => $request->input('category_id') != 3 ? 'bail|required|regex:/^\d+(\.\d{1,2})?$/' : '',
         ],
         [
             //require
@@ -237,6 +241,7 @@ class ProductController extends Controller
             'product_id.regex'=> config('apps.validation.feild_is_number'),
             'category_id.regex'=> config('apps.validation.feild_is_number'), 
             'status.regex'=> config('apps.validation.feild_is_number'), 
+            'brand_id.regex'=> config('apps.validation.feild_require'), 
             'guarantee.regex'=> config('apps.validation.feild_is_number'), 
             'price.regex'=> config('apps.validation.feild_is_number'), 
         ]);
@@ -274,5 +279,22 @@ class ProductController extends Controller
     {
        $products = Product::filterProduct($request);
        return (new ProductCollection($products))->response();
+    }
+
+    public function getMostView()
+    {
+        $productMostView = $this->productService->getProductDashbpoard("view");
+        return $productMostView;
+    }
+
+    public function getRecentlyDashboard()
+    {
+        $productMostRecently = $this->productService->getProductDashbpoard("recently");
+        return $productMostRecently;
+    }
+
+    public function getViewStatic() {
+        $view = $this->productService->getViewStatic();
+        return $view;
     }
 }

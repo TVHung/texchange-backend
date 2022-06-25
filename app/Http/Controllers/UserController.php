@@ -159,4 +159,10 @@ class UserController extends Controller
             return $this->baseService->sendError(config('apps.message.delete_user_error'), [], config('apps.general.error_code'));
         }
     }
+
+    public function getRecentlyDashboard()
+    {
+        $users = $this->userService->getUserRecently();
+        return $users;
+    }
 }

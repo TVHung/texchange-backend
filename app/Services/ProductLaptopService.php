@@ -17,4 +17,16 @@ class ProductLaptopService extends BaseService
     {
         $this->productLaptopRepo = $productLaptopRepo;
     }
+
+    public function create($data) {
+        return $this->productLaptopRepo->store($data);
+    }
+
+    public function update($product_child_id, $productData) {
+        return $this->productLaptopRepo->updateById($product_child_id, $productData);
+    }
+
+    public function getIdByParentId($product_id) {
+        return $this->productLaptopRepo->findByField('product_id', $product_id);
+    }
 }

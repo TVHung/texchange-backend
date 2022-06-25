@@ -18,7 +18,7 @@ class CreateProductLaptopsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->integer('brand_id')->nullable();
-            $table->foreign('brand_id')->references('id')->on('brands');
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->string('color', 30)->nullable();
             $table->string('cpu', 50)->nullable();
             $table->string('gpu', 50)->nullable();

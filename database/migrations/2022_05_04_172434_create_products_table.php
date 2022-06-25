@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->smallInteger('is_trade');
             $table->string('title', 100);
             $table->string('name', 100);
@@ -34,13 +34,6 @@ class CreateProductsTable extends Migration
             $table->integer('guarantee');
             $table->smallInteger('is_block');
             $table->integer('view');
-            // $table->string('cpu', 50)->nullable();
-            // $table->string('gpu', 50)->nullable();
-            // $table->smallInteger('storage_type')->nullable();
-            // $table->integer('brand_id')->nullable();
-            // $table->foreign('brand_id')->references('id')->on('brands');
-            // $table->string('color', 30)->nullable();
-            // $table->float('display_size')->nullable();
             $table->timestamps();
         });
     }

@@ -11,6 +11,9 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['middleware' => 'auth-admin'], function() {
     Route::get('/product-manager', [ProductController::class, 'all']);       
     Route::post('/set-block-product/{id}', [ProductController::class, 'setBlockProduct']);      
+    Route::get('/most-view', [ProductController::class, 'getMostView']);       
+    Route::get('/dashboard-recently-product', [ProductController::class, 'getRecentlyDashboard']);       
+    Route::get('/view-static', [ProductController::class, 'getViewStatic']);       
 });
 Route::apiResource('products', ProductController::class); //api crud product
 Route::get('/products-recently', [ProductController::class, 'getRecentlyProducts']);       

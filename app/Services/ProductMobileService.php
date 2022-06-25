@@ -17,4 +17,16 @@ class ProductMobileService extends BaseService
     {
         $this->productMobileRepo = $productMobileRepo;
     }
+
+    public function create($data) {
+        return $this->productMobileRepo->store($data);
+    }
+
+    public function update($product_child_id, $productData) {
+        return $this->productMobileRepo->updateById($product_child_id, $productData);
+    }
+
+    public function getIdByParentId($product_id) {
+        return $this->productMobileRepo->findByField('product_id', $product_id);
+    }
 }
