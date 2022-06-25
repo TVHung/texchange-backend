@@ -37,12 +37,12 @@ class ProfileService extends BaseService
 
     public function getAllWishList($user_id)
     {
-        $arrayObjPostId = Profile::where('user_id', $user_id)->get(['post_id']);
-        $array_postId = array();
-        foreach ($arrayObjPostId as $key => $value) {
-            array_push($array_postId, $value->post_id);
+        $arrayObjProductId = Profile::where('user_id', $user_id)->get(['product_id']);
+        $array_productId = array();
+        foreach ($arrayObjProductId as $key => $value) {
+            array_push($array_productId, $value->product_id);
         }
-        return Post::whereIn('id', $array_postId)->get(); 
+        return Product::whereIn('id', $array_productId)->get(); 
     }
     
     public function create ($request, $user_id){
@@ -59,7 +59,7 @@ class ProfileService extends BaseService
                     'facebook_url' => $request->input('facebook_url')
                 ];
                 // if($request->file('avatar') != null || $request->file('avatar') != ""){
-                //     $uploadedFileImageUrl = Cloudinary::upload($request->file('avatar')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
+                //     $uploadedFileImageUrl = Cloudinary::upload($request->file('avatar')->getRealPath(), ['folder' => 'product_images'])->getSecurePath();
                 //     $profileData['avatar_url'] = $uploadedFileImageUrl;
                 // }
                 $newProfile = $this->profileRepo->store($profileData);
@@ -79,9 +79,9 @@ class ProfileService extends BaseService
         return Profile::find($id);
     }
 
-    public function update($id, array $post_data){
-        $post = tap(Profile::where('id', $id))->update($post_data);
-        return response()->json($post);
+    public function update($id, array $product_data){
+        $product = tap(Profile::where('id', $id))->update($product_data);
+        return response()->json($product);
     }
 
     public function updateAvatar($user_id, $avatar){

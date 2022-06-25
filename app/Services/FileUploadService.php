@@ -11,7 +11,7 @@ class FileUploadService extends BaseService
     public function imageUpload ($request){
         if(Auth::check()){
             try {
-                $uploadedFileUrl = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'post_images'])->getSecurePath();
+                $uploadedFileUrl = Cloudinary::upload($request->file('file')->getRealPath(), ['folder' => 'product_images'])->getSecurePath();
                 return $uploadedFileUrl;
             } catch (\Throwable $th) {
                 return false;

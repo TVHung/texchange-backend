@@ -13,9 +13,9 @@ class Category extends Model
         'name',
     ];
 
-    public function posts()
+    public function products()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Product::class);
     }
 
     public function brands()

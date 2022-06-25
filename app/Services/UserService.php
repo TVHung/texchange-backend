@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\Profile;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +25,9 @@ class UserService extends BaseService
 
     public function getAll($id)
     {
-        return User::where('id', '!=', $id)->paginate(config('constants.paginate'));
+        return User::where('id', '!=', $id)
+                    // ->orderBy('created_at', 'desc')
+                    ->paginate(config('constants.paginate'));
     }
 
     public function getCount()
@@ -81,5 +84,19 @@ class UserService extends BaseService
             return $this->sendError(config('apps.message.not_role_admin'));
         }
         return $this->sendError(config('apps.message.not_exist'));
+    }
+
+    public function getUserRecently(){
+        try {
+            DB::beginTransaction();
+            $users = Profile::orderBy('created_at', 'desc')
+                                ->take(5)
+                                ->get();
+            DB::commit();
+            return $this->sendResponse(config('apps.message.success'), $users);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return $this->sendError(config('apps.message.not_complete'));
+        }
     }
 }
