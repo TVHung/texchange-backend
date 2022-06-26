@@ -45,10 +45,6 @@ class ProductService extends BaseService
         }
 
         return $product->paginate(config('constants.paginate'));
-        // if(array_key_exists('category', $allParameters))
-        //     return Product::where('category_id', $allParameters['category'])->paginate(config('constants.paginate'));
-        // else
-        //     return Product::paginate(config('constants.paginate'));
     }
 
     public function getAllBase () {

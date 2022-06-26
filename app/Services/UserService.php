@@ -25,9 +25,15 @@ class UserService extends BaseService
 
     public function getAll($id)
     {
-        return User::where('id', '!=', $id)
-                    // ->orderBy('created_at', 'desc')
-                    ->paginate(config('constants.paginate'));
+        $allParameters = \Request::query();
+        $user = User::query();
+        if (array_key_exists('is_block', $allParameters)) {
+            $user->where('is_block', $allParameters['is_block']);
+        }
+        if (array_key_exists('is_admin', $allParameters)) {
+            $user->where('is_admin', $allParameters['is_admin']);
+        }
+        return $user->paginate(config('constants.paginate'));
     }
 
     public function getCount()
