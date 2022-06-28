@@ -52,4 +52,8 @@ return [
     'email_ivalid' => 'Email không tồn tại, bạn vui lòng nhập đúng email tài khoản của mình',
     'reset_password_success' => 'Reset mật khẩu thành công',
     'reset_password_error' => 'Reset mật khẩu không thành công',
+
+    'add_wish_list_success' => 'Thêm sản phẩm quan tâm thành công',
+    'add_wish_list_error' => 'Thêm sản phẩm quan tâm không thành công',
+    'add_wish_list_exist' => 'Sản phẩm đã có trong danh sách quan tâm',
 ];

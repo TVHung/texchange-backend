@@ -19,10 +19,26 @@ class StorageType implements Pipe
         $builder = $next($request);
         $value = explode(".", request($filterParam));
         // dd($value);
-        return $builder->where(function($query) use($value){
-                        foreach($value as $id){
-                            $query->orWhere('storage_type', '=', (int)$id);
-                        }        
-                    });
+        switch ((int)request('category')) {
+            case 2:
+                $result = $builder->where(function($query) use($value){
+                                    foreach($value as $id){
+                                        $query->orWhere('storage_type', '=', (int)$id);
+                                    }        
+                                });
+                return $result;
+                break;
+            case 3:
+                $result = $builder->where(function($query) use($value){
+                                    foreach($value as $id){
+                                        $query->orWhere('storage_type', '=', (int)$id);
+                                    }        
+                                });
+                return $result;
+                break;
+            default:
+                return $builder;
+                break;
+        }
     }
 }

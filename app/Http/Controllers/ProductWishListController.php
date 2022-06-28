@@ -74,7 +74,7 @@ class ProductWishListController extends Controller
         //kiem tra su ton tai neu ton tai thi khong tao
         $exist = $this->productWishListRepo->isExistProduct(Auth::user()->id, $request->input('product_id'));
         if($exist) 
-            return $this->baseService->sendResponse(config('apps.message.success'));
+            return $this->baseService->sendResponse(config('apps.message.add_wish_list_exist'));
         else
             try{
                 DB::beginTransaction();
@@ -84,10 +84,10 @@ class ProductWishListController extends Controller
                 $productWishList->product_id = $request->input('product_id');
                 $productWishList->save();
                 DB::commit();
-                return $this->baseService->sendResponse(config('apps.message.success'), $productWishList);
+                return $this->baseService->sendResponse(config('apps.message.add_wish_list_success'), $productWishList);
             } catch (\Exception $e) {
                 DB::rollback();
-                return $this->baseService->sendError(config('apps.message.not_complete'), [], config('apps.general.error_code'));
+                return $this->baseService->sendError(config('apps.message.add_wish_list_error'), [], config('apps.general.error_code'));
             }
     }
 

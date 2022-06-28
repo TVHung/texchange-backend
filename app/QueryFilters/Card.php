@@ -16,13 +16,34 @@ class Card implements Pipe
             return $next($request);
         }
         $builder = $next($request);
-        if((int)request($filterParam) == config('constants.has_card')){
-            // dd("co card");
-            return $builder->whereNotNull('gpu');
-        }
-        else {
-            // dd("khong co card");
-            return $builder->whereNull('gpu');
+        switch ((int)request('category')) {
+            case 2:
+                if((int)request($filterParam) == config('constants.has_card')){
+                    $result = $builder->where('gpu', '!=', 'null')
+                                ->where('gpu', '!=', '')
+                                ->where('gpu', '!=', null); 
+                }else{
+                    $result = $builder->orWhere('gpu', '=', 'null')
+                                ->orWhere('gpu', '=', '')
+                                ->orWhere('gpu', '=', null);
+                }
+                return $result;
+                break;
+            case 3:
+                if((int)request($filterParam) == config('constants.has_card')){
+                    $result = $builder->where('gpu', '!=', 'null')
+                                ->where('gpu', '!=', '')
+                                ->where('gpu', '!=', null); 
+                }else{
+                    $result = $builder->orWhere('gpu', '=', 'null')
+                                ->orWhere('gpu', '=', '')
+                                ->orWhere('gpu', '=', null);
+                }
+                return $result;
+                break;
+            default:
+                return $builder;
+                break;
         }
     }
 }

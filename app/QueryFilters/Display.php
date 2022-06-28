@@ -23,12 +23,28 @@ class Display implements Pipe
         // return $builder->whereBetween('display_size', [(int)$value[0], (int)$value[1]]);
 
         $value = explode(".", request($filterParam));
-        // dd($value);
-        return $builder->where(function($query) use($value){
-                        foreach($value as $item){
-                            $size = explode("_", array_values(config('constants.display'))[(int)$item]);
-                            $query->orWhereBetween('display_size', [(int)$size[0], (int)$size[1]]);
-                        }        
-                    });
+        switch ((int)request('category')) {
+            case 2:
+                $result = $builder->where(function($query) use($value){
+                                    foreach($value as $item){
+                                        $size = explode("_", array_values(config('constants.display'))[(int)$item]);
+                                        $query->orWhereBetween('display_size', [(int)$size[0], (int)$size[1]]);
+                                    }        
+                                });
+                return $result;
+                break;
+            case 3:
+                $result = $builder->where(function($query) use($value){
+                                    foreach($value as $item){
+                                        $size = explode("_", array_values(config('constants.display'))[(int)$item]);
+                                        $query->orWhereBetween('display_size', [(int)$size[0], (int)$size[1]]);
+                                    }        
+                                });
+                return $result;
+                break;
+            default:
+                return $builder;
+                break;
+        }
     }
 }

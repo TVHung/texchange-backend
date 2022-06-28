@@ -16,6 +16,28 @@ class Brand implements Pipe
             return $next($request);
         }
         $builder = $next($request);
-        return $builder->where('brand_id', '=', request($filterParam));
+
+        $value = explode(".", request($filterParam));
+        switch ((int)request('category')) {
+            case 1:
+                $result = $builder->where(function($query) use($value){
+                                    foreach($value as $id){
+                                        $query->orWhere('brand_id', '=', (int)$id);
+                                    }        
+                                });
+                return $result;
+                break;
+            case 2:
+                $result = $builder->where(function($query) use($value){
+                                    foreach($value as $id){
+                                        $query->orWhere('brand_id', '=', (int)$id);
+                                    }        
+                                });
+                return $result;
+                break;
+            default:
+                return $builder;
+                break;
+        }
     }
 }
