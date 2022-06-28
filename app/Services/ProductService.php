@@ -44,7 +44,7 @@ class ProductService extends BaseService
             $product->where('sold', $allParameters['sold']);
         }
 
-        return $product->paginate(config('constants.paginate'));
+        return $product->orderBy('created_at', 'desc')->paginate(config('constants.paginate'));
     }
 
     public function getAllBase () {

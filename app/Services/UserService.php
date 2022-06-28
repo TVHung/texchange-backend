@@ -33,7 +33,7 @@ class UserService extends BaseService
         if (array_key_exists('is_admin', $allParameters)) {
             $user->where('is_admin', $allParameters['is_admin']);
         }
-        return $user->paginate(config('constants.paginate'));
+        return $user->orderBy('created_at', 'desc')->paginate(config('constants.paginate'));
     }
 
     public function getCount()
