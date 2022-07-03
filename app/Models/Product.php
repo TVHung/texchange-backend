@@ -44,6 +44,11 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->whereNull('comment_parent_id');
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

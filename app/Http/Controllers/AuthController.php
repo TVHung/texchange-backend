@@ -99,6 +99,7 @@ class AuthController extends Controller
         $profile->sex = 10;
         $profile->phone = "";
         $profile->address = "";
+        $profile->facebook_url = "";
         $profile->avatar_url = "https://res.cloudinary.com/trhung/image/upload/v1650219626/rvo0ufooowdf3ur0ltpf.jpg";
         $profile->save();
 
