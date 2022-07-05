@@ -34,6 +34,7 @@ require_once('product_api.php');
 require_once('brand_api.php');  
 require_once('media_api.php');
 require_once('comment_api.php');
+require_once('chat_api.php');
 
 // Verb          Path                        Action  Route Name
 // GET           /users                      index   users.index
