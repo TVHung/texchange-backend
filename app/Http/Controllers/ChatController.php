@@ -9,42 +9,25 @@ use App\Events\Message;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class ChatController extends Controller
 {
-    protected $ChatService;
+    protected $chatService;
     protected $baseService;
-    public function __construct(ChatService $ChatService, BaseService $baseService){
-        $this->ChatService = $ChatService;
+    public function __construct(ChatService $chatService, BaseService $baseService){
+        $this->chatService = $chatService;
         $this->baseService = $baseService;
     }
 
-    public function createConversation (Request $request) {
-        
-    }
-
-    public function allMessageWithConversationId (Request $request) {
-        return "allMessageWithConversationId";
-
-    }
-
-    public function getMyListConversation () {
-        return "getMyListConversation";
-    }
-
-    public function sendMessage (Request $request) {
-        // dd($request->all());
+    public function getAllMessBoxChat (Request $request) {
         $validator = Validator::make($request->all(), [
-            'message' => 'bail|required|string',
-            // 'conversation_id' => 'bail|regex:/^\d+(\.\d{1,2})?$/',
+            'target_user_id' => 'bail|regex:/^\d+(\.\d{1,2})?$/',
         ],
         [
             //require
-            'message.required'=> config('apps.validation.feild_require'), 
-            // 'conversation_id.required'=> config('apps.validation.feild_require'), 
-            //string
-            'message.string'=> config('apps.validation.feild_is_string'), 
+            'target_user_id.required'=> config('apps.validation.feild_require'), 
             //number
-            // 'conversation_id.regex'=> config('apps.validation.feild_is_number'),
+            'target_user_id.regex'=> config('apps.validation.feild_is_number'),
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors());
@@ -52,9 +35,62 @@ class ChatController extends Controller
         try{
             DB::beginTransaction();
             $user_id = Auth::user()->id;
-            event(new Message($request->input('message')));
+            $allMess = $this->chatService->getAllChatTargetUserId($user_id, $request->input('target_user_id'));
             DB::commit();
-            return [];
+            return $allMess;
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->baseService->sendError(config('apps.message.error'), [], config('apps.general.error_code'));
+        }
+    }
+
+    public function getMyListConversation () {
+        try{
+            DB::beginTransaction();
+            $user_id = Auth::user()->id;
+            $conversations = $this->chatService->getMyListConversation($user_id);
+            DB::commit();
+            return $this->baseService->sendResponse(config('apps.message.success'), $conversations);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->baseService->sendError(config('apps.message.error'), [], config('apps.general.error_code'));
+        }
+    }
+
+    public function sendMessage (Request $request) {
+        // dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'message' => 'bail|required|string',
+            'target_user_id' => 'bail|regex:/^\d+(\.\d{1,2})?$/',
+        ],
+        [
+            //require
+            'message.required'=> config('apps.validation.feild_require'), 
+            'target_user_id.required'=> config('apps.validation.feild_require'), 
+            //string
+            'message.string'=> config('apps.validation.feild_is_string'), 
+            //number
+            'target_user_id.regex'=> config('apps.validation.feild_is_number'),
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+        try{
+            DB::beginTransaction();
+            $user_id = Auth::user()->id;
+            if((int)$request->input('target_user_id') != $user_id){
+                //if have image
+                $uploadedFileUrl = null;
+                // dd($request->file('image'));
+                if($request->file('image')){
+                    $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath(), ['folder' => 'chat_images'])->getSecurePath();
+                }
+                event(new Message($request->input('message')));
+                $result = $this->chatService->createMess($request, $user_id, $uploadedFileUrl);
+                DB::commit();
+                return $result;
+            }else
+                return $this->baseService->sendError(config('apps.message.error'), [], config('apps.general.error_code'));
         } catch (\Exception $e) {
             DB::rollback();
             return $this->baseService->sendError(config('apps.message.error'), [], config('apps.general.error_code'));
