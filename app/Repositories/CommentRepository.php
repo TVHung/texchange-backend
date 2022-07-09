@@ -22,6 +22,14 @@ class CommentRepository extends Repository
         return $this->getModel()::where('id', $id)->update($data);
     }
 
+    public function getCommentProduct($id)
+    {
+        return $this->getModel()::where('product_id', $id)
+                                ->where('comment_parent_id', null)
+                                ->orderBy('created_at', 'desc')
+                                ->get();
+    }
+
     public function update($id, $data)
     {
         $data = Comment::where('id', $id)->update($data);

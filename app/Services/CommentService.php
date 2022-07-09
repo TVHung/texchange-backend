@@ -18,6 +18,11 @@ class CommentService extends BaseService
         return Comment::find($id);
     }
 
+    public function getCommentProduct($id)
+    {
+        return $this->commentRepo->getCommentProduct($id);
+    }
+    
     public function create ($request, $user_id){
         try {
             DB::beginTransaction();

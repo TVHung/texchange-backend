@@ -10,6 +10,7 @@ use App\Services\BaseService;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+// use App\Events\Comment;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
@@ -27,9 +28,17 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getCommentProduct($id)
     {
-        //
+        try{
+            DB::beginTransaction();
+            $comments = $this->commentService->getCommentProduct($id);
+            DB::commit();
+            return new CommentCollection($comments);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->baseService->sendError(config('apps.message.error'), [], config('apps.general.error_code'));
+        }
     }
 
     /**
@@ -71,6 +80,7 @@ class CommentController extends Controller
         try{
             DB::beginTransaction();
             $user_id = Auth::user()->id;
+            // event(new Comment($request->input('comment')));
             $comment = $this->commentService->create($request, $user_id);
             DB::commit();
             return $comment;
