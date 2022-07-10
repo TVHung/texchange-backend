@@ -10,7 +10,7 @@ use App\Services\BaseService;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-// use App\Events\Comment;
+use App\Events\CommentEvent;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
@@ -80,7 +80,7 @@ class CommentController extends Controller
         try{
             DB::beginTransaction();
             $user_id = Auth::user()->id;
-            // event(new Comment($request->input('comment')));
+            event(new CommentEvent($request->input('content')));
             $comment = $this->commentService->create($request, $user_id);
             DB::commit();
             return $comment;

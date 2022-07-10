@@ -27,7 +27,7 @@ class CommentRepository extends Repository
         return $this->getModel()::where('product_id', $id)
                                 ->where('comment_parent_id', null)
                                 ->orderBy('created_at', 'desc')
-                                ->get();
+                                ->paginate(config('constants.paginate_product_comment'));
     }
 
     public function update($id, $data)
