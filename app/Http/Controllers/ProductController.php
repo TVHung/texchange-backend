@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Validator;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use App\Http\Requests\Product\ProductRequest;
 class ProductController extends Controller
 {
@@ -120,7 +121,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->input('category_id'));
         $validator = Validator::make($request->all(), [
             'category_id' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'name' => 'bail|required|string',

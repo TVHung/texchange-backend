@@ -18,4 +18,5 @@ return [
     'paginate_wish_list' => 12,
     'paginate_my_product' => 4,
     'paginate_search_product' => 4,
+    'paginate_product_comment' => 5,
 ];

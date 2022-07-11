@@ -11,17 +11,13 @@ class Message extends Model
 
     protected $fillable = [
         'message',
+        'image_url',
         'user_id',
-        'conversation_id',
+        'target_user_id',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function conversation()
-    {
-        return $this->belongsTo(Conversation::class);
     }
 }

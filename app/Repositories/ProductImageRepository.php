@@ -23,6 +23,12 @@ class ProductImageRepository extends Repository
         return $data;
     }
 
+    //so anh cua 1 product
+    public function getNumImageProduct($product_id){
+        $images = ProductImage::where('product_id', '=', $product_id)->get();
+        return $images->count();
+    }
+
     public function isExists($id)
     {
         return $this->getInstance()::where('user_id', $id)->exists();

@@ -86,14 +86,4 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Message::class);
     }
-
-    public function conversations()
-    {
-        return $this->hasMany(Conversation::class);
-    }
-
-    public function participant()
-    {
-        return $this->hasOne(Participant::class);
-    }
 }

@@ -21,7 +21,7 @@ class ProfileSeeder extends Seeder
             [
                 'id' => 101,
                 'user_id'=> 101,
-                'name'=> "Trương Văn Hùng",
+                'name'=> "Hùng đây",
                 'sex'=> 1,
                 'avatar_url'=> "https://thiepnhanai.com/wp-content/uploads/2021/05/hinh-anh-dai-dien-dep-1.jpg",
                 'phone'=> "0383621309",
@@ -33,7 +33,7 @@ class ProfileSeeder extends Seeder
             [
                 'id' => 102,
                 'user_id'=> 102,
-                'name'=> "Trương Văn Hoàn",
+                'name'=> "Hùng vật vờ",
                 'sex'=> 1,
                 'avatar_url'=> "https://pdp.edu.vn/wp-content/uploads/2021/05/hinh-anh-avatar-nam-1.jpg",
                 'phone'=> "0383621309",
@@ -45,7 +45,7 @@ class ProfileSeeder extends Seeder
             [
                 'id' => 103,
                 'user_id'=> 103,
-                'name'=> "Trương Văn Hưng",
+                'name'=> "Hùng là tôi",
                 'sex'=> 1,
                 'avatar_url'=> "https://dautubanthan.net/wp-content/uploads/2021/12/Hi%CC%80nh-da%CC%A3i-die%CC%A3%CC%82n-de%CC%A3p-da%CC%82%CC%81u-ma%CC%A3%CC%86t-cho-nam.jpg",
                 'phone'=> "0383621309",
