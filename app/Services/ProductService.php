@@ -394,13 +394,14 @@ class ProductService extends BaseService
                 'public_status', 'guarantee', 'sold'
             ]);
             $productUpdate = $this->productRepo->getById((int)$product_id);
+        
             if($productUpdate->is_block === config('constants.is_block')) //user cannot edit product is blocked
                 return $this->sendError(config('apps.message.product_is_block_cannot_edit'));
             if($productUpdate->user_id !== $user_id){
                 return $this->sendError(config('apps.message.not_role_admin'));
             }
             $productData['user_id'] = $user_id;
-            // dd($productUpdate);
+
             //kiem tra khi edit co xoa anh hay khong
             if($request->input('is_delete_image') != null || $request->input('is_delete_image') != ""){
                 $imageIds = explode(",", $request->input('is_delete_image'));
@@ -416,16 +417,24 @@ class ProductService extends BaseService
                 $uploadedFileUrl = Cloudinary::uploadVideo($request->file('fileVideo')->getRealPath(), ['folder' => 'product_videos'])->getSecurePath();
                 $productData['video_url'] = $uploadedFileUrl;
             }
+
+            //kiem tra xem con anh khong
+            $countImages = $this->productImageRepo->getNumImageProduct((int)$product_id);
             //kiem tra neu có image
-            // if($request->file('fileImage') != null || $request->file('fileImage') != ""){
-            //     $uploadedFileImageUrl = Cloudinary::upload($request->file('fileImage')->getRealPath(), ['folder' => 'product_images'])->getSecurePath();
-            //     $imageData = [
-            //         'product_id' => $product_id,
-            //         'is_banner' => 1,
-            //         'image_url' => $uploadedFileImageUrl,
-            //     ];
-            //     $newProductImage = $this->productImageRepo->store($imageData);
-            // }
+            $files = $request->file('fileImages');
+            $num = 0;
+            if($request->has('fileImages')){
+                foreach($request->file('fileImages') as $image){
+                    $uploadedFileUrl = Cloudinary::upload($image->getRealPath(), ['folder' => 'product_images'])->getSecurePath();
+                    $imageData = [
+                        'product_id' => $product_id,
+                        'is_banner' => ($countImages == 0 && $num == 0) ? 1 : 0,
+                        'image_url' => $uploadedFileUrl,
+                    ];
+                    $newProductImage = $this->productImageRepo->store($imageData);
+                    $num = $num + 1;
+                }
+            }
             $updateProduct = $this->productRepo->updateById($product_id, $productData);
             // dd($updateProduct);
             //update child
