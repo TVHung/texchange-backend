@@ -80,13 +80,13 @@ class ChatController extends Controller
             $user_id = Auth::user()->id;
             if((int)$request->input('target_user_id') != $user_id){
                 //if have image
-                $uploadedFileUrl = null;
+                $uploadedFileUrl = "";
                 // dd($request->file('image'));
                 if($request->file('image')){
                     $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath(), ['folder' => 'chat_images'])->getSecurePath();
                 }
-                event(new Message($request->input('message')));
                 $result = $this->chatService->createMess($request, $user_id, $uploadedFileUrl);
+                event(new Message($request->input('message'), $uploadedFileUrl, (int)$request->input('target_user_id'), (int)$user_id));
                 DB::commit();
                 return $result;
             }else

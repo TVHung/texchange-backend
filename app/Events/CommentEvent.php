@@ -10,14 +10,16 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class CommentEvent
+class CommentEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $comment;
-    public function __construct($comment)
+    public $product_id;
+    public function __construct($comment, $product_id)
     {   
         $this->comment = $comment;
+        $this->product_id = $product_id;
     }
     public function broadcastOn()
     {

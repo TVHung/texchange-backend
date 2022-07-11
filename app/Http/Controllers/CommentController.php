@@ -66,7 +66,7 @@ class CommentController extends Controller
         ],
         [
             //require
-            'category_id.required'=> config('apps.validation.feild_require'), 
+            'product_id.required'=> config('apps.validation.feild_require'), 
             'content.required'=> config('apps.validation.feild_require'), 
             //string
             'content.string'=> config('apps.validation.feild_is_string'), 
@@ -80,8 +80,8 @@ class CommentController extends Controller
         try{
             DB::beginTransaction();
             $user_id = Auth::user()->id;
-            event(new CommentEvent($request->input('content')));
             $comment = $this->commentService->create($request, $user_id);
+            event(new CommentEvent($request->input('content'), (int)$request->input('product_id')));
             DB::commit();
             return $comment;
         } catch (\Exception $e) {
