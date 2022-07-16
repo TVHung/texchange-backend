@@ -27,7 +27,9 @@ class Search implements Pipe
             return $next($request);
         }
         if(request($filterParam) != "")
-            return $builder->where('name', 'ilike', '%' . request($filterParam) . '%'); 
+            return $builder->where('name', 'ilike', '%' . request($filterParam) . '%')
+                            ->orWhere('title', 'ilike', '%'.request($filterParam) . '%')
+                            ->orWhere('description', 'ilike', '%'.request($filterParam) . '%'); 
         else return $builder;
     }
 }
