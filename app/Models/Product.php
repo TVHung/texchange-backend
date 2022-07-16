@@ -66,6 +66,10 @@ class Product extends Model
         return $this->hasOne(ProductPc::class);
     }
 
+    public function matching() {
+        
+    }
+
     public static function filterProduct($request) {
         $products = Product::query();
 
