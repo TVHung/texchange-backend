@@ -23,3 +23,5 @@ Route::get('/recommend-products', [ProductController::class, 'getRecommendProduc
 Route::get('/get-product-category/{id}', [ProductController::class, 'getCategoryProducts']);       
 Route::get('/up-view/{id}', [ProductController::class, 'upView']);       
 Route::post('/search', [ProductController::class, 'filter']);
+Route::get('/get-similar-product', [ProductController::class, 'getSimilarProduct']);
+Route::post('/get-list-compare', [ProductController::class, 'getListCompare']);

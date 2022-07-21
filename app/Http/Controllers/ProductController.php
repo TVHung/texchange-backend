@@ -297,4 +297,14 @@ class ProductController extends Controller
         $view = $this->productService->getViewStatic();
         return $view;
     }
+
+    public function getSimilarProduct($id) {
+
+    }
+
+    public function getListCompare(Request $request) {
+        $array = explode(",", $request->input('array_id'));
+        $listCompare = $this->productService->getListCompare($array);
+        return (new ProductCollection($listCompare))->response();
+    }
 }

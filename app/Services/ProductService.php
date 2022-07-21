@@ -530,4 +530,16 @@ class ProductService extends BaseService
             return $this->sendError(config('apps.message.not_complete'));
         }
     }
+
+    public function getListCompare($array) {
+        try {
+            DB::beginTransaction();
+            $products = Product::whereIn('id', $array)->get();
+            DB::commit();
+            return $products;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return [];
+        }
+    }
 }

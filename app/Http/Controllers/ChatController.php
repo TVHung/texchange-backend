@@ -79,9 +79,7 @@ class ChatController extends Controller
             DB::beginTransaction();
             $user_id = Auth::user()->id;
             if((int)$request->input('target_user_id') != $user_id){
-                //if have image
                 $uploadedFileUrl = "";
-                // dd($request->file('image'));
                 if($request->file('image')){
                     $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath(), ['folder' => 'chat_images'])->getSecurePath();
                 }

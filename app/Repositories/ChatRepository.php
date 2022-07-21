@@ -19,16 +19,6 @@ class ChatRepository extends Repository
     }
 
     public function getAllChatTargetUserId($user_id, $target_user_id) {
-        // $messages = $this->getModel()::where([
-        //                         'user_id' => $user_id,
-        //                         'target_user_id' => $target_user_id,
-        //                     ])
-        //                     ->orWhere([
-        //                         'user_id' => $target_user_id,
-        //                         'target_user_id' => $user_id,
-        //                     ])
-        //                     ->orderBy('created_at', 'asc')
-        //                     ->get();
         $messages = $this->getModel()::where(function($query) use ($user_id, $target_user_id) {
                                 return $query
                                     ->where('user_id', '=', (int)$user_id)
@@ -40,6 +30,7 @@ class ChatRepository extends Repository
                                     ->where('target_user_id', '=', (int)$user_id);
                                 })
                             ->orderBy('created_at', 'asc')
+                            // ->paginate(config('constants.paginate_message'));
                             ->get();
         return $messages;
     }
