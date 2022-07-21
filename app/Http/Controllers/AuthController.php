@@ -155,10 +155,11 @@ class AuthController extends Controller
                 'message' => config('apps.message.cannot_login_user_is_block')
             ]);
         }
+        $time = 30;
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60 * 24 * 60,
+            'expires_in' => auth()->factory()->getTTL($time),
             'user' => auth()->user()
         ]);
     }

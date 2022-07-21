@@ -18,6 +18,7 @@ class Message implements ShouldBroadcast
     public $image_url;
     public $target_user_id;
     public $user_id;
+    // public $created_at;
 
     public function __construct($message, $image_url, $target_user_id, $user_id)
     {
@@ -25,11 +26,12 @@ class Message implements ShouldBroadcast
         $this->image_url = $image_url;
         $this->target_user_id = $target_user_id;
         $this->user_id = $user_id;
+        // $this->created_at = $created_at;
     }
 
     public function broadcastOn()
     {
-        // return new PrivateChannel('channel-name');
+        // return new PrivateChannel('chat');
         return ['chat'];
     }
 
