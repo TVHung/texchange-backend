@@ -2,6 +2,9 @@
 namespace App\Services;
 
 use App\Models\Product;
+use App\Models\ProductMobile;
+use App\Models\ProductLaptop;
+use App\Models\ProductPc;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\ProductCollection;
@@ -540,6 +543,61 @@ class ProductService extends BaseService
         } catch (\Throwable $th) {
             DB::rollBack();
             return [];
+        }
+    }
+
+    public function getFeildSuggest() {
+        try {
+            $data = [];
+            $data['name'] = Product::groupBy('name')
+                                    ->selectRaw('name, count(name) as count')
+                                    ->take(100)
+                                    ->orderBy('count', 'desc')
+                                    ->pluck('name');
+
+            $color = DB::table("product_laptops")->select("color")->whereNotNull("color");
+            $data['color'] = DB::table("product_mobiles")
+                            ->select("color")
+                            ->whereNotNull("color")
+                            ->union($color)
+                            ->orderBy('color', 'asc')
+                            ->get()
+                            ->take(50)
+                            ->pluck('color');
+
+            $display_size = DB::table("product_laptops")->select("display_size")->whereNotNull("display_size");
+            $data['display_size'] = DB::table("product_pcs")
+                            ->select("display_size")
+                            ->whereNotNull("display_size")
+                            ->union($display_size)
+                            ->orderBy('display_size', 'asc')
+                            ->get()
+                            ->take(30)
+                            ->pluck('display_size');
+
+            $cpu = DB::table("product_laptops")->select("cpu")->whereNotNull("cpu");
+            $data['cpu'] = DB::table("product_pcs")
+                            ->select("cpu")
+                            ->whereNotNull("cpu")
+                            ->union($cpu)
+                            ->orderBy('cpu', 'asc')
+                            ->get()
+                            ->take(100)
+                            ->pluck('cpu');
+
+            $gpu = DB::table("product_laptops")->select("gpu")->whereNotNull("gpu");
+            $data['gpu'] = DB::table("product_pcs")
+                            ->select("gpu")
+                            ->whereNotNull("gpu")
+                            ->union($gpu)
+                            ->orderBy('gpu', 'asc')
+                            ->get()
+                            ->take(100)
+                            ->pluck('gpu');
+            return $this->sendResponse(config('apps.message.success'), $data);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return $this->sendError(config('apps.message.not_complete'));
         }
     }
 }
