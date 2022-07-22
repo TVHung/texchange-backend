@@ -307,4 +307,8 @@ class ProductController extends Controller
         $listCompare = $this->productService->getListCompare($array);
         return (new ProductCollection($listCompare))->response();
     }
+
+    public function productsFeildSuggest(){
+        return $this->productService->getFeildSuggest();
+    }
 }

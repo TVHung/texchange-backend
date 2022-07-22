@@ -25,3 +25,4 @@ Route::get('/up-view/{id}', [ProductController::class, 'upView']);
 Route::post('/search', [ProductController::class, 'filter']);
 Route::get('/get-similar-product', [ProductController::class, 'getSimilarProduct']);
 Route::post('/get-list-compare', [ProductController::class, 'getListCompare']);
+Route::get('/products-feild-suggest', [ProductController::class, 'productsFeildSuggest']);
