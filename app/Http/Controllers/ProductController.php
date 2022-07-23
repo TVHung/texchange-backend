@@ -311,4 +311,8 @@ class ProductController extends Controller
     public function productsFeildSuggest(){
         return $this->productService->getFeildSuggest();
     }
+
+    public function getNameSuggest(){
+        return $this->productService->getNameSuggest();
+    }
 }

@@ -50,4 +50,10 @@ class ChatService extends BaseService
         return $array_user;
 
     }
+
+    public function deleteConversation($id, $user_id){
+        Message::where('user_id', $user_id)->where('target_user_id', $id)->delete();
+        Message::where('target_user_id', $user_id)->where('user_id', $id)->delete();
+        return $this->sendResponse(config('apps.message.success'), []);
+    }
 }

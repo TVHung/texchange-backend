@@ -20,8 +20,8 @@ class CreateProductLaptopsTable extends Migration
             $table->integer('brand_id')->nullable();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->string('color', 30)->nullable();
-            $table->string('cpu', 50)->nullable();
-            $table->string('gpu', 50)->nullable();
+            $table->string('cpu', 255)->nullable();
+            $table->string('gpu', 255)->nullable();
             $table->smallInteger('storage_type')->nullable();
             $table->float('display_size')->nullable();
             $table->timestamps();

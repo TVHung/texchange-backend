@@ -551,18 +551,19 @@ class ProductService extends BaseService
             $data = [];
             $data['name'] = Product::groupBy('name')
                                     ->selectRaw('name, count(name) as count')
-                                    ->take(100)
+                                    ->take(300)
                                     ->orderBy('count', 'desc')
                                     ->pluck('name');
 
             $color = DB::table("product_laptops")->select("color")->whereNotNull("color");
+            $color2 = DB::table("product_mobiles")->select("color")->whereNotNull("color");
             $data['color'] = DB::table("product_mobiles")
                             ->select("color")
                             ->whereNotNull("color")
                             ->union($color)
                             ->orderBy('color', 'asc')
                             ->get()
-                            ->take(50)
+                            ->take(100)
                             ->pluck('color');
 
             $display_size = DB::table("product_laptops")->select("display_size")->whereNotNull("display_size");
@@ -572,7 +573,7 @@ class ProductService extends BaseService
                             ->union($display_size)
                             ->orderBy('display_size', 'asc')
                             ->get()
-                            ->take(30)
+                            ->take(50)
                             ->pluck('display_size');
 
             $cpu = DB::table("product_laptops")->select("cpu")->whereNotNull("cpu");
@@ -594,6 +595,21 @@ class ProductService extends BaseService
                             ->get()
                             ->take(100)
                             ->pluck('gpu');
+            return $this->sendResponse(config('apps.message.success'), $data);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return $this->sendError(config('apps.message.not_complete'));
+        }
+    }
+
+    public function getNameSuggest() {
+        try {
+            $data = [];
+            $data['name'] = Product::groupBy('name')
+                                    ->selectRaw('name, count(name) as count')
+                                    ->take(100)
+                                    ->orderBy('count', 'desc')
+                                    ->pluck('name');
             return $this->sendResponse(config('apps.message.success'), $data);
         } catch (\Throwable $th) {
             DB::rollBack();

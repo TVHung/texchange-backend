@@ -21,7 +21,7 @@ class CreateProfilesTable extends Migration
             $table->smallInteger('sex')->nullable();
             $table->string('avatar_url', 255)->nullable();
             $table->string('phone', 12)->nullable();
-            $table->string('address', 100)->nullable();
+            $table->string('address', 255)->nullable();
             $table->string('facebook_url', 255)->nullable();
             $table->timestamps();
         });
