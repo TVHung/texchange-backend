@@ -90,6 +90,7 @@ class Product extends Model
                 \App\QueryFilters\Guarantee::class,
                 \App\QueryFilters\Display::class,
                 \App\QueryFilters\Brand::class,
+                \App\QueryFilters\Trade::class,
                 \App\QueryFilters\CreateAt::class
             ])
             ->thenReturn();
