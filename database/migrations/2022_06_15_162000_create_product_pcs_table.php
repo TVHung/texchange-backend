@@ -17,8 +17,8 @@ class CreateProductPcsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->string('cpu', 50)->nullable();
-            $table->string('gpu', 50)->nullable();
+            $table->string('cpu', 255)->nullable();
+            $table->string('gpu', 255)->nullable();
             $table->smallInteger('storage_type')->nullable();
             $table->float('display_size')->nullable();
             $table->timestamps();

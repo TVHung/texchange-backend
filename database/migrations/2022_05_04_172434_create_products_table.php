@@ -20,14 +20,14 @@ class CreateProductsTable extends Migration
             $table->integer('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->smallInteger('is_trade');
-            $table->string('title', 100);
-            $table->string('name', 100);
-            $table->string('description', 255);
+            $table->string('title', 255);
+            $table->string('name', 255);
+            $table->string('description', 500);
             $table->integer('ram')->nullable();
             $table->integer('storage')->nullable();
             $table->smallInteger('status');
             $table->float('price');
-            $table->string('address', 100);
+            $table->string('address', 255);
             $table->string('video_url', 255)->nullable();
             $table->smallInteger('public_status');
             $table->smallInteger('sold');
