@@ -18,6 +18,7 @@ Route::group(['middleware' => 'auth-admin'], function() {
 Route::apiResource('products', ProductController::class); //api crud product
 Route::get('/products-recently', [ProductController::class, 'getRecentlyProducts']);       
 Route::get('/products-has-trade', [ProductController::class, 'getProductHasTrade']);       
+Route::get('/products-most-interest', [ProductController::class, 'getProductInterest']);       
 Route::get('/user-products/{id}', [ProductController::class, 'getUserProducts']);       
 Route::get('/recommend-products', [ProductController::class, 'getRecommendProducts']);       
 Route::get('/get-product-category/{id}', [ProductController::class, 'getCategoryProducts']);       

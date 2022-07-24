@@ -315,4 +315,8 @@ class ProductController extends Controller
     public function getNameSuggest(){
         return $this->productService->getNameSuggest();
     }
+
+    public function getProductInterest(){
+        return $this->productService->getProductInterest();
+    }
 }

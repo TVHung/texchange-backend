@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use App\Services\ProductMobileService;
 use App\Services\ProductLaptopService;
 use App\Services\ProductPcService;
+use App\Services\ProductWishListService;
 class ProductService extends BaseService
 {
     private $productRepo;
@@ -24,13 +25,15 @@ class ProductService extends BaseService
     private $productLaptopService;
     private $productPcService;
     private $productImageRepo;
-    public function __construct(ProductRepository $productRepo, ProductMobileService $productMobileService, ProductLaptopService $productLaptopService, ProductPcService $productPcService, ProductImageRepository $productImageRepo)
+    private $productWishListService;
+    public function __construct(ProductRepository $productRepo, ProductMobileService $productMobileService, ProductLaptopService $productLaptopService, ProductPcService $productPcService, ProductImageRepository $productImageRepo, ProductWishListService $productWishListService)
     {
         $this->productRepo = $productRepo;
         $this->productMobileService = $productMobileService;
         $this->productLaptopService = $productLaptopService;
         $this->productPcService = $productPcService;
         $this->productImageRepo = $productImageRepo;
+        $this->productWishListService = $productWishListService;
     }
 
     public function getAllAdmin () {
@@ -597,7 +600,6 @@ class ProductService extends BaseService
                             ->pluck('gpu');
             return $this->sendResponse(config('apps.message.success'), $data);
         } catch (\Throwable $th) {
-            DB::rollBack();
             return $this->sendError(config('apps.message.not_complete'));
         }
     }
@@ -612,7 +614,15 @@ class ProductService extends BaseService
                                     ->pluck('name');
             return $this->sendResponse(config('apps.message.success'), $data);
         } catch (\Throwable $th) {
-            DB::rollBack();
+            return $this->sendError(config('apps.message.not_complete'));
+        }
+    }
+
+    public function getProductInterest(){
+        try {
+            $data = $this->productWishListService->getMostWishList();
+            return $this->sendResponse(config('apps.message.success'), $data);
+        } catch (\Throwable $th) {
             return $this->sendError(config('apps.message.not_complete'));
         }
     }

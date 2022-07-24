@@ -5,9 +5,17 @@ use App\Models\ProductWishList;
 use App\Models\Product;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
+use App\Repositories\ProductWishListRepository;
 
 class ProductWishListService extends BaseService
 {
+
+    private $productWishListRepo;
+    public function __construct(ProductWishListRepository $productWishListRepo)
+    {
+        $this->productWishListRepo = $productWishListRepo;
+    }
+
     public function get($id)
     {
         return ProductWishList::find($id);
@@ -25,6 +33,12 @@ class ProductWishListService extends BaseService
                     ->whereIn('products.id', $array_productId)
                     ->where('product_images.is_banner', '=', 1)
                     ->paginate(config('constants.paginate_wish_list'), array('products.*', 'product_images.image_url')); //get product favoriate
+    }
+
+    //get most
+    public function getMostWishList()
+    {
+        return $this->productWishListRepo->getMostInterest();
     }
 
     public function find($id)
