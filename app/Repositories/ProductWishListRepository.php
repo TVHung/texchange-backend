@@ -51,10 +51,10 @@ class ProductWishListRepository extends Repository
             ->take(12)
             ->orderBy('count', 'desc')
             ->pluck('product_id');
-        // return $mostList;
-        return Product::join('product_images', 'products.id', '=', 'product_images.product_id')
-                    ->whereIn('products.id', $mostList)
-                    ->where('product_images.is_banner', '=', 1)
-                    ->get();
+        return $mostList;
+        // return Product::join('product_images', 'products.id', '=', 'product_images.product_id')
+        //             ->whereIn('products.id', $mostList)
+        //             ->where('product_images.is_banner', '=', 1)
+        //             ->get();
     }
 }

@@ -205,6 +205,25 @@ class ProductService extends BaseService
         }
     }
 
+    //get product recommend
+    public function getSameDetailProducts($user_id = null, $id)
+    {
+        $product = $this->productRepo->getById($id);
+        $price = $product->price;
+        $productQuery = Product::query()->where('category_id', '=', $product->category_id)
+                                        ->where('is_block', '=', 0)
+                                        ->where('sold', '=', 0)
+                                        ->where('public_status', '=', 1)
+                                        ->whereBetween('price', [$price - 1 * $price, $price + 0.3 * $price])
+                                        ->orderBy('price', 'desc')
+                                        ->where('id', '!=', $product->id);
+        if($product){
+            return $productQuery->paginate(12);
+        }else{
+            return [];
+        }
+    }
+
     //get product recently
     public function getProductHasTrade($user_id = null)
     {
@@ -620,8 +639,9 @@ class ProductService extends BaseService
 
     public function getProductInterest(){
         try {
-            $data = $this->productWishListService->getMostWishList();
-            return $this->sendResponse(config('apps.message.success'), $data);
+            $data = $this->productWishListService->getMostWishList();  // array id product
+            $products = Product::whereIn('id', $data)->get();
+            return $this->sendResponse(config('apps.message.success'), new ProductCollection($products));
         } catch (\Throwable $th) {
             return $this->sendError(config('apps.message.not_complete'));
         }

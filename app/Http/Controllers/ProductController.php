@@ -77,15 +77,19 @@ class ProductController extends Controller
         }
     }
 
-    public function getRecommendProducts()
+    public function getRecommendProducts($id) //id is id of product get recommend
     {
-        if (Auth::check()) {
-            $user_id = Auth::user()->id;
-            $products = $this->productService->getRecentlyProducts($user_id);
-            return (new ProductCollection($products))->response();
-        }else{
-            $products = $this->productService->getRecentlyProducts();
-            return (new ProductCollection($products))->response();
+        try {
+            if (Auth::check()) {
+                $user_id = Auth::user()->id;
+                $products = $this->productService->getSameDetailProducts($user_id, $id);
+                return (new ProductCollection($products))->response();
+            }else{
+                $products = $this->productService->getSameDetailProducts(null, $id);
+                return (new ProductCollection($products))->response();
+            }
+        } catch (\Throwable $th) {
+            return $this->baseService->sendError(config('apps.message.error'), [], config('apps.general.error_code'));
         }
     }
 

@@ -16,11 +16,11 @@ Route::group(['middleware' => 'auth-admin'], function() {
     Route::get('/view-static', [ProductController::class, 'getViewStatic']);       
 });
 Route::apiResource('products', ProductController::class); //api crud product
-Route::get('/products-recently', [ProductController::class, 'getRecentlyProducts'])->middleware('cacheResponse:900');      
-Route::get('/products-has-trade', [ProductController::class, 'getProductHasTrade'])->middleware('cacheResponse:900');       
-Route::get('/products-most-interest', [ProductController::class, 'getProductInterest'])->middleware('cacheResponse:900');       
+Route::get('/products-recently', [ProductController::class, 'getRecentlyProducts'])->middleware('cacheResponse:300');      
+Route::get('/products-has-trade', [ProductController::class, 'getProductHasTrade'])->middleware('cacheResponse:300');       
+Route::get('/products-most-interest', [ProductController::class, 'getProductInterest'])->middleware('cacheResponse:300');       
 Route::get('/user-products/{id}', [ProductController::class, 'getUserProducts']);       
-Route::get('/recommend-products', [ProductController::class, 'getRecommendProducts']);       
+Route::get('/recommend-products/{id}', [ProductController::class, 'getRecommendProducts']);       
 Route::get('/get-product-category/{id}', [ProductController::class, 'getCategoryProducts']);       
 Route::get('/up-view/{id}', [ProductController::class, 'upView']);       
 Route::post('/search', [ProductController::class, 'filter']);
