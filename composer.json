@@ -16,6 +16,7 @@
         "laravel/ui": "^3.3",
         "nesbot/carbon": "^2.58",
         "pusher/pusher-php-server": "^7.0",
+        "spatie/laravel-responsecache": "^6.6",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {

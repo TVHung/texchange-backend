@@ -94,6 +94,9 @@ class Product extends Model
                 \App\QueryFilters\CreateAt::class
             ])
             ->thenReturn();
-        return $pipeline->paginate(config('constants.paginate_search_product'));
+        return $pipeline->where('public_status', '=', 1)
+                        ->where('sold', '=', 0)
+                        ->where('is_block', '=', 0)
+                        ->paginate(config('constants.paginate_search_product'));
     }
 }

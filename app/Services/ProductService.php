@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use App\Services\ProductMobileService;
 use App\Services\ProductLaptopService;
 use App\Services\ProductPcService;
+use App\Services\ProductWishListService;
 class ProductService extends BaseService
 {
     private $productRepo;
@@ -24,13 +25,15 @@ class ProductService extends BaseService
     private $productLaptopService;
     private $productPcService;
     private $productImageRepo;
-    public function __construct(ProductRepository $productRepo, ProductMobileService $productMobileService, ProductLaptopService $productLaptopService, ProductPcService $productPcService, ProductImageRepository $productImageRepo)
+    private $productWishListService;
+    public function __construct(ProductRepository $productRepo, ProductMobileService $productMobileService, ProductLaptopService $productLaptopService, ProductPcService $productPcService, ProductImageRepository $productImageRepo, ProductWishListService $productWishListService)
     {
         $this->productRepo = $productRepo;
         $this->productMobileService = $productMobileService;
         $this->productLaptopService = $productLaptopService;
         $this->productPcService = $productPcService;
         $this->productImageRepo = $productImageRepo;
+        $this->productWishListService = $productWishListService;
     }
 
     public function getAllAdmin () {
@@ -199,6 +202,28 @@ class ProductService extends BaseService
             ->orderBy('created_at', 'desc')
             ->take(12)
             ->get();
+        }
+    }
+
+    //get product recommend
+    public function getSameDetailProducts($user_id = null, $id)
+    {
+        $product = $this->productRepo->getById($id);
+        $price = $product->price;
+        $productQuery = Product::query()->where('category_id', '=', $product->category_id)
+                                        ->orWhere('name', 'ilike', '%' . $product->name . '%')
+                                        ->orWhere('title', 'ilike', '%' . $product->name . '%')
+                                        ->orWhere('description', 'ilike', '%' . $product->name . '%')
+                                        ->where('is_block', '=', 0)
+                                        ->where('sold', '=', 0)
+                                        ->where('public_status', '=', 1)
+                                        ->whereBetween('price', [$price - 1 * $price, $price + 0.3 * $price])
+                                        ->orderBy('price', 'desc')
+                                        ->where('id', '!=', $product->id);
+        if($product){
+            return $productQuery->paginate(12);
+        }else{
+            return [];
         }
     }
 
@@ -597,7 +622,6 @@ class ProductService extends BaseService
                             ->pluck('gpu');
             return $this->sendResponse(config('apps.message.success'), $data);
         } catch (\Throwable $th) {
-            DB::rollBack();
             return $this->sendError(config('apps.message.not_complete'));
         }
     }
@@ -612,7 +636,16 @@ class ProductService extends BaseService
                                     ->pluck('name');
             return $this->sendResponse(config('apps.message.success'), $data);
         } catch (\Throwable $th) {
-            DB::rollBack();
+            return $this->sendError(config('apps.message.not_complete'));
+        }
+    }
+
+    public function getProductInterest(){
+        try {
+            $data = $this->productWishListService->getMostWishList();  // array id product
+            $products = Product::whereIn('id', $data)->get();
+            return $this->sendResponse(config('apps.message.success'), new ProductCollection($products));
+        } catch (\Throwable $th) {
             return $this->sendError(config('apps.message.not_complete'));
         }
     }
