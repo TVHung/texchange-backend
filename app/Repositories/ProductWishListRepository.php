@@ -3,6 +3,8 @@
 namespace App\Repositories;
 use App\Models\ProductWishList;
 use App\Models\Product;
+use Carbon\Carbon;
+
 /**
  * Class ProductWishListRepository.
  */
@@ -46,15 +48,12 @@ class ProductWishListRepository extends Repository
     }
 
     public function getMostInterest(){
-        $mostList = $this->getInstance()::groupBy('product_id')
-            ->selectRaw('product_id, count(product_id) as count')
-            ->take(12)
-            ->orderBy('count', 'desc')
-            ->pluck('product_id');
+        $mostList = $this->getInstance()::where('created_at', '>=', Carbon::now()->subDays(30)->toDateTimeString())
+                        ->groupBy('product_id')
+                        ->selectRaw('product_id, count(product_id) as count')
+                        ->take(12)
+                        ->orderBy('count', 'desc')
+                        ->pluck('product_id');
         return $mostList;
-        // return Product::join('product_images', 'products.id', '=', 'product_images.product_id')
-        //             ->whereIn('products.id', $mostList)
-        //             ->where('product_images.is_banner', '=', 1)
-        //             ->get();
     }
 }

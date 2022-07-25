@@ -211,6 +211,9 @@ class ProductService extends BaseService
         $product = $this->productRepo->getById($id);
         $price = $product->price;
         $productQuery = Product::query()->where('category_id', '=', $product->category_id)
+                                        ->orWhere('name', 'ilike', '%' . $product->name . '%')
+                                        ->orWhere('title', 'ilike', '%' . $product->name . '%')
+                                        ->orWhere('description', 'ilike', '%' . $product->name . '%')
                                         ->where('is_block', '=', 0)
                                         ->where('sold', '=', 0)
                                         ->where('public_status', '=', 1)
