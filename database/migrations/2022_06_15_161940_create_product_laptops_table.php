@@ -24,7 +24,7 @@ class CreateProductLaptopsTable extends Migration
             $table->string('gpu', 255)->nullable();
             $table->smallInteger('storage_type')->nullable();
             $table->float('display_size')->nullable();
-            $table->string('resolution', 50)->nullable();
+            $table->integer('resolution')->nullable();
             $table->timestamps();
         });
     }

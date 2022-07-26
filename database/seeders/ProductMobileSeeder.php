@@ -24,7 +24,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -34,7 +34,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -44,7 +44,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -54,7 +54,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -64,7 +64,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -74,7 +74,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -84,7 +84,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -94,7 +94,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -104,7 +104,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -114,7 +114,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -124,7 +124,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -134,7 +134,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -144,7 +144,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -154,7 +154,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -164,7 +164,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -174,7 +174,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -184,7 +184,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -194,7 +194,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -204,7 +204,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -214,7 +214,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
                 'pin' => 5000,
-                'resolution' => "1920x1080 (FullHD)",
+                'resolution' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],

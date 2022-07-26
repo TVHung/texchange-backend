@@ -92,6 +92,9 @@ class Product extends Model
                 \App\QueryFilters\Display::class,
                 \App\QueryFilters\Brand::class,
                 \App\QueryFilters\Trade::class,
+                \App\QueryFilters\Command::class,
+                \App\QueryFilters\Pin::class,
+                \App\QueryFilters\Resolution::class,
                 \App\QueryFilters\CreateAt::class
             ])
             ->thenReturn();
