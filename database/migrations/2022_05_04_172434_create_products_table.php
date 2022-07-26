@@ -34,6 +34,7 @@ class CreateProductsTable extends Migration
             $table->integer('guarantee');
             $table->smallInteger('is_block');
             $table->integer('view');
+            $table->integer('command');
             $table->timestamps();
         });
     }

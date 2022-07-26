@@ -23,7 +23,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 101,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -31,7 +33,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 102,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -39,7 +43,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 103,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -47,7 +53,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 110,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -55,7 +63,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 111,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -63,7 +73,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 112,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -71,7 +83,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 119,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -79,7 +93,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 120,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -87,7 +103,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 121,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -95,7 +113,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 128,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -103,7 +123,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 129,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -111,7 +133,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 130,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -119,7 +143,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 137,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -127,7 +153,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 138,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -135,7 +163,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 139,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -143,7 +173,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 146,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -151,7 +183,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 147,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -159,7 +193,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 148,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -167,7 +203,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 155,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -175,7 +213,9 @@ class ProductMobileSeeder extends Seeder
                 'product_id'=> 156,
                 'color'=> "Đỏ",
                 'brand_id'=> 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'pin' => 5000,
+                'resolution' => 1,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
         ];

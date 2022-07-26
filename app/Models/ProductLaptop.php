@@ -16,7 +16,8 @@ class ProductLaptop extends Model
         'cpu',
         'gpu',
         'storage_type',
-        'display_size'
+        'display_size',
+        'resolution'
     ];
 
     public function product()

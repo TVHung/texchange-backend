@@ -35,6 +35,7 @@ class ProductResource extends JsonResource
             'sold' => $this->sold,
             'is_block' => $this->is_block,
             'view' => $this->view,
+            'command' => $this->command,
             'images' => $this->productImages,
             // 'comments' => new CommentCollection($this->comments),
             'productMobile' => new ProductMobileResource($this->productMobile),

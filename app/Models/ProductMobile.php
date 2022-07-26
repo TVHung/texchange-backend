@@ -12,7 +12,9 @@ class ProductMobile extends Model
     protected $fillable = [
         'product_id',
         'brand_id',
-        'color'
+        'color',
+        'pin',
+        'resolution'
     ];
 
     public function product()

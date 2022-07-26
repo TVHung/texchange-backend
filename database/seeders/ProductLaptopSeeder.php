@@ -27,7 +27,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -39,7 +40,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -52,7 +54,8 @@ class ProductLaptopSeeder extends Seeder
                 'brand_id'=> 2,
                 'display_size'=> 15,
                 
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -64,7 +67,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -76,7 +80,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -88,7 +93,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
            [
@@ -100,7 +106,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -112,7 +119,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -124,7 +132,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -136,7 +145,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -148,7 +158,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -160,7 +171,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -172,7 +184,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -184,7 +197,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -196,7 +210,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -208,7 +223,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -220,7 +236,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -232,7 +249,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -244,7 +262,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
@@ -256,7 +275,8 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> 2,
                 'brand_id'=> 2,
                 'display_size'=> 15,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
+                'resolution' => 2,
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
         ];

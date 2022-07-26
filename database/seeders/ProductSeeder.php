@@ -37,6 +37,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -59,6 +60,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -81,6 +83,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -103,6 +106,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -125,6 +129,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -147,6 +152,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -169,6 +175,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -191,6 +198,7 @@ class ProductSeeder extends Seeder
                 'sold' => 1,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -213,6 +221,7 @@ class ProductSeeder extends Seeder
                 'sold' => 1,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -235,6 +244,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -257,6 +267,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -279,6 +290,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -301,6 +313,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -323,6 +336,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -345,6 +359,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -367,6 +382,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -389,6 +405,7 @@ class ProductSeeder extends Seeder
                 'sold' => 1,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -411,6 +428,7 @@ class ProductSeeder extends Seeder
                 'sold' => 1,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -433,6 +451,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -455,6 +474,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -477,6 +497,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -499,6 +520,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -521,6 +543,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -543,6 +566,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -565,6 +589,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -587,6 +612,7 @@ class ProductSeeder extends Seeder
                 'sold' => 1,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -609,6 +635,7 @@ class ProductSeeder extends Seeder
                 'sold' => 1,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -631,6 +658,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -653,6 +681,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -675,6 +704,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -697,6 +727,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -719,6 +750,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -741,6 +773,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -763,6 +796,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -785,6 +819,7 @@ class ProductSeeder extends Seeder
                 'sold' => 1,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -807,6 +842,7 @@ class ProductSeeder extends Seeder
                 'sold' => 1,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -829,6 +865,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -851,6 +888,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -873,6 +911,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -895,6 +934,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -917,6 +957,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -939,6 +980,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -961,6 +1003,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -983,6 +1026,7 @@ class ProductSeeder extends Seeder
                 'sold' => 1,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1005,6 +1049,7 @@ class ProductSeeder extends Seeder
                 'sold' => 1,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1027,6 +1072,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1049,6 +1095,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1071,6 +1118,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1093,6 +1141,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1115,6 +1164,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1137,6 +1187,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1159,6 +1210,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1181,6 +1233,7 @@ class ProductSeeder extends Seeder
                 'sold' => 1,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1203,6 +1256,7 @@ class ProductSeeder extends Seeder
                 'sold' => 1,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1225,6 +1279,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1247,6 +1302,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1269,6 +1325,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1291,6 +1348,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1313,6 +1371,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -1335,6 +1394,7 @@ class ProductSeeder extends Seeder
                 'sold' => 0,
                 'is_block' => 0,
                 'view' => 0,
+                'command' => 1,
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ],
