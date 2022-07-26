@@ -20,6 +20,8 @@ class CreateProductMobilesTable extends Migration
             $table->integer('brand_id');
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->string('color', 30)->nullable();
+            $table->integer('pin')->nullable();
+            $table->string('resolution', 50)->nullable();
             $table->timestamps();
         });
     }

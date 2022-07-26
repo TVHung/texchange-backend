@@ -349,7 +349,8 @@ class ProductService extends BaseService
                 'guarantee' => $request->input('guarantee') ?? 0,
                 'sold' => 0,
                 'is_block' => config('constants.is_not_block') ?? 0,
-                'view' => 0
+                'view' => 0,
+                'command' => $request->input('command') ?? null
             ];
             // dd($request->input('fileVideo'));
             
@@ -366,6 +367,8 @@ class ProductService extends BaseService
                     $productChilData['product_id'] = $newProduct->id;
                     $productChilData['brand_id'] = $request->input('brand_id') ?? null;
                     $productChilData['color'] = $request->input('color') ?? null;
+                    $productChilData['pin'] = $request->input('pin') ?? null;
+                    $productChilData['resolution'] = $request->input('resolution') ?? null;
                     $newProductChild = $this->productMobileService->create($productChilData);
                     break;
                 case 2:
@@ -376,6 +379,7 @@ class ProductService extends BaseService
                     $productChilData['gpu'] = $request->input('gpu') ?? null;
                     $productChilData['storage_type'] = $request->input('storage_type') ?? null;
                     $productChilData['display_size'] = $request->input('display_size') ?? null;
+                    $productChilData['resolution'] = $request->input('resolution') ?? null;
                     $newProductChild = $this->productLaptopService->create($productChilData);
                     break;
                 case 3:
@@ -419,7 +423,7 @@ class ProductService extends BaseService
             DB::beginTransaction();
             $productData = $request->only(['is_trade', 'title', 'name', 'video_url',
                 'description', 'ram', 'storage', 'video_url', 'status', 'price', 'address',
-                'public_status', 'guarantee', 'sold'
+                'public_status', 'guarantee', 'sold', 'command'
             ]);
             $productUpdate = $this->productRepo->getById((int)$product_id);
         
@@ -473,6 +477,8 @@ class ProductService extends BaseService
                     $child = $this->productMobileService->getIdByParentId($product_id);
                     $productChilData['brand_id'] = $request->input('brand_id');
                     $productChilData['color'] = $request->input('color');
+                    $productChilData['pin'] = $request->input('pin') ?? null;
+                    $productChilData['resolution'] = $request->input('resolution') ?? null;
                     $updateProductChild = $this->productMobileService->update($child->id, $productChilData);
                     break;
                 case 2:
@@ -483,6 +489,7 @@ class ProductService extends BaseService
                     $productChilData['gpu'] = $request->input('gpu');
                     $productChilData['storage_type'] = $request->input('storage_type');
                     $productChilData['display_size'] = $request->input('display_size');
+                    $productChilData['resolution'] = $request->input('resolution') ?? null;
                     $updateProductChild = $this->productLaptopService->update($child->id, $productChilData);
                     break;
                 case 3:

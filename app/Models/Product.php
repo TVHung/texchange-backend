@@ -27,6 +27,7 @@ class Product extends Model
         'sold',
         'is_block',
         'view',
+        'command'
     ];
 
     public function user()
