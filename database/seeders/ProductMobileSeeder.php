@@ -28,7 +28,7 @@ class ProductMobileSeeder extends Seeder
                 'color'=> $colors[array_rand($colors)],
                 'brand_id'=> rand(1, 22),
                 'pin' => $pins[array_rand($pins)],
-                'resolution' => rand(1, 6),
+                'resolution' => rand(1, 7),
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ];

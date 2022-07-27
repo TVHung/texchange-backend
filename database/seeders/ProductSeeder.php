@@ -39,7 +39,7 @@ class ProductSeeder extends Seeder
                 'sold' => rand(0,1),
                 'is_block' => 0,
                 'view' => 0,
-                'command' => rand(1,4),
+                'command' => rand(1,3),
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ];
@@ -66,7 +66,7 @@ class ProductSeeder extends Seeder
                 'sold' => rand(0,1),
                 'is_block' => 0,
                 'view' => 0,
-                'command' => rand(1,4),
+                'command' => rand(4,9),
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ];
@@ -93,7 +93,7 @@ class ProductSeeder extends Seeder
                 'sold' => rand(0,1),
                 'is_block' => 0,
                 'view' => 0,
-                'command' => rand(1,4),
+                'command' => rand(10,15),
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ];

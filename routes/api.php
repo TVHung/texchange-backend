@@ -10,11 +10,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductWishListController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\CategoryController;
 
 Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
     require_once('user_api.php');    
 });
 Route::apiResource('users', UserController::class);
+Route::apiResource('categories', CategoryController::class);
 Route::apiResource('product-image', ProductImageController::class); //api crud product image
 Route::apiResource('wish-list', ProductWishListController::class); //api crud wish list
 
@@ -36,6 +38,7 @@ require_once('media_api.php');
 require_once('comment_api.php');
 require_once('chat_api.php');
 require_once('suggest_api.php');
+require_once('data_common_api.php');
 
 // Verb          Path                        Action  Route Name
 // GET           /users                      index   users.index

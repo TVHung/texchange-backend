@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -13,7 +14,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return [
+            'status' => config('apps.general.success'),
+            'message' => config('apps.message.success'),
+            'data' => Category::select('id','name')->get()
+        ];
     }
 
     /**

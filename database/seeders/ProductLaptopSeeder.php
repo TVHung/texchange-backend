@@ -32,7 +32,7 @@ class ProductLaptopSeeder extends Seeder
                 'storage_type'=> rand(1,3),
                 'brand_id'=> rand(23, 37),
                 'display_size'=> $displays[array_rand($displays)],
-                'resolution' => rand(1,6),
+                'resolution' => rand(1,7),
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
             ];
