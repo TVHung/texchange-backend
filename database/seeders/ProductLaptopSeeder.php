@@ -16,270 +16,28 @@ class ProductLaptopSeeder extends Seeder
     public function run()
     {
         DB::table('product_laptops')->delete();
+        $colors = array("Đỏ","Xanh","Vàng","Xám","Nâu","Đen","Trắng","Tím","Hồng","Cam");
+        $cpus = array("Intel core i3", "Intel core i5", "Intel core i7", "Intel core i9", "AMD ryzen 3", "AMD ryzen 5", "AMD ryzen 7", "AMD ryzen 9");
+        $gpus = array("GTX 1030", "GTX 1050", "GTX 1060", "GTX 1070", "GTX 1080", "RTX 2030", "RTX 2050", "RTX 2060", "RTX 2070", "RTX 2080", "RTX 3030", "RTX 3050", "RTX 3060", "RTX 3070", "RTX 3080");
+        $displays = array(10, 11, 12, 13.3, 14, 15.6, 16, 17.3);
 
-        $products = [
-            [
-                'id' => 104,
-                'product_id'=> 104,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
+        $products = [];
+        for ($x = 201; $x <= 300; $x++) {
+            $dataItem = [
+                'id' => $x,
+                'product_id'=> $x,
+                'color'=> $colors[array_rand($colors)],
+                'cpu'=> $cpus[array_rand($cpus)],
+                'gpu'=> $gpus[array_rand($gpus)],
+                'storage_type'=> rand(1,3),
+                'brand_id'=> rand(23, 37),
+                'display_size'=> $displays[array_rand($displays)],
+                'resolution' => rand(1,6),
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 105,
-                'product_id'=> 105,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 106,
-                'product_id'=> 106,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 113,
-                'product_id'=> 113,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 114,
-                'product_id'=> 114,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 115,
-                'product_id'=> 115,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-           [
-                'id' => 122,
-                'product_id'=> 122,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 123,
-                'product_id'=> 123,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 124,
-                'product_id'=> 124,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 131,
-                'product_id'=> 131,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 132,
-                'product_id'=> 132,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 133,
-                'product_id'=> 133,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 140,
-                'product_id'=> 140,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 141,
-                'product_id'=> 141,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 142,
-                'product_id'=> 142,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 149,
-                'product_id'=> 149,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 150,
-                'product_id'=> 150,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 151,
-                'product_id'=> 151,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 157,
-                'product_id'=> 157,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 158,
-                'product_id'=> 158,
-                'color'=> "Đỏ",
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 2,
-                'brand_id'=> 2,
-                'display_size'=> 15,
-                'resolution' => 2,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-        ];
+            ];
+            array_push($products, $dataItem);
+        }
 
         DB::table('product_laptops')->insert($products);
     }

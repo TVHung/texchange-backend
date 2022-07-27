@@ -16,210 +16,25 @@ class ProductPcSeeder extends Seeder
     public function run()
     {
         DB::table('product_pcs')->delete();
+        $cpus = array("Intel core i3", "Intel core i5", "Intel core i7", "Intel core i9", "AMD ryzen 3", "AMD ryzen 5", "AMD ryzen 7", "AMD ryzen 9");
+        $gpus = array("GTX 1030", "GTX 1050", "GTX 1060", "GTX 1070", "GTX 1080", "RTX 2030", "RTX 2050", "RTX 2060", "RTX 2070", "RTX 2080", "RTX 3030", "RTX 3050", "RTX 3060", "RTX 3070", "RTX 3080");
+        $displays = array(10, 11, 12, 13.3, 14, 15.6, 16, 17.3);
 
-        $products = [
-            [
-                'id' => 107,
-                'product_id'=> 107,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
+        $products = [];
+        for ($x = 301; $x <= 400; $x++) {
+            $dataItem = [
+                'id' => $x,
+                'product_id'=> $x,
+                'cpu'=> $cpus[array_rand($cpus)],
+                'gpu'=> $gpus[array_rand($gpus)],
+                'storage_type'=> rand(1,3),
+                'display_size'=> $displays[array_rand($displays)],
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 108,
-                'product_id'=> 108,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 109,
-                'product_id'=> 109,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 116,
-                'product_id'=> 116,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 117,
-                'product_id'=> 117,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 118,
-                'product_id'=> 118,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 125,
-                'product_id'=> 125,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 126,
-                'product_id'=> 126,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 127,
-                'product_id'=> 127,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 134,
-                'product_id'=> 134,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 135,
-                'product_id'=> 135,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 136,
-                'product_id'=> 136,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 143,
-                'product_id'=> 143,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 144,
-                'product_id'=> 144,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 145,
-                'product_id'=> 145,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 152,
-                'product_id'=> 152,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 153,
-                'product_id'=> 153,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 154,
-                'product_id'=> 154,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 159,
-                'product_id'=> 159,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-            [
-                'id' => 160,
-                'product_id'=> 160,
-                'cpu'=> "i5",
-                'gpu'=> "amd radeon r7",
-                'storage_type'=> 3,
-                'display_size'=> null,
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'), 
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-            ],
-        ];
-
+            ];
+            array_push($products, $dataItem);
+        }
+       
         DB::table('product_pcs')->insert($products);
     }
 }

@@ -17,80 +17,22 @@ class ProfileSeeder extends Seeder
         // \App\Models\Profile::factory(1)->create();
         DB::table('profiles')->delete();
 
-        $profiles = [
-            [
-                'id' => 101,
-                'user_id'=> 101,
-                'name'=> "Hùng đây",
-                'sex'=> 1,
+        $profiles = [];
+        for ($x = 101; $x <= 136; $x++) {
+            $dataItem = [
+                'id' => $x,
+                'user_id'=> $x,
+                'name'=> "username" . $x ,
+                'sex'=> rand(1,3),
                 'avatar_url'=> "https://thiepnhanai.com/wp-content/uploads/2021/05/hinh-anh-dai-dien-dep-1.jpg",
                 'phone'=> "0383621309",
                 'address'=> "Yên phụ, Yên phong, Bắc Ninh",
                 'facebook_url'=> "https://www.facebook.com/hung.tv99/",
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-            [
-                'id' => 102,
-                'user_id'=> 102,
-                'name'=> "Hùng vật vờ",
-                'sex'=> 1,
-                'avatar_url'=> "https://pdp.edu.vn/wp-content/uploads/2021/05/hinh-anh-avatar-nam-1.jpg",
-                'phone'=> "0383621309",
-                'address'=> "Yên phụ, Yên phong, Bắc Ninh",
-                'facebook_url'=> "",
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-            [
-                'id' => 103,
-                'user_id'=> 103,
-                'name'=> "Hùng là tôi",
-                'sex'=> 1,
-                'avatar_url'=> "https://dautubanthan.net/wp-content/uploads/2021/12/Hi%CC%80nh-da%CC%A3i-die%CC%A3%CC%82n-de%CC%A3p-da%CC%82%CC%81u-ma%CC%A3%CC%86t-cho-nam.jpg",
-                'phone'=> "0383621309",
-                'address'=> "Yên phụ, Yên phong, Bắc Ninh",
-                'facebook_url'=> "https://www.facebook.com/hung.tv99/",
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-            [
-                'id' => 104,
-                'user_id'=> 104,
-                'name'=> "Trương Tấn Sang",
-                'sex'=> 1,
-                'avatar_url'=> "https://thiepnhanai.com/wp-content/uploads/2021/05/hinh-anh-dai-dien-dep-1.jpg",
-                'phone'=> "0383621309",
-                'address'=> "Yên phụ, Yên phong, Bắc Ninh",
-                'facebook_url'=> "https://www.facebook.com/hung.tv99/",
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-            [
-                'id' => 105,
-                'user_id'=> 105,
-                'name'=> "Trương Thị Hoan",
-                'sex'=> 1,
-                'avatar_url'=> "https://thiepnhanai.com/wp-content/uploads/2021/05/hinh-anh-dai-dien-dep-1.jpg",
-                'phone'=> "0383621309",
-                'address'=> "Yên phụ, Yên phong, Bắc Ninh",
-                'facebook_url'=> "https://www.facebook.com/hung.tv99/",
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-            [
-                'id' => 106,
-                'user_id'=> 106,
-                'name'=> "Trương Thị Mỹ Tâm",
-                'sex'=> 1,
-                'avatar_url'=> "https://thiepnhanai.com/wp-content/uploads/2021/05/hinh-anh-dai-dien-dep-1.jpg",
-                'phone'=> "0383621309",
-                'address'=> "Yên phụ, Yên phong, Bắc Ninh",
-                'facebook_url'=> "https://www.facebook.com/hung.tv99/",
-                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-        ];
+            ];
+            array_push($profiles, $dataItem);
+        }
 
         DB::table('profiles')->insert($profiles);
     }
