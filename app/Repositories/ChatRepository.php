@@ -58,6 +58,22 @@ class ChatRepository extends Repository
         }
         return $array_id_1;
     }
+    public function getLastMessage($user_id, $target_user_id)
+    {
+        $lastMessage = $this->getModel()::where(function($query) use ($user_id, $target_user_id) {
+                                return $query
+                                    ->where('user_id', '=', (int)$user_id)
+                                    ->where('target_user_id', '=', (int)$target_user_id);
+                                })
+                            ->orWhere(function($query) use ($user_id, $target_user_id) {
+                                return $query
+                                    ->where('user_id', '=', (int)$target_user_id)
+                                    ->where('target_user_id', '=', (int)$user_id);
+                                })
+                            ->orderBy('created_at', 'desc')->first();
+        return $lastMessage;
+    }
+
 
     public function updateById($id, array $data)
     {

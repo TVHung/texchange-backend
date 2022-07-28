@@ -45,7 +45,15 @@ class ChatService extends BaseService
         $all = $this->chatRepo->getMyListConversation($user_id);
         $array_user = [];
         for ($i=0; $i < count($all); $i++) { 
-            array_push($array_user, new UserResource($this->userRepo->getById($all[$i])));
+            $user = new UserResource($this->userRepo->getById($all[$i]));
+            $lastMessage = $this->chatRepo->getLastMessage($user_id, $all[$i]);
+            $user->lastMessage = $lastMessage;
+            // dd($user_id, $all[$i]);
+            $data = [
+                'user' => $user,
+                'lastMessage' => $lastMessage
+            ];
+            array_push($array_user, $data);
         }
         return $array_user;
 
