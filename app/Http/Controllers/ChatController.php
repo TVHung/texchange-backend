@@ -49,6 +49,7 @@ class ChatController extends Controller
             DB::beginTransaction();
             $user_id = Auth::user()->id;
             $conversations = $this->chatService->getMyListConversation($user_id);
+            // dd($conversations);
             DB::commit();
             return $this->baseService->sendResponse(config('apps.message.success'), $conversations);
         } catch (\Exception $e) {
