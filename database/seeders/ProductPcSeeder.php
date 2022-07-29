@@ -21,7 +21,7 @@ class ProductPcSeeder extends Seeder
         $displays = array(10, 11, 12, 13.3, 14, 15.6, 16, 17.3);
 
         $products = [];
-        for ($x = 301; $x <= 400; $x++) {
+        for ($x = 701; $x <= 1000; $x++) {
             $dataItem = [
                 'id' => $x,
                 'product_id'=> $x,

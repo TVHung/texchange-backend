@@ -656,4 +656,28 @@ class ProductService extends BaseService
             return $this->sendError(config('apps.message.not_complete'));
         }
     }
+
+    public function getSameProduct($product_id, $user_id){
+        try {
+            $product = $this->productRepo->getById($product_id);
+            $price = (int)$product->price;
+            // dd($product->user_id, $user_id);
+            $products = Product::where('user_id', '!=', $product->user_id)
+                                ->where('id', '!=', $product->id)
+                                ->where('category_id', '=', $product->category_id)
+                                ->where('is_trade', '!=', $product->is_trade)
+                                ->whereBetween('price', [$price - $price * 0.2 , $price + $price * 0.2])
+                                // ->where('name', 'ilike', '%'. $product->name .'%')
+                                // ->orWhere('title', 'ilike', '%'. $product->name .'%')
+                                // ->orWhere('description', 'ilike', '%'. $product->name .'%')
+                                ->where('public_status', '=', 1)
+                                ->where('sold', '=', 0)
+                                ->where('is_block', '=', 0)
+                                ->take(4)
+                                ->get();
+            return $this->sendResponse(config('apps.message.success'), new ProductCollection($products));
+        } catch (\Throwable $th) {
+            return $this->sendError(config('apps.message.not_complete'));
+        }
+    }
 }

@@ -7,6 +7,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/products/{id}', [ProductController::class, 'update']); //api crud product
     Route::get('/my-products', [ProductController::class, 'getMyProducts']);       
     Route::get('/get-product-edit/{id}', [ProductController::class, 'getProductEdit']);       
+    Route::get('/product-matching/{id}', [ProductController::class, 'getProductMatching']);       
 });
 Route::group(['middleware' => 'auth-admin'], function() {
     Route::get('/product-manager', [ProductController::class, 'all']);       

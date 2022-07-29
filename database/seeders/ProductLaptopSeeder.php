@@ -22,7 +22,7 @@ class ProductLaptopSeeder extends Seeder
         $displays = array(10, 11, 12, 13.3, 14, 15.6, 16, 17.3);
 
         $products = [];
-        for ($x = 201; $x <= 300; $x++) {
+        for ($x = 401; $x <= 700; $x++) {
             $dataItem = [
                 'id' => $x,
                 'product_id'=> $x,
