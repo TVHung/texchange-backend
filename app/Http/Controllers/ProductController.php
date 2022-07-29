@@ -323,4 +323,13 @@ class ProductController extends Controller
     public function getProductInterest(){
         return $this->productService->getProductInterest();
     }
+
+    public function getProductMatching($id){
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+            return $this->productService->getSameProduct($id, $user_id);
+        }else{
+            return $this->baseService->sendError(config('apps.message.delete_product_error'), [], config('apps.general.error_code'));
+        }
+    }
 }

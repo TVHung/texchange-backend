@@ -21,7 +21,7 @@ class ProductMobileSeeder extends Seeder
         $colors = array("Đỏ","Xanh","Vàng","Xám","Nâu","Đen","Trắng","Tím","Hồng","Cam");
         $pins = array(500, 1000, 2000, 3000, 4000, 5000, 6000);
 
-        for ($x = 101; $x <= 200; $x++) {
+        for ($x = 101; $x <= 400; $x++) {
             $dataItem = [
                 'id' => $x,
                 'product_id'=> $x,

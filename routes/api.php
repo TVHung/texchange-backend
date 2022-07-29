@@ -13,7 +13,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\CategoryController;
 
 Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
-    require_once('user_api.php');    
+    include('user_api.php');    
 });
 Route::apiResource('users', UserController::class);
 Route::apiResource('categories', CategoryController::class);
@@ -31,14 +31,14 @@ Route::get('/callback', [GoogleController::class, 'loginCallback']);
 Route::post('reset-password', [ResetPasswordController::class, 'sendMail']);
 Route::put('reset-password/{token}', [ResetPasswordController::class, 'reset']);
 
-require_once('profile_api.php');  
-require_once('product_api.php');  
-require_once('brand_api.php');  
-require_once('media_api.php');
-require_once('comment_api.php');
-require_once('chat_api.php');
-require_once('suggest_api.php');
-require_once('data_common_api.php');
+include('profile_api.php');  
+include('product_api.php');  
+include('brand_api.php');  
+include('media_api.php');
+include('comment_api.php');
+include('chat_api.php');
+include('suggest_api.php');
+include('data_common_api.php');
 
 // Verb          Path                        Action  Route Name
 // GET           /users                      index   users.index
