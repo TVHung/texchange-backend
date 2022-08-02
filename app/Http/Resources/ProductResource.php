@@ -26,7 +26,7 @@ class ProductResource extends JsonResource
             'ram'=> $this->ram,
             'storage'=> $this->storage,
             'status'=> $this->status,
-            'status_value' => config('constants.status')[$this->status] ?? null,
+            'status_value' => config('constants.status')[(int)$this->status - 1] ?? null,
             'video_url' => $this->video_url,
             'price'=> $this->price,
             'address'=> $this->address,

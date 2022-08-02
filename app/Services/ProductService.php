@@ -680,4 +680,14 @@ class ProductService extends BaseService
             return $this->sendError(config('apps.message.not_complete'));
         }
     }
+
+    public function getMyProductId($user_id)
+    {
+        $productIds = Product::where('user_id', $user_id)
+                    ->orderBy('created_at', 'desc')
+                    ->where('is_block', config('constants.is_not_block'))
+                    ->pluck('id')
+                    ->toArray();
+        return $productIds;
+    }
 }

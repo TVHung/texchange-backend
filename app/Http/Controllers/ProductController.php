@@ -136,6 +136,11 @@ class ProductController extends Controller
             'title' => 'bail|required|string',
             'brand_id' => $request->input('category_id') != 3 ? 'bail|required|regex:/^\d+(\.\d{1,2})?$/' : '',
             'fileImages' => $request->input('is_trade') ? 'bail' : 'bail|required',
+            "command" => $request->input('command') ? 'bail|regex:/^\d+(\.\d{1,2})?$/' : 'bail',
+            "pin" => $request->input('pin') ? 'bail|regex:/^\d+(\.\d{1,2})?$/' : 'bail',
+            "resolution" => $request->input('resolution') ? 'bail|regex:/^\d+(\.\d{1,2})?$/' : 'bail',
+            "ram" => $request->input('ram') ? 'bail|regex:/^\d+(\.\d{1,2})?$/' : 'bail',
+            "storage" => $request->input('storage') ? 'bail|regex:/^\d+(\.\d{1,2})?$/' : 'bail',
         ],
         [
             //require
@@ -160,6 +165,11 @@ class ProductController extends Controller
             'brand_id.regex'=> config('apps.validation.feild_require'), 
             'guarantee.regex'=> config('apps.validation.feild_is_number'), 
             'price.regex'=> config('apps.validation.feild_is_number'), 
+            'command.regex'=> config('apps.validation.feild_is_number'), 
+            'pin.regex'=> config('apps.validation.feild_is_number'), 
+            'resolution.regex'=> config('apps.validation.feild_is_number'), 
+            'ram.regex'=> config('apps.validation.feild_is_number'), 
+            'storage.regex'=> config('apps.validation.feild_is_number'), 
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors());

@@ -8,6 +8,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/comments', [CommentController::class, 'store']); //api crud product
     Route::delete('/comments/{id}', [CommentController::class, 'destroy']);       
     Route::put('/comments/{id}', [CommentController::class, 'update']);       
+    Route::get('/comments/my-product-comment', [CommentController::class, 'getAllCommentOfMyProduct']);       
 });
 
 Route::get('/comments/{id}', [CommentController::class, 'show']);       

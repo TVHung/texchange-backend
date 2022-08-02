@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\Comment;
 use App\Repositories\CommentRepository;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\CommentCollection;
 use App\Services\BaseService;
 class CommentService extends BaseService
 {
@@ -71,4 +72,14 @@ class CommentService extends BaseService
         }
         return $this->sendError(config('apps.message.error'));
     }
+
+    public function getAllCommentOfMyProduct($user_id, $productIds)
+    {
+        $comments = Comment::whereIn('product_id', $productIds)
+                            ->orderBy('created_at', 'desc')
+                            ->where('comment_parent_id', null)
+                            ->paginate(config('constants.paginate_product_comment_manager'));
+        return $comments;
+    }
+
 }

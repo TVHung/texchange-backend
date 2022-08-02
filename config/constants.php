@@ -19,5 +19,6 @@ return [
     'paginate_my_product' => 4,
     'paginate_search_product' => 4,
     'paginate_product_comment' => 5,
+    'paginate_product_comment_manager' => 8,
     'paginate_message' => 5,
 ];

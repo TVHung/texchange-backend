@@ -64,4 +64,11 @@ class ChatService extends BaseService
         Message::where('target_user_id', $user_id)->where('user_id', $id)->delete();
         return $this->sendResponse(config('apps.message.success'), []);
     }
+
+    public function setIsRead($id){
+        $message = Message::find($id);
+        $message->is_read = 1;
+        $message->save();
+        return $this->sendResponse(config('apps.message.success'), []);
+    }
 }
