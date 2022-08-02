@@ -112,6 +112,19 @@ class ChatController extends Controller
             return $this->baseService->sendError(config('apps.message.error'), [], config('apps.general.error_code'));
         }
     }
+
+    public function setReadLastestMessage($id){
+        try {
+            DB::beginTransaction();
+            $user_id = Auth::user()->id;
+            $result = $this->chatService->setIsRead($id);
+            DB::commit();
+            return $result;
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return $this->baseService->sendError(config('apps.message.error'), [], config('apps.general.error_code'));
+        }
+    }
 }
 
 

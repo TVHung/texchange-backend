@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\CommentCollection;
 use App\Http\Resources\CommentResource;
 use App\Services\CommentService;
+use App\Services\ProductService;
 use App\Services\BaseService;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Validator;
@@ -18,9 +19,11 @@ class CommentController extends Controller
 
     protected $commentService;
     protected $baseService;
-    public function __construct(CommentService $commentService, BaseService $baseService){
+    protected $productService;
+    public function __construct(CommentService $commentService, BaseService $baseService, ProductService $productService){
         $this->commentService = $commentService;
         $this->baseService = $baseService;
+        $this->productService = $productService;
     }
 
     /**
@@ -84,6 +87,22 @@ class CommentController extends Controller
             event(new CommentEvent($request->input('content'), (int)$request->input('product_id')));
             DB::commit();
             return $comment;
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->baseService->sendError(config('apps.message.error'), [], config('apps.general.error_code'));
+        }
+    }
+
+    public function getAllCommentOfMyProduct()
+    {
+        try{
+            DB::beginTransaction();
+            $user_id = Auth::user()->id;
+            $myProductId = $this->productService->getMyProductId($user_id);
+            $comments = $this->commentService->getAllCommentOfMyProduct($user_id, $myProductId);
+            // dd($myProductId);
+            DB::commit();
+            return new CommentCollection($comments);
         } catch (\Exception $e) {
             DB::rollback();
             return $this->baseService->sendError(config('apps.message.error'), [], config('apps.general.error_code'));
