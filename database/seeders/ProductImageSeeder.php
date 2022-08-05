@@ -34,7 +34,7 @@ class ProductImageSeeder extends Seeder
                     "https://photo2.tinhte.vn/data/attachment-files/2021/07/5538850_techzones-chon-linh-kien-pc-nhu-the-nao-de-tu-build-pc-de-nhat.png", "https://anphatcomputer.vn/img/image/tin-tuc/956/top-3-mau-may-tinh-choi-game-duoi-10-trieu-hot-nhat-nam-2020-11.jpg");
 
         $productMobiles = [];
-        for ($x = 101; $x <= 200; $x++) {
+        for ($x = 101; $x <= 400; $x++) {
             $dataItem1 = [
                 'id' => $x,
                 'product_id'=> $x,
@@ -47,7 +47,7 @@ class ProductImageSeeder extends Seeder
         }
         
         $productLaptops = [];
-        for ($x = 201; $x <= 300; $x++) {
+        for ($x = 401; $x <= 700; $x++) {
             $dataItem2 = [
                 'id' => $x,
                 'product_id'=> $x,
@@ -60,7 +60,7 @@ class ProductImageSeeder extends Seeder
         }
         
         $productPcs = [];
-        for ($x = 301; $x <= 400; $x++) {
+        for ($x = 701; $x <= 1000; $x++) {
             $dataItem3 = [
                 'id' => $x,
                 'product_id'=> $x,
