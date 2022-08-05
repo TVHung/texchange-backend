@@ -20,4 +20,5 @@ Route::group(['middleware' => 'auth-admin'], function() {
     Route::post('/set-admin-user/{id}', [UserController::class, 'setAdminUser']);
     Route::post('/set-block-user/{id}', [UserController::class, 'setBlockUser']);
     Route::get('/user-recently', [UserController::class, 'getRecentlyDashboard']);
+    Route::get('/new-user-static', [UserController::class, 'newUserStatic']);
 });

@@ -185,7 +185,6 @@ class ProductController extends Controller
 
     public function show($id)
     {
-
         $product = $this->productService->get($id);
         return $product;
     }
@@ -254,7 +253,7 @@ class ProductController extends Controller
             //number
             'product_id.regex'=> config('apps.validation.feild_is_number'),
             'category_id.regex'=> config('apps.validation.feild_is_number'), 
-            'status.regex'=> config('apps.validation.feild_is_number'), 
+            'status.regex'=> config('apps.validation.feild_require'), 
             'brand_id.regex'=> config('apps.validation.feild_require'), 
             'guarantee.regex'=> config('apps.validation.feild_is_number'), 
             'price.regex'=> config('apps.validation.feild_is_number'), 
@@ -341,5 +340,28 @@ class ProductController extends Controller
         }else{
             return $this->baseService->sendError(config('apps.message.delete_product_error'), [], config('apps.general.error_code'));
         }
+    }
+
+    public function newProductStatic(){
+        $products7 = count(Product::where('created_at','>=', \Carbon\Carbon::today()->subDays(6))->get());
+        $products6 = count(Product::where('created_at','>=', \Carbon\Carbon::today()->subDays(5))->get());
+        $products5 = count(Product::where('created_at','>=', \Carbon\Carbon::today()->subDays(4))->get());
+        $products4 = count(Product::where('created_at','>=', \Carbon\Carbon::today()->subDays(3))->get());
+        $products3 = count(Product::where('created_at','>=', \Carbon\Carbon::today()->subDays(2))->get());
+        $products2 = count(Product::where('created_at','>=', \Carbon\Carbon::today()->subDays(1))->get());
+        $products1 = count(Product::where('created_at','>=', \Carbon\Carbon::today()->subDays(0))->get());
+        $arrNumStatic = [$products1, $products2, $products3, $products4, $products5, $products6, $products7];
+        $arrNumStaticLast = [];
+        for ($i=0; $i < count($arrNumStatic); $i++) { 
+            if($i > 0)
+                array_push($arrNumStaticLast, $arrNumStatic[$i] - $arrNumStatic[$i - 1]);
+            else
+                array_push($arrNumStaticLast, $arrNumStatic[$i]);
+        }
+        return [
+            'status' => config('apps.general.success'),
+            'message' => 'Thành công',
+            'data' => array_reverse($arrNumStaticLast)
+        ];
     }
 }

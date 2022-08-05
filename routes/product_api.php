@@ -15,6 +15,7 @@ Route::group(['middleware' => 'auth-admin'], function() {
     Route::get('/most-view', [ProductController::class, 'getMostView']);       
     Route::get('/dashboard-recently-product', [ProductController::class, 'getRecentlyDashboard']);       
     Route::get('/view-static', [ProductController::class, 'getViewStatic']);       
+    Route::get('/new-product-static', [ProductController::class, 'newProductStatic']);       
 });
 Route::apiResource('products', ProductController::class); //api crud product
 Route::get('/products-recently', [ProductController::class, 'getRecentlyProducts']);    

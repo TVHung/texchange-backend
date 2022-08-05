@@ -165,4 +165,27 @@ class UserController extends Controller
         $users = $this->userService->getUserRecently();
         return $users;
     }
+
+    public function newUserStatic(){
+        $users7 = count(User::where('created_at','>=', \Carbon\Carbon::today()->subDays(6))->get());
+        $users6 = count(User::where('created_at','>=', \Carbon\Carbon::today()->subDays(5))->get());
+        $users5 = count(User::where('created_at','>=', \Carbon\Carbon::today()->subDays(4))->get());
+        $users4 = count(User::where('created_at','>=', \Carbon\Carbon::today()->subDays(3))->get());
+        $users3 = count(User::where('created_at','>=', \Carbon\Carbon::today()->subDays(2))->get());
+        $users2 = count(User::where('created_at','>=', \Carbon\Carbon::today()->subDays(1))->get());
+        $users1 = count(User::where('created_at','>=', \Carbon\Carbon::today()->subDays(0))->get());
+        $arrNumStatic = [$users1, $users2, $users3, $users4, $users5, $users6, $users7];
+        $arrNumStaticLast = [];
+        for ($i=0; $i < count($arrNumStatic); $i++) { 
+            if($i > 0)
+                array_push($arrNumStaticLast, $arrNumStatic[$i] - $arrNumStatic[$i - 1]);
+            else
+                array_push($arrNumStaticLast, $arrNumStatic[$i]);
+        }
+        return [
+            'status' => config('apps.general.success'),
+            'message' => 'Thành công',
+            'data' => array_reverse($arrNumStaticLast)
+        ];
+    }
 }
