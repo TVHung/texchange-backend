@@ -85,7 +85,7 @@ class ChatController extends Controller
                     $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath(), ['folder' => 'chat_images'])->getSecurePath();
                 }
                 $result = $this->chatService->createMess($request, $user_id, $uploadedFileUrl);
-                event(new Message($request->input('message'), $uploadedFileUrl, (int)$request->input('target_user_id'), (int)$user_id));
+                event(new Message($result));
                 DB::commit();
                 return $result;
             }else
