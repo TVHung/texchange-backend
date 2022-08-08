@@ -1,64 +1,31 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+**_1. Cài đặt PostgreSQL_**
+Để chạy được hệ thống đầu tiên cần cài đặt hệ quản trị cơ sở dữ liệu, ở đây em lựa chọn PostgreSQL.
+Tải phần mềm postgreSQL tại trang chủ https://www.postgresql.org/download/windows/
+Sau khi tải xong phần mềm, chúng ta sẽ tiến hành cài đặt bằng cách nhập các thông tin được yêu cầu như mật khẩu, port…
+Sau khi cài đặt bạn có thể mở pgAdmin4 và nhập mật khẩu mà đã cấu hình ở bước cài đặt.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Kết nối thành công thì bạn có thể truy cập vào CSDL, sau đó bạn cần tạo một cơ sở dữ liệu trống để chạy dự án thông qua việc kết nối với Laravel sẽ được trình bày ở bên dưới.
 
-## About Laravel
+**_2. Cài đặt môi trường Laravel_**
+Cài đặt Xampp
+Để chạy các dự án Laravel thì cần một môi trường để chạy các đoạn code PHP, với Xampp chúng ta có sẵn môi trường server với PHP mà không cần cài đặt gì thêm cả. Tải và cài đặt tại trang chủ
+https://www.apachefriends.org/index.html
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Cài đặt Composer
+Laravel sử dụng composer để quản lý các thư viện phụ thuộc, cần phải cài đặt composer trước khi cài đặt laravel. Tải composer tại link chính thức
+https://getcomposer.org/download/
+Lưu ý khi cài đặt composer cần trỏ đến đúng file PHP ở trong thư mục cài đã cài đặt Xampp.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Để chạy được hệ thống cần lưu dự án ở trong thư mục htdocs của Xampp. Sau khi tải dự án về máy tính, mở màn hình terminal chạy lệnh "cp .evn.example .env".
+Khi đó 1 file mới là .env được tạo ra.Bạn cần cấu hình cơ sở dữ liệu kết nối với database ở trong file .env.
+Các trường dữ liệu cần cấu hình như sau:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+DB_CONNECTION : Tên hệ quản trị cơ sở dữ liệu, ở đây em chọn PostgreSQL nên sẽ điền pgsql
+DB_HOST: Host mà dự án sẽ chạy
+DB_PORT: Cổng cơ sở dữ liệu
+DB_DATABASE: Tên cơ sở dữ liệu (cần tạo trước trong hệ quản trị cơ sở dữ liệu)
+DB_USERNAME: tên cơ sở dữ liệu đã tạo ở trong phần cài đặt PostgreSQL.
+DB_PASSWORD: Mật khẩu cơ sở dữ liệu
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Sau khi đã cấu hình xong cơ sở dữ liệu cần phải trong màn hình terminal chạy lênh "composer install" khi đó các thư viện của dự án sẽ được cài đặt.
+Tiếp theo bạn cần chạy lệnh để khởi động server bằng lệnh "php artisan serve"
