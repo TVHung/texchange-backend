@@ -49,7 +49,7 @@ class ProductSeeder extends Seeder
 
         $products = [];
 
-        for ($x = 101; $x <= 400; $x++) {
+        for ($x = 101; $x <= 1000; $x++) {
             $dataItem = [
                 'id' => $x,
                 'user_id'=> rand(101, 136),
@@ -76,7 +76,7 @@ class ProductSeeder extends Seeder
             array_push($products, $dataItem);
         }
 
-        for ($x = 401; $x <= 700; $x++) {
+        for ($x = 1001; $x <= 2000; $x++) {
             $dataItem = [
                 'id' => $x,
                 'user_id'=> rand(101, 136),
@@ -103,7 +103,7 @@ class ProductSeeder extends Seeder
             array_push($products, $dataItem);
         }
 
-        for ($x = 701; $x <= 1000; $x++) {
+        for ($x = 2001; $x <= 3000; $x++) {
             $dataItem = [
                 'id' => $x,
                 'user_id'=> rand(101, 136),
