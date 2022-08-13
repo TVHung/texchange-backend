@@ -71,6 +71,10 @@ class ProductWishListController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
+        //kiem tra san pham khong phai cua nguoi dung
+        $product = $this->productService->find($request->input('product_id'));
+        if($product->user_id == Auth::user()->id)
+            return $this->baseService->sendError('Không thành công, đây là sản phẩm của bạn', [], config('apps.general.error_code'));
         //kiem tra su ton tai neu ton tai thi khong tao
         $exist = $this->productWishListRepo->isExistProduct(Auth::user()->id, $request->input('product_id'));
         if($exist) 

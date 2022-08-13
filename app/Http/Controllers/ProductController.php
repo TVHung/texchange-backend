@@ -235,7 +235,7 @@ class ProductController extends Controller
             'price' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'title' => 'bail|required|string',
             'brand_id' => $request->input('category_id') != 3 ? 'bail|required|regex:/^\d+(\.\d{1,2})?$/' : '',
-            'fileImages' => $request->input('is_trade') ? 'bail' : 'bail|required',
+            // 'fileImages' => $request->input('is_trade') ? 'bail' : 'bail|required',
         ],
         [
             //require

@@ -47,7 +47,9 @@ class ProductSeeder extends Seeder
         $addresses = ['Xã Yên Phụ, Huyện Yên Phong, Tỉnh Bắc Ninh', 'Xã Phúc Lộc, Huyện Ba Bể, Tỉnh Bắc Kạn', 'Phường Phan Chu Trinh, Quận Hoàn Kiếm, Thành phố Hà Nội', 'Xã Sủng Trái, Huyện Đồng Văn, Tỉnh Hà Giang',
                         'Xã Sen Thượng, Huyện Mường Nhé, Tỉnh Điện Biên', 'Xã Tả Thàng, Huyện Mường Khương, Tỉnh Lào Cai', 'Xã Nam Cao, Huyện Bảo Lâm, Tỉnh Cao Bằng', 'Xã La Pan Tẩn, Huyện Mường Khương, Tỉnh Lào Cai'];
 
+        $video = ['https://res.cloudinary.com/trhung/video/upload/v1660152965/post_videos/video_jdrq9k.mp4', ''];
         $products = [];
+        $storages = [8, 16, 32, 64, 128, 256, 512];
 
         for ($x = 101; $x <= 1000; $x++) {
             $dataItem = [
@@ -59,11 +61,11 @@ class ProductSeeder extends Seeder
                 'name'=> $nameMobiles[array_rand($nameMobiles)],
                 'description'=> $descriptions[array_rand($descriptions)],
                 'ram'=> rand(0, 12),
-                'storage'=> 128,
+                'storage'=> $storages[array_rand($storages)],
                 'status'=> rand(1,3),
                 'price'=> rand(0, 15000000),
                 'address'=> $addresses[array_rand($addresses)],
-                'video_url'=> "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+                'video_url'=> $video[array_rand($video)],
                 'public_status'=> rand(0,1),
                 'guarantee'=> rand(0,24),
                 'sold' => rand(0,1),
@@ -86,11 +88,11 @@ class ProductSeeder extends Seeder
                 'name'=> $nameLaptops[array_rand($nameLaptops)],
                 'description'=> $descriptions[array_rand($descriptions)],
                 'ram'=> rand(0, 12),
-                'storage'=> 128,
+                'storage'=> $storages[array_rand($storages)],
                 'status'=> rand(1,3),
                 'price'=> rand(0, 25000000),
                 'address'=> $addresses[array_rand($addresses)],
-                'video_url'=> "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+                'video_url'=> $video[array_rand($video)],
                 'public_status'=> rand(0,1),
                 'guarantee'=> rand(0,24),
                 'sold' => rand(0,1),
@@ -113,11 +115,11 @@ class ProductSeeder extends Seeder
                 'name'=>  $namePcs[array_rand($namePcs)],
                 'description'=> $descriptions[array_rand($descriptions)],
                 'ram'=> rand(0, 12),
-                'storage'=> 128,
+                'storage'=> $storages[array_rand($storages)],
                 'status'=> rand(1,3),
                 'price'=> rand(0, 25000000),
                 'address'=> $addresses[array_rand($addresses)],
-                'video_url'=> "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+                'video_url'=> $video[array_rand($video)],
                 'public_status'=> rand(0,1),
                 'guarantee'=> rand(0,24),
                 'sold' => rand(0,1),
