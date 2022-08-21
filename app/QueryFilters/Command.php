@@ -16,7 +16,7 @@ class Command implements Pipe
             return $next($request);
         }
         $builder = $next($request);
-
+        
         $value = explode(".", request($filterParam));
         $result = $builder->where(function($query) use($value){
                             foreach($value as $id){

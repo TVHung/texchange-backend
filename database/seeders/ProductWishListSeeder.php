@@ -22,7 +22,29 @@ class ProductWishListSeeder extends Seeder
             $dataItem = [
                 'id' => $x,
                 'user_id'=> rand(101, 136),
-                'product_id' => rand(101, 400),
+                'product_id' => rand(101, 1000),
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s'),
+            ];
+            array_push($productWishList, $dataItem);
+        }
+
+        for ($x = 1001; $x <= 1200; $x++) {
+            $dataItem = [
+                'id' => $x,
+                'user_id'=> rand(101, 136),
+                'product_id' => rand(1001, 2000),
+                'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'=> Carbon::now()->format('Y-m-d H:i:s'),
+            ];
+            array_push($productWishList, $dataItem);
+        }
+
+        for ($x = 2001; $x <= 2200; $x++) {
+            $dataItem = [
+                'id' => $x,
+                'user_id'=> rand(101, 136),
+                'product_id' => rand(2001, 3000),
                 'created_at'=> Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'=> Carbon::now()->format('Y-m-d H:i:s'),
             ];

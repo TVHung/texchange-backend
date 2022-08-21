@@ -15,18 +15,17 @@ class Message implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
-    public $image_url;
-    public $target_user_id;
-    public $user_id;
-    // public $created_at;
+    // public $image_url;
+    // public $target_user_id;
+    // public $user_id;
+    // , $image_url, $target_user_id, $user_id
 
-    public function __construct($message, $image_url, $target_user_id, $user_id)
+    public function __construct($message)
     {
         $this->message = $message;
-        $this->image_url = $image_url;
-        $this->target_user_id = $target_user_id;
-        $this->user_id = $user_id;
-        // $this->created_at = $created_at;
+        // $this->image_url = $image_url;
+        // $this->target_user_id = $target_user_id;
+        // $this->user_id = $user_id;
     }
 
     public function broadcastOn()

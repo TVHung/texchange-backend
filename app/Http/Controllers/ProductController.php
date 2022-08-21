@@ -235,6 +235,7 @@ class ProductController extends Controller
             'price' => 'bail|required|regex:/^\d+(\.\d{1,2})?$/',
             'title' => 'bail|required|string',
             'brand_id' => $request->input('category_id') != 3 ? 'bail|required|regex:/^\d+(\.\d{1,2})?$/' : '',
+            // 'fileImages' => $request->input('is_trade') ? 'bail' : 'bail|required',
         ],
         [
             //require
@@ -245,6 +246,7 @@ class ProductController extends Controller
             'price.required'=> config('apps.validation.feild_require'), 
             'title.required'=> config('apps.validation.feild_require'), 
             'description.required'=> config('apps.validation.feild_require'), 
+            'fileImages.required'=> config('apps.validation.image_require'), 
             //string
             'name.string'=> config('apps.validation.feild_is_string'), 
             'address.string'=> config('apps.validation.feild_is_string'), 

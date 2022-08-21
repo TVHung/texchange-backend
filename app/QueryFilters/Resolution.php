@@ -18,6 +18,7 @@ class Resolution implements Pipe
         $builder = $next($request);
 
         $value = explode(".", request($filterParam));
+        // dd(request('category'));
         switch ((int)request('category')) {
             case 1:
                 $result = $builder->where(function($query) use($value){
